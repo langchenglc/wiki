@@ -1,0 +1,16 @@
+
+<h2 class="sectionedit1" id="登录日志记录">登录日志记录</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li">celery-web 中使用spring security进行身份认证，SecurityConfig类中对spring security的配置中注入了LoginSuccessHandler，这里面定义了当用户成功登陆时候的方法；</div>
+</li>
+<li class="level1"><div class="li">用户成功登陆以后做了两件事：绑定用户信息到session⇒USER_INFO中方便随时使用(bindingSession())；记录用户登录信息(logRecordService.recordLoginInfo(request))；</div>
+</li>
+<li class="level1"><div class="li">登录日志查询：celery-valid-record:RecordController.findLoginRecord()</div>
+</li>
+<li class="level1"><div class="li">登录日志记录配置了快关，config-record-valid.properties  中logLoginLog=true的时候才进行登录日志记录；
+</div>
+</li>
+</ul>
+
+</div>

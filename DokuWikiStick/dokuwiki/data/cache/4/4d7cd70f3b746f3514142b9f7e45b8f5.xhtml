@@ -1,0 +1,45 @@
+
+<p>
+断电重启操作步骤
+</p>
+
+<p>
+vmware 中链接服务器  192.168.5.115   root/<strong></strong>**
+三台服务器开机 190 191  192
+190  配置网关<br/>
+
+设置网关 
+route add default gw 192.168.5.1
+</p>
+
+<p>
+集群重新配置ntp服务，每一台都照做；
+service ntpd status /stop
+ntpdate 1.cn.pool.ntp.org
+servcie ntpd start
+</p>
+
+<p>
+开tdh集群，进入集群管理界面
+192.168.5.190:8180
+admin/admin
+</p>
+
+<p>
+集群管理界面中启动集群所有服务
+测试集群启动是否成功
+</p>
+
+<p>
+192.168.5.200开启的服务
+</p>
+
+<p>
+maven
+:    <a href="http://192.168.5.200:8081/nexus" class="urlextern" title="http://192.168.5.200:8081/nexus" rel="nofollow">http://192.168.5.200:8081/nexus</a>
+</p>
+
+<p>
+svn
+:    visual svn manager
+</p>

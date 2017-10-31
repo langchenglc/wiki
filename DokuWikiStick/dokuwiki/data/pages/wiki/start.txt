@@ -1,0 +1,33 @@
+# dokuwiki
+
+## dokuwiki 是什么
+dokuwiki是一个方便个人或者组织建立wiki的工具，能够很方便的生成文档、博客等。同时文档是以文本文件的形式存放的，非常易于管理和迁移。还有丰富的插件使用，使用插件可以支持markdown写作。
+
+## dokuwiki安装
+dokuwiki的安装参见官网[dokuwiki](https://www.dokuwiki.org/dokuwiki#)
+
+1. windows安装包在200的software文件夹中有，只要执行run.cmd即可，自带apache服务器，点击即可运行。
+2. 软件包解压缩就可以使用，首次执行会让你进行很简单的配置工作。
+
+## 添加新页面
+dokuwiki中添加新的页面很简单，有两种方式
+
+1. 通过url添加：浏览器中输入url就好了，id后面的部分就是你自定义的页面路径 http://192.168.5.200:8800/doku.php?id=dokuwiki:start
+2. 通过自己在服务器对应目录中创建对应的文件夹和文件即可：文本文件的目录是/dokuwiki/data/pages/
+3. 路径说明：dokuwiki:start  这个格式表示dokuwiki文件夹下的start文件，以此类推
+
+## 添加链接
+如果页面直接需要添加链接，链接格式如下：
+
+1. 例如：[[:start]]   [ [dokuwiki:index] ]   (到时候两个中括号的空格不要，里面写上面说的文件路径)
+2. 还有可以连接外网的连接形式等  可以参见官网的这个说明  [[wiki:syntax]]
+
+## sidebar的编辑
+sidebar同样也是一个txt文件，路径是[[:sidebar]]，对应的是服务器的路径/dokuwiki/data/pages/sidebar.txt
+
+也可以实用插件自动生成sidebar，目前实用indexmenu插件自动，不用自己配置sidebar
+
+关于怎么使用自动sidebar配置，请参照[[https://www.dokuwiki.org/plugin:indexmenu#about_empty_namespaces|插件文档]]或者参看根目录的下sidebar配置
+
+## markdown语法
+markdown 是一种写作语言，markdown的教程参见[[http://gong.leanote.com/post/markdown%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%85%B6%E7%94%A8%E6%B3%95|markdown写法]]

@@ -1,0 +1,12 @@
+{{indexmenu>:|navbar context}}
+
+---
+
+[[:start|转到首页]]
+
+[[:sidebar|转到根sidebar]]
+
+[[wiki:start|关于dowuwiki]]
+
+
+~~NOCACHE~~ 

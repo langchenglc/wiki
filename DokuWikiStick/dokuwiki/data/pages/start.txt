@@ -1,0 +1,19 @@
+> 欢迎使用skyon 文档协作平台！
+
+
+
+### 快速导览 ###
+
+1. 从左侧链接开始你的阅读
+
+2. [[dokuwiki:index|怎么在dokuwiki中协作写作]]
+
+3. [[wiki:syntax|dokuwiki的详细语法看这里]]
+
+4. [[http://www.dokuwiki.org/  | dokuwiki官网]]
+
+5. 登录名为各位名字，密码同名字
+
+6. 交流的笔记都同步在这里，便于大家一起学习和补充
+
+---
