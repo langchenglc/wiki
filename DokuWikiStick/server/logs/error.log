@@ -115,3 +115,8 @@
 [Tue Oct 31 16:01:39.850613 2017] [core:notice] [pid 6660:tid 148] AH00094: Command line: 'mapache.exe -d E:/ftp/software/dokuwiki/DokuWikiStick/server'
 [Tue Oct 31 16:01:39.852613 2017] [mpm_winnt:notice] [pid 6660:tid 148] AH00418: Parent: Created child process 6240
 [Tue Oct 31 16:01:40.304639 2017] [mpm_winnt:notice] [pid 6240:tid 224] AH00354: Child: Starting 64 worker threads.
+[Tue Oct 31 16:56:05.553400 2017] [core:warn] [pid 6860:tid 148] AH00098: pid file E:/ftp/software/dokuwiki/DokuWikiStick/server/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Tue Oct 31 16:56:05.578402 2017] [mpm_winnt:notice] [pid 6860:tid 148] AH00455: Apache/2.4.25 (Win32) PHP/5.6.30 configured -- resuming normal operations
+[Tue Oct 31 16:56:05.578402 2017] [mpm_winnt:notice] [pid 6860:tid 148] AH00456: Apache Lounge VC11 Server built: Dec 20 2016 13:02:04
+[Tue Oct 31 16:56:05.578402 2017] [core:notice] [pid 6860:tid 148] AH00094: Command line: 'mapache.exe -d E:/ftp/software/dokuwiki/DokuWikiStick/server'
+[Tue Oct 31 16:56:05.579402 2017] [mpm_winnt:notice] [pid 6860:tid 148] AH00418: Parent: Created child process 6076

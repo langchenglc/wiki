@@ -1,0 +1,16 @@
+
+<h2 class="sectionedit1" id="数据有效期管理">数据有效期管理</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li">数据有效期规则管理celery-valid-record:DataValidController中，常规的增删改查</div>
+</li>
+<li class="level1"><div class="li">数据有效期规则更新时候的内存更新进行实时生效：celery-valid-record:UpdateDataValidInterceptor中使用aop技术，切入数据有效期的修改方法，当数据有效期进行修改后，进行数据有效期的查询对内存中暂存的数据进行更新；</div>
+</li>
+<li class="level1"><div class="li">数据有效期检查配置了开关，config-record-valid.properties  中validData=true的时候才进行数据有效期检查；</div>
+</li>
+<li class="level1"><div class="li">数据有效期检查的时机：celery-valid-record:LogRecordInterceptor 使用aop记录用户操作记录的同时也对数据进行超期检查checkValid；
+</div>
+</li>
+</ul>
+
+</div>

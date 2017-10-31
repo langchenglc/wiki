@@ -1,0 +1,4 @@
+## 项目结构
+
+* 项目使用maven多模块结构进行管理；
+* 模块结构：celery-v 组合模块，对其他模块进行组合；celery-parent 父模块，定义模块jar包依赖；celery-data-unit数据统一处理和查询模块；celery-core核心模块；celery-br百融相关；celery-qx启信宝相关；celery-gzt国政通相关；celery-rbac用户角色权限控制相关；celery-valid-record数据有效期和日志相关；celery-web网页相关；celery-hfw汇法网相关；celery-td同盾相关；

@@ -1,0 +1,50 @@
+
+<p>
+安装tdh大数据集群的步骤
+</p>
+
+<p>
+<a href="/lib/exe/fetch.php?media=%E5%A4%96%E9%83%A8%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E7%B3%BB%E7%BB%9F:faq:%E5%AE%89%E8%A3%85tdh%E6%AD%A5%E9%AA%A4.pdf" class="media mediafile mf_pdf" title="外部数据采集系统:faq:安装tdh步骤.pdf (223.9 KB)">步骤文档pdf</a>
+</p>
+
+<p>
+具体步骤：
+</p>
+<ol>
+<li class="level1"><div class="li">安装三台虚拟机，步骤略；vmware中安装，系统centos6.8</div>
+</li>
+<li class="level0"><div class="li">配置网络参数，主要是配置静态ip；ip自定义:
+<p>
+    <code>
+    /etc/sysconfig/network-scripts/ifcfg-eth0
+    DEVICE=eth0
+    HWADDR=00:0C:29:23:09:70
+    TYPE=Ethernet
+    UUID=9e559956-33fb-46b2-a47b-6648e1a1fcfe
+    ONBOOT=yes
+    NM_CONTROLLED=yes
+    BOOTPROTO=static
+    IPADDR=192.168.5.190
+    DNS1=8.8.8.8
+    DNS2=8.8.4.4
+    GATEWAY=192.168.5.1
+    </code>
+<br/>
+3. 上传tdh的安装包到190机器；解压
+</p>
+</div>
+</li>
+<li class="level0"><div class="li">安装transwarp manager
+    <code>
+    执行./install.sh
+    图形化界面
+    会让你配置端口号，名称等，均默认就好了；端口8180
+    配置yum源：http://mirrors.aliyun.com/centos/6/os/x86_64/
+    </code></div>
+</li>
+<li class="level0"><div class="li">等待transwarp manager自动安装</div>
+</li>
+<li class="level0"><div class="li">浏览器进入ip:8180,transwarp manager 界面安装软件；admin/admin
+</div>
+</li>
+</ol>

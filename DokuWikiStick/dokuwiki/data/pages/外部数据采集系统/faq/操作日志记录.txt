@@ -1,0 +1,6 @@
+## 操作日志记录
+
+* 操作日志查询：celery-valid-record:RecordController.findQueryLog()
+* 操作日志记录：celery-valid-record:LogRecordInterceptor类中使用aop技术，切面技术来切入记录操作记录；
+* aop的一个简洁介绍：[blog aop](https://langchenglc.github.io/blogs/spring-aop-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02.html)
+* 操作日志记录配置了开关，config-record-valid.properties  中logQueryLog=true的时候才进行操作日志记录；

@@ -1,0 +1,36 @@
+安装tdh大数据集群的步骤
+
+{{外部数据采集系统:faq:安装tdh步骤.pdf|步骤文档pdf}}
+
+
+具体步骤：
+
+1. 安装三台虚拟机，步骤略；vmware中安装，系统centos6.8
+2. 配置网络参数，主要是配置静态ip；ip自定义:
+
+    ```
+    /etc/sysconfig/network-scripts/ifcfg-eth0
+    DEVICE=eth0
+    HWADDR=00:0C:29:23:09:70
+    TYPE=Ethernet
+    UUID=9e559956-33fb-46b2-a47b-6648e1a1fcfe
+    ONBOOT=yes
+    NM_CONTROLLED=yes
+    BOOTPROTO=static
+    IPADDR=192.168.5.190
+    DNS1=8.8.8.8
+    DNS2=8.8.4.4
+    GATEWAY=192.168.5.1
+    ```
+    
+3. 上传tdh的安装包到190机器；解压
+
+4. 安装transwarp manager
+    ```
+    执行./install.sh
+    图形化界面
+    会让你配置端口号，名称等，均默认就好了；端口8180
+    配置yum源：http://mirrors.aliyun.com/centos/6/os/x86_64/
+    ```
+5. 等待transwarp manager自动安装
+6. 浏览器进入ip:8180,transwarp manager 界面安装软件；admin/admin

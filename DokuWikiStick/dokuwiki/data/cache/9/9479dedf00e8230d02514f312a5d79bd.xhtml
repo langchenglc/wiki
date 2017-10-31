@@ -1,0 +1,26 @@
+
+<h2 class="sectionedit1" id="basecontroller_baseservice_basedao_baseqo_geresult介绍">BaseController BaseService BaseDao BaseQo GeResult介绍</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li">BaseController 是常规Controller的继承的父类</div>
+</li>
+<li class="level1"><div class="li">BaseController中已经使用异常捕获，不用在代码中进行无意义的报错try-catch了；</div>
+</li>
+<li class="level1"><div class="li">BaseController中已经预定义了success() error()系列方法，直接在controller中调用返回即可；</div>
+</li>
+<li class="level1"><div class="li">BaseContrller中可以方便获取到登录用户信息；getCurrentLoginName（）；从session中获取当前登录用户信息；</div>
+</li>
+<li class="level1"><div class="li">BaseService 中定义了基础的增删改查的方法，直接使用即可；</div>
+</li>
+<li class="level1"><div class="li">BaseService 中同样定义了success() error() 方法，方便调用返回；</div>
+</li>
+<li class="level1"><div class="li">BaseDao 中预定义了很多常用的查询和操作方法；</div>
+</li>
+<li class="level1"><div class="li">BaseQo 是通用的查询包装实体；里面可以重写updateHql方法；可以参考DataValidQo  QueryRecordQo这些实体的方法；可以自定义比较复杂的hql语句；在service 和dao使用name paramter来动态替换传入的查询参数进行查询；这个也是除了key_id查询之外的推荐的查询方法；</div>
+</li>
+<li class="level1"><div class="li">GeResult===code反馈号：CodeEnum;success描述成功与否；total：多条信息反馈时候存放总数信息；result：查询结果；message：提示信息
+</div>
+</li>
+</ul>
+
+</div>

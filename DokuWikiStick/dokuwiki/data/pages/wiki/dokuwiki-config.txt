@@ -1,0 +1,73 @@
+# dokuwiki安装以后的基本配置
+
+## 插件安装
+
+### 1.markdown插件，支持markdown语法
+
+### 2.indexmenu插件，用来自动生成导航栏:
+
+* indexmenu 的具体语法参考[官方文档](https://www.dokuwiki.org/plugin:indexmenu)
+* `$conf['plugin']['indexmenu']['skip_file'] = '/(:sidebar$|sidebar$)/';`配置导航栏忽略的文件，使用正则表达式
+* sidebar 文件中使用  `{{indexmenu>:|navbar context}}`
+
+
+
+## 乱码修复
+
+> 如果使用中文页面名或者文件夹名字的话，dokuwiki会乱码，因此需要对配置进行简单的修改：
+
+
+    也可以参考[[https://www.dokuwiki.org/zh:pagename|官方文档]]进行修改
+
+
+1. dokuwiki/conf/local.php修改
+
+```php
+//增加一行
+$conf['fnencode'] = 'utf-8';
+```
+
+2.dokuwiki/inc/pageutils.php 替换两个函数
+
+```php
+function utf8_encodeFN($file,$safe=true){
+    global $conf;
+    //if($conf['fnencode'] == 'utf-8') return $file;
+	if($conf['fnencode'] == 'utf-8'){
+		if(eregi('win', PHP_OS)){
+			$file=mb_convert_encoding($file,"CP936","UTF-8");
+		}
+		return $file;
+	}
+ 
+    if($safe && preg_match('#^[a-zA-Z0-9/_\-\.%]+$#',$file)){
+        return $file;
+    }
+ 
+    if($conf['fnencode'] == 'safe'){
+        return SafeFN::encode($file);
+    }
+ 
+    $file = urlencode($file);
+    $file = str_replace('%2F','/',$file);
+    return $file;
+}
+ 
+ 
+function utf8_decodeFN($file){
+    global $conf;
+    //if($conf['fnencode'] == 'utf-8') return $file;
+	if($conf['fnencode'] == 'utf-8'){
+		if(eregi('win', PHP_OS)){
+			$file=mb_convert_encoding($file,"UTF-8","CP936");
+		}
+		return $file;
+	}
+ 
+    if($conf['fnencode'] == 'safe'){
+        return SafeFN::decode($file);
+    }
+    return urldecode($file);
+}
+
+```

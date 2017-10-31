@@ -1,0 +1,2 @@
+<span class="co1">//增加一行</span>
+<span class="re0">$conf</span><span class="br0">&#91;</span><span class="st_h">'fnencode'</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="st_h">'utf-8'</span><span class="sy0">;</span>

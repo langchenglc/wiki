@@ -1,0 +1,92 @@
+
+<h1 class="sectionedit1" id="dokuwiki安装以后的基本配置">dokuwiki安装以后的基本配置</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "dokuwiki安装以后的基本配置" [0-38] -->
+<h2 class="sectionedit2" id="插件安装">插件安装</h2>
+<div class="level2">
+
+</div>
+<!-- EDIT2 SECTION "插件安装" [39-55] -->
+<h3 class="sectionedit3" id="markdown插件_支持markdown语法">1.markdown插件，支持markdown语法</h3>
+<div class="level3">
+
+</div>
+<!-- EDIT3 SECTION "1.markdown插件，支持markdown语法" [56-100] -->
+<h3 class="sectionedit4" id="indexmenu插件_用来自动生成导航栏">2.indexmenu插件，用来自动生成导航栏:</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li">indexmenu 的具体语法参考<a href="https://www.dokuwiki.org/plugin:indexmenu" class="urlextern" title="https://www.dokuwiki.org/plugin:indexmenu" rel="nofollow">官方文档</a></div>
+</li>
+<li class="level1"><div class="li"><code>$conf[&#039;plugin&#039;][&#039;indexmenu&#039;][&#039;skip_file&#039;] = &#039;/(:sidebar$|sidebar$)/&#039;;</code>配置导航栏忽略的文件，使用正则表达式</div>
+</li>
+<li class="level1"><div class="li">sidebar 文件中使用  <code>{{indexmenu&gt;:|navbar context}}</code></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT4 SECTION "2.indexmenu插件，用来自动生成导航栏:" [101-436] -->
+<h2 class="sectionedit5" id="乱码修复">乱码修复</h2>
+<div class="level2">
+<blockquote><div class="no">
+如果使用中文页面名或者文件夹名字的话，dokuwiki会乱码，因此需要对配置进行简单的修改：</div></blockquote>
+<pre class="code">  也可以参考[[https://www.dokuwiki.org/zh:pagename|官方文档]]进行修改</pre>
+<ol>
+<li class="level1"><div class="li">dokuwiki/conf/local.php修改</div>
+</li>
+</ol>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=wiki:dokuwiki-config&amp;codeblock=0" title="下载片段" class="mediafile mf_php">snippet.php</a></dt>
+<dd><pre class="code file php"><span class="co1">//增加一行</span>
+<span class="re0">$conf</span><span class="br0">&#91;</span><span class="st_h">'fnencode'</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="st_h">'utf-8'</span><span class="sy0">;</span></pre>
+</dd></dl>
+
+<p>
+2.dokuwiki/inc/pageutils.php 替换两个函数
+</p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=wiki:dokuwiki-config&amp;codeblock=1" title="下载片段" class="mediafile mf_php">snippet.php</a></dt>
+<dd><pre class="code file php"><span class="kw2">function</span> utf8_encodeFN<span class="br0">&#40;</span><span class="re0">$file</span><span class="sy0">,</span><span class="re0">$safe</span><span class="sy0">=</span><span class="kw4">true</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw2">global</span> <span class="re0">$conf</span><span class="sy0">;</span>
+    <span class="co1">//if($conf['fnencode'] == 'utf-8') return $file;</span>
+	<span class="kw1">if</span><span class="br0">&#40;</span><span class="re0">$conf</span><span class="br0">&#91;</span><span class="st_h">'fnencode'</span><span class="br0">&#93;</span> <span class="sy0">==</span> <span class="st_h">'utf-8'</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+		<span class="kw1">if</span><span class="br0">&#40;</span><a href="http://www.php.net/eregi"><span class="kw3">eregi</span></a><span class="br0">&#40;</span><span class="st_h">'win'</span><span class="sy0">,</span> <span class="kw4">PHP_OS</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+			<span class="re0">$file</span><span class="sy0">=</span><a href="http://www.php.net/mb_convert_encoding"><span class="kw3">mb_convert_encoding</span></a><span class="br0">&#40;</span><span class="re0">$file</span><span class="sy0">,</span><span class="st0">&quot;CP936&quot;</span><span class="sy0">,</span><span class="st0">&quot;UTF-8&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		<span class="br0">&#125;</span>
+		<span class="kw1">return</span> <span class="re0">$file</span><span class="sy0">;</span>
+	<span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">if</span><span class="br0">&#40;</span><span class="re0">$safe</span> <span class="sy0">&amp;&amp;</span> <a href="http://www.php.net/preg_match"><span class="kw3">preg_match</span></a><span class="br0">&#40;</span><span class="st_h">'#^[a-zA-Z0-9/_\-\.%]+$#'</span><span class="sy0">,</span><span class="re0">$file</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="re0">$file</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">if</span><span class="br0">&#40;</span><span class="re0">$conf</span><span class="br0">&#91;</span><span class="st_h">'fnencode'</span><span class="br0">&#93;</span> <span class="sy0">==</span> <span class="st_h">'safe'</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> SafeFN<span class="sy0">::</span><span class="me2">encode</span><span class="br0">&#40;</span><span class="re0">$file</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="re0">$file</span> <span class="sy0">=</span> <a href="http://www.php.net/urlencode"><span class="kw3">urlencode</span></a><span class="br0">&#40;</span><span class="re0">$file</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="re0">$file</span> <span class="sy0">=</span> <a href="http://www.php.net/str_replace"><span class="kw3">str_replace</span></a><span class="br0">&#40;</span><span class="st_h">'%2F'</span><span class="sy0">,</span><span class="st_h">'/'</span><span class="sy0">,</span><span class="re0">$file</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">return</span> <span class="re0">$file</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+<span class="kw2">function</span> utf8_decodeFN<span class="br0">&#40;</span><span class="re0">$file</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw2">global</span> <span class="re0">$conf</span><span class="sy0">;</span>
+    <span class="co1">//if($conf['fnencode'] == 'utf-8') return $file;</span>
+	<span class="kw1">if</span><span class="br0">&#40;</span><span class="re0">$conf</span><span class="br0">&#91;</span><span class="st_h">'fnencode'</span><span class="br0">&#93;</span> <span class="sy0">==</span> <span class="st_h">'utf-8'</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+		<span class="kw1">if</span><span class="br0">&#40;</span><a href="http://www.php.net/eregi"><span class="kw3">eregi</span></a><span class="br0">&#40;</span><span class="st_h">'win'</span><span class="sy0">,</span> <span class="kw4">PHP_OS</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+			<span class="re0">$file</span><span class="sy0">=</span><a href="http://www.php.net/mb_convert_encoding"><span class="kw3">mb_convert_encoding</span></a><span class="br0">&#40;</span><span class="re0">$file</span><span class="sy0">,</span><span class="st0">&quot;UTF-8&quot;</span><span class="sy0">,</span><span class="st0">&quot;CP936&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		<span class="br0">&#125;</span>
+		<span class="kw1">return</span> <span class="re0">$file</span><span class="sy0">;</span>
+	<span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">if</span><span class="br0">&#40;</span><span class="re0">$conf</span><span class="br0">&#91;</span><span class="st_h">'fnencode'</span><span class="br0">&#93;</span> <span class="sy0">==</span> <span class="st_h">'safe'</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> SafeFN<span class="sy0">::</span><span class="me2">decode</span><span class="br0">&#40;</span><span class="re0">$file</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">return</span> <a href="http://www.php.net/urldecode"><span class="kw3">urldecode</span></a><span class="br0">&#40;</span><span class="re0">$file</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</dd></dl>
+
+</div>
+<!-- EDIT5 SECTION "乱码修复" [437-] -->

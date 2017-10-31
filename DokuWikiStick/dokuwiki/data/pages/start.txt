@@ -6,7 +6,7 @@
 
 1. 从左侧链接开始你的阅读
 
-2. [[dokuwiki:index|怎么在dokuwiki中协作写作]]
+2. [怎么在dokuwiki中协作写作](wiki:dokuwiki-Chinese)
 
 3. [[wiki:syntax|dokuwiki的详细语法看这里]]
 

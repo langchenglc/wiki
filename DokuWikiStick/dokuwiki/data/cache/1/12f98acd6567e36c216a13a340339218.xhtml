@@ -1,0 +1,120 @@
+
+<h1 class="sectionedit1" id="dokuwiki">dokuwiki</h1>
+<div class="level1">
+
+</div>
+<!-- EDIT1 SECTION "dokuwiki" [0-11] -->
+<h2 class="sectionedit2" id="dokuwiki_是什么">dokuwiki 是什么</h2>
+<div class="level2">
+
+<p>
+dokuwiki是一个方便个人或者组织建立wiki的工具，能够很方便的生成文档、博客等。同时文档是以文本文件的形式存放的，非常易于管理和迁移。还有丰富的插件使用，使用插件可以支持markdown写作。
+</p>
+
+</div>
+<!-- EDIT2 SECTION "dokuwiki 是什么" [12-295] -->
+<h2 class="sectionedit3" id="dokuwiki安装">dokuwiki安装</h2>
+<div class="level2">
+
+<p>
+dokuwiki的安装参见官网<a href="https://www.dokuwiki.org/dokuwiki#" class="urlextern" title="https://www.dokuwiki.org/dokuwiki#" rel="nofollow">dokuwiki</a>
+</p>
+<ol>
+<li class="level1"><div class="li">windows安装包在200的software文件夹中有，只要执行run.cmd即可，自带apache服务器，点击即可运行。</div>
+</li>
+<li class="level0"><div class="li">软件包解压缩就可以使用，首次执行会让你进行很简单的配置工作。</div>
+</li>
+</ol>
+
+</div>
+<!-- EDIT3 SECTION "dokuwiki安装" [296-613] -->
+<h2 class="sectionedit4" id="dokuwiki简单配置">dokuwiki简单配置</h2>
+<div class="level2">
+
+<p>
+<a href="/doku.php?id=wiki:dokuwiki-config" class="wikilink1" title="wiki:dokuwiki-config">见配置说明文档</a>
+</p>
+
+</div>
+<!-- EDIT4 SECTION "dokuwiki简单配置" [614-685] -->
+<h2 class="sectionedit5" id="添加新页面">添加新页面</h2>
+<div class="level2">
+
+<p>
+dokuwiki中添加新的页面很简单，有两种方式
+</p>
+<ol>
+<li class="level1"><div class="li">通过url添加：浏览器中输入url就好了，id后面的部分就是你自定义的页面路径 <a href="http://192.168.5.200:8800/doku.php?id=dokuwiki:start" class="urlextern" title="http://192.168.5.200:8800/doku.php?id=dokuwiki:start" rel="nofollow">http://192.168.5.200:8800/doku.php?id=dokuwiki:start</a></div>
+</li>
+<li class="level0"><div class="li">如果url链接所指向的文件已经存在，则显示该文件，点击右侧按钮进行修改；如果不存在，则就是新增文件</div>
+</li>
+<li class="level0"><div class="li">通过自己在服务器对应目录中创建对应的文件夹和文件即可：文本文件的目录是/dokuwiki/data/pages/  （推荐使用方法1，避免不必要的问题，同时也能保留操作记录）</div>
+</li>
+<li class="level0"><div class="li">路径说明：dokuwiki:start  这个格式表示dokuwiki文件夹下的start文件，以此类推</div>
+</li>
+<li class="level0"><div class="li">新页面如果内容被删除为空进行保存，则namespace也会被清空</div>
+</li>
+</ol>
+
+</div>
+<!-- EDIT5 SECTION "添加新页面" [686-1467] -->
+<h2 class="sectionedit6" id="页面内容中添加链接">页面内容中添加链接</h2>
+<div class="level2">
+
+<p>
+如果页面直接需要添加链接，链接格式如下：
+</p>
+<ol>
+<li class="level1"><div class="li">添加文档内部链接：例如：<a href="/doku.php?id=start" class="wikilink1" title="start">start</a>   [ [dokuwiki:start] ]   (到时候两个中括号的空格不要，里面写上面说的文件路径)</div>
+</li>
+<li class="level0"><div class="li">添加文档外部链接：例如：<a href="http://www.baidu.com" class="urlextern" title="http://www.baidu.com" rel="nofollow">baidu</a>   [ [<a href="http://www.baidu.com" class="urlextern" title="http://www.baidu.com" rel="nofollow">http://www.baidu.com</a>|baidu]]    （到时候把空格去掉）</div>
+</li>
+<li class="level0"><div class="li">添加图片<a href="/lib/exe/detail.php?id=wiki%3Adokuwiki-chinese&amp;media=wiki:skyon.png" class="media" title="wiki:skyon.png"><img src="/lib/exe/fetch.php?media=wiki:skyon.png" class="media" alt="" /></a>  { {wiki:skyon.png}}（到时候把空格去掉）</div>
+</li>
+<li class="level0"><div class="li">添加有link的图片<a href="http://www.skyon.com.cn" class="media" title="http://www.skyon.com.cn" rel="nofollow"><img src="/lib/exe/fetch.php?media=wiki:skyon.png" class="media" alt="" /></a>    [ [<a href="http://www.skyon.com.cn" class="urlextern" title="http://www.skyon.com.cn" rel="nofollow">http://www.skyon.com.cn</a>|{ {wiki:skyon.png}}]]    （到时候把空格去掉）</div>
+</li>
+<li class="level0"><div class="li">具体可以参考官网这个说明 <a href="/doku.php?id=wiki:syntax" class="wikilink1" title="wiki:syntax">语法</a></div>
+</li>
+</ol>
+
+</div>
+<!-- EDIT6 SECTION "页面内容中添加链接" [1468-2158] -->
+<h2 class="sectionedit7" id="页面内容中添加图片等多媒体资源">页面内容中添加图片等多媒体资源</h2>
+<div class="level2">
+
+<p>
+右上角媒体管理器中进行上传，每个资源会有一个id，同上面的文本资源名格式  namespaces:name 
+</p>
+
+</div>
+<!-- EDIT7 SECTION "页面内容中添加图片等多媒体资源" [2159-2332] -->
+<h2 class="sectionedit8" id="sidebar的编辑">sidebar的编辑</h2>
+<div class="level2">
+
+<p>
+sidebar同样也是一个txt文件，路径是<a href="/doku.php?id=sidebar" class="wikilink1" title="sidebar">sidebar</a>，对应的是服务器的路径/dokuwiki/data/pages/sidebar.txt
+</p>
+
+<p>
+也可以实用插件自动生成sidebar，目前实用indexmenu插件自动，不用自己配置sidebar
+</p>
+
+<p>
+关于怎么使用自动sidebar配置，请参照<a href="https://www.dokuwiki.org/plugin:indexmenu#about_empty_namespaces" class="urlextern" title="https://www.dokuwiki.org/plugin:indexmenu#about_empty_namespaces" rel="nofollow">插件文档</a>或者参看根目录的下sidebar配置
+</p>
+
+</div>
+<!-- EDIT8 SECTION "sidebar的编辑" [2333-2755] -->
+<h2 class="sectionedit9" id="markdown语法">markdown语法</h2>
+<div class="level2">
+
+<p>
+markdown 是一种写作语言，markdown的教程参见<a href="http://gong.leanote.com/post/markdown%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%85%B6%E7%94%A8%E6%B3%95" class="urlextern" title="http://gong.leanote.com/post/markdown%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%85%B6%E7%94%A8%E6%B3%95" rel="nofollow">leante-blog  markdown 写法</a>
+</p>
+
+<p>
+或者参见<a href="/doku.php?id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:markdown" class="wikilink1" title="学习笔记:markdown">学习笔记markdown</a>
+</p>
+
+</div>
+<!-- EDIT9 SECTION "markdown语法" [2756-] -->

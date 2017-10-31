@@ -1,0 +1,16 @@
+
+<h2 class="sectionedit1" id="数据接口顺序服务">数据接口顺序服务</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li">RegistryController 正常的增删改查管理</div>
+</li>
+<li class="level1"><div class="li">UpdateServiceOrderInterceptor 当对数据接口顺序服务进行了修改以后，在这个方法中使用aop对于内存中存储的数据接口服务顺序进行更新</div>
+</li>
+<li class="level1"><div class="li">数据接口顺序服务是在数据处理引擎获取的时候进行动态判断的；根据预定义的数据接口服务顺序实体判断是返回那一个对应的数据查询和解析实体；</div>
+</li>
+<li class="level1"><div class="li">对于没有定义数据服务接口顺序的，则按照spring容器加载的顺序取第一个返回；这个不可控；
+</div>
+</li>
+</ul>
+
+</div>

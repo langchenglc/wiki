@@ -1,4 +1,6 @@
-{{indexmenu>:|navbar context}}
+导航
+
+{{indexmenu> ..:#1|navbar context}}
 
 ---
 
@@ -6,7 +8,7 @@
 
 [[:sidebar|转到根sidebar]]
 
-[[wiki:start|关于dowuwiki]]
+[[wiki:dokuwiki-Chinese|关于dowuwiki]]
 
 
 ~~NOCACHE~~ 

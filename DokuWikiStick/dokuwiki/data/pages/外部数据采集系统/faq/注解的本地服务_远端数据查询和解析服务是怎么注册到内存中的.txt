@@ -1,0 +1,9 @@
+## 注解的本地服务，远端数据查询和解析服务是怎么注册到内存中的？
+
+* 自定义了一套注解类用来描述对应的服务
+* 本地查询服务实体注解：@LocalDataServiceRegistry(value= DataServiceEnum.ENT_COURT_NOTICE,desc="企业法院公告信息")  
+* 远端数据查询实体注解：@RemoteDataServiceRegistry4Class(value = BelongEnum.QX,desc = "启信宝数据接口")
+* 远端数据解析实体注解：@ParserServiceRegistry4Class(value = BelongEnum.QX,desc = "启信宝数据解析")
+* 当spring启动自动扫描注入实体的时候，通过扫描上面的三个注解信息，对有这三个注解的实体则读取对应的注解信息存放到实体中；
+* 具体的扫描注册动作在RegistryListener类中
+* 原理见[blog](https://langchenglc.github.io/blogs/spring%E5%8A%A0%E8%BD%BD%E5%90%8E%E5%AF%B9bean%E8%87%AA%E5%AE%9A%E4%B9%89%E5%A4%84%E7%90%86.html)

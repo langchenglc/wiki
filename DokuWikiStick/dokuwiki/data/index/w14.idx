@@ -2,3 +2,8 @@ multiplication
 securityconfig
 bindingsession
 authentication
+datacontroller
+rolecontroller
+usercontroller
+pagecontroller
+basecontroller

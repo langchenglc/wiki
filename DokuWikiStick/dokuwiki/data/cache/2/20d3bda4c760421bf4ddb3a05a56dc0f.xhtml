@@ -1,0 +1,25 @@
+
+<h2 class="sectionedit1" id="查询数据的主要步骤">查询数据的主要步骤：</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li">LogRecordInterceptor中时候用aop监控DataController主要查询入口，获取查询参数；</div>
+</li>
+<li class="level1"><div class="li">DataController 中根据查询参数获取到本地查询实体，远端数据查询服务实体，数据解析服务实体；（当然这个过程中涉及到对于预定义接口顺序的判断；）</div>
+</li>
+<li class="level1"><div class="li">根据上面对应的三个实体组装成数据处理引擎DataEngineNew</div>
+</li>
+<li class="level1"><div class="li">数据处理引擎使用反射技术，查询各个实体中定义的对应服务方法，调用对应的方法并返回数据；</div>
+</li>
+<li class="level1"><div class="li">DataController组装数据成GeResult并准备返回；</div>
+</li>
+<li class="level1"><div class="li">LogRecordInterceptor接管反馈的数据并对数据进行数据有效期判断</div>
+</li>
+<li class="level1"><div class="li">LogRecordInterceptor接管反馈的数据并对数据进行操作信息记录；</div>
+</li>
+<li class="level1"><div class="li">反馈数据到用户；
+<br/>
+</div>
+</li>
+</ul>
+
+</div>

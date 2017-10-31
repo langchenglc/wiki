@@ -1,0 +1,6 @@
+## 反馈码描述
+
+* CodeEnum中统一规定了对于返回码的具体描述；
+* `return error(CodeEnum.HAND_ERROR,"对应的接口类型-服务接口类型组合已经存在！")`
+* `return error(CodeEnum.PARAM_ERROR,"更新失败！传递的key_id为空！")`
+* `re.setCode(CodeEnum.RUNTIME_ERROR.getCode());`
