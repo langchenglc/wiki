@@ -181,3 +181,5 @@ body
 form
 spel
 8080
+json
+ajax

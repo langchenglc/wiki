@@ -9,29 +9,66 @@
 3. 处理request header部分的注解：@RequestHeader, @CookieValue;
 4. 处理attribute类型是注解： @SessionAttributes, @ModelAttribute;
 
-###一.@RequestParam
->该注解类型用于将指定的请求参数赋值给方法中的形参
-
-@RequestParam注解支持的属性
+注解支持的属性
 |属性|类型|是否必要|说明|
 |name|String|否|指定请求头绑定的名称|
 |value|String|否|name属性的别名|
 |required|Boolean|否|指示参数是否必须绑定|
 |defaultValue|String|否|如果没有传递参数而使用的默认值|
 
-用来处理Content-Type: 为 application/x-www-form-urlencoded编码的内容，提交方式GET、POST.
+---
+
+###一.@RequestParam
+>该注解类型用于将指定的请求参数赋值给方法中的形参
+
+@RequestParam用来处理Content-Type: 为 application/x-www-form-urlencoded编码的内容，提交方式GET、POST.
 该注解主要参数：value用来指定要传入值的id名称；required默认是true，表示请求中一定要有相应的参数，否则将报404错误码；default默认值，表示如果请求中没有同名参数时的默认值，默认值可以是SpEL表达式，如“#{systemProperties['java.vm.version']}”。
 
-例：   http：//localhost:8080/login?username=joven&password=123456
-''@RequestMapping("/login")
-public  ModelAndView go(@RequestParam("username") String username,
-                        @RequestParam("password") String password){
-        return .....;        }''
-        
-        
+例：http://localhost:8080/login?username=joven&password=123456
+
+
+
+```java
 @RequestMapping("/login")
 public  ModelAndView go(@RequestParam("username") String username,
-                        @RequestParam("password") String password){
-        return .....;        }
+                        @RequestParam("password") String password){                        
+        return .....;        
+}
+```
+以上代码会将请求中的loginname参数的值"joven"赋给loginname变量，password参数的值"123456"赋给password变量
+
+---
+
+###@RequestBody
+该注解常用来处理Content-Type: 不是application/x-www-form-urlencoded编码的内容，例如application/json, application/xml等；
+
+```java
+$.ajax({  
+    type: "post",  
+    contentType:"application/json",  
+    url: "repairs/saveDispatches",  
+    data: JSON.stringify(dispatchesDTO),  
+    success: function(data){  
+        if(!data.success){  
+          alertError("派工失败");  
+        }else{  
+        alertSuccess("派工成功");  
+    }  
+}) 
+```
 
 
+```java
+@RequestMapping(value="/saveUser",method=RequestMethod.POST) 
+@ResponseBody  
+public void saveUser(@RequestBody List<User> users,@RequestBody DispatchesDTO dispatchesDTO,) { 
+   userService.batchSave(users); 
+   dispatchesService.saveDispatches(dispatchesDTO);
+} 
+```
+
+其实 @RequestBody接收的是一个Json对象的字符串，而不是一个Json对象。然而在ajax请求往往传的都是Json对象，后来发现用 JSON.stringify(data)的方式就能将对象变成字符串。同时ajax请求的时候也要指定dataType: "json",contentType:"application/json" 这样就可以轻易的将一个对象或者List传到Java端，使用@RequestBody即可绑定对象或者List.
+
+---
+
+###@PathVariable

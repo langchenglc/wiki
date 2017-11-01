@@ -1,0 +1,5 @@
+@RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/login&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">public</span>  ModelAndView go<span class="br0">&#40;</span>@RequestParam<span class="br0">&#40;</span><span class="st0">&quot;username&quot;</span><span class="br0">&#41;</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> username,
+                        @RequestParam<span class="br0">&#40;</span><span class="st0">&quot;password&quot;</span><span class="br0">&#41;</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> password<span class="br0">&#41;</span><span class="br0">&#123;</span>                        
+        <span class="kw1">return</span> .....<span class="sy0">;</span>        
+<span class="br0">&#125;</span>

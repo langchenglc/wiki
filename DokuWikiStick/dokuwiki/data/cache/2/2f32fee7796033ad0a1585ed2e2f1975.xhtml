@@ -18,17 +18,10 @@
 </li>
 </ol>
 
-</div>
-<!-- EDIT1 SECTION "项目中常见spring注解" [0-480] -->
-<h3 class="sectionedit2" id="一_requestparam">一.@RequestParam</h3>
-<div class="level3">
-<blockquote><div class="no">
-该注解类型用于将指定的请求参数赋值给方法中的形参</div></blockquote>
-
 <p>
-@RequestParam注解支持的属性
+注解支持的属性
 </p>
-<div class="table sectionedit3"><table class="inline">
+<div class="table sectionedit2"><table class="inline">
 	<tr class="row0">
 		<td class="col0">属性</td><td class="col1">类型</td><td class="col2">是否必要</td><td class="col3">说明</td>
 	</tr>
@@ -45,25 +38,79 @@
 		<td class="col0">defaultValue</td><td class="col1">String</td><td class="col2">否</td><td class="col3">如果没有传递参数而使用的默认值</td>
 	</tr>
 </table></div>
-<!-- EDIT3 TABLE [613-862] -->
+<!-- EDIT2 TABLE [504-753] --><hr />
+
+</div>
+<!-- EDIT1 SECTION "项目中常见spring注解" [0-758] -->
+<h3 class="sectionedit3" id="一_requestparam">一.@RequestParam</h3>
+<div class="level3">
+<blockquote><div class="no">
+该注解类型用于将指定的请求参数赋值给方法中的形参</div></blockquote>
+
 <p>
-用来处理Content-Type: 为 application/x-www-form-urlencoded编码的内容，提交方式GET、POST.
+@RequestParam用来处理Content-Type: 为 application/x-www-form-urlencoded编码的内容，提交方式GET、POST.
 该注解主要参数：value用来指定要传入值的id名称；required默认是true，表示请求中一定要有相应的参数，否则将报404错误码；default默认值，表示如果请求中没有同名参数时的默认值，默认值可以是SpEL表达式，如“#{systemProperties[&#039;java.vm.version&#039;]}”。
 </p>
 
 <p>
-例：   http：<em>localhost:8080/login?username=joven&amp;password=123456
-<code>@RequestMapping(“/login”)
-public  ModelAndView go(@RequestParam(“username”) String username,
-                        @RequestParam(“password”) String password){
-        return …..;        }</code>
-<br/>
-<br/>
-@RequestMapping(“/login”)
-public  ModelAndView go(@RequestParam(“username”) String username,
-                        @RequestParam(“password”) String password){
-        return …..;        }
+例：<a href="http://localhost:8080/login?username=joven&amp;password=123456" class="urlextern" title="http://localhost:8080/login?username=joven&amp;password=123456" rel="nofollow">http://localhost:8080/login?username=joven&amp;password=123456</a>
 </p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=0" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/login&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">public</span>  ModelAndView go<span class="br0">&#40;</span>@RequestParam<span class="br0">&#40;</span><span class="st0">&quot;username&quot;</span><span class="br0">&#41;</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> username,
+                        @RequestParam<span class="br0">&#40;</span><span class="st0">&quot;password&quot;</span><span class="br0">&#41;</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> password<span class="br0">&#41;</span><span class="br0">&#123;</span>                        
+        <span class="kw1">return</span> .....<span class="sy0">;</span>        
+<span class="br0">&#125;</span></pre>
+</dd></dl>
+
+<p>
+以上代码会将请求中的loginname参数的值“joven”赋给loginname变量，password参数的值“123456”赋给password变量
+</p>
+<hr />
 
 </div>
-<!-- EDIT2 SECTION "一.@RequestParam" [481-] -->
+<!-- EDIT3 SECTION "一.@RequestParam" [759-1731] -->
+<h3 class="sectionedit4" id="requestbody">@RequestBody</h3>
+<div class="level3">
+
+<p>
+该注解常用来处理Content-Type: 不是application/x-www-form-urlencoded编码的内容，例如application/json, application/xml等；
+</p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=1" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">$.<span class="me1">ajax</span><span class="br0">&#40;</span><span class="br0">&#123;</span>  
+    type<span class="sy0">:</span> <span class="st0">&quot;post&quot;</span>,  
+    contentType<span class="sy0">:</span><span class="st0">&quot;application/json&quot;</span>,  
+    url<span class="sy0">:</span> <span class="st0">&quot;repairs/saveDispatches&quot;</span>,  
+    data<span class="sy0">:</span> JSON.<span class="me1">stringify</span><span class="br0">&#40;</span>dispatchesDTO<span class="br0">&#41;</span>,  
+    success<span class="sy0">:</span> function<span class="br0">&#40;</span>data<span class="br0">&#41;</span><span class="br0">&#123;</span>  
+        <span class="kw1">if</span><span class="br0">&#40;</span><span class="sy0">!</span>data.<span class="me1">success</span><span class="br0">&#41;</span><span class="br0">&#123;</span>  
+          alertError<span class="br0">&#40;</span><span class="st0">&quot;派工失败&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>  
+        <span class="br0">&#125;</span><span class="kw1">else</span><span class="br0">&#123;</span>  
+        alertSuccess<span class="br0">&#40;</span><span class="st0">&quot;派工成功&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>  
+    <span class="br0">&#125;</span>  
+<span class="br0">&#125;</span><span class="br0">&#41;</span> </pre>
+</dd></dl>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=2" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@RequestMapping<span class="br0">&#40;</span>value<span class="sy0">=</span><span class="st0">&quot;/saveUser&quot;</span>,method<span class="sy0">=</span>RequestMethod.<span class="me1">POST</span><span class="br0">&#41;</span> 
+@ResponseBody  
+<span class="kw1">public</span> <span class="kw4">void</span> saveUser<span class="br0">&#40;</span>@RequestBody List<span class="sy0">&lt;</span>User<span class="sy0">&gt;</span> users,@RequestBody DispatchesDTO dispatchesDTO,<span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+   userService.<span class="me1">batchSave</span><span class="br0">&#40;</span>users<span class="br0">&#41;</span><span class="sy0">;</span> 
+   dispatchesService.<span class="me1">saveDispatches</span><span class="br0">&#40;</span>dispatchesDTO<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> </pre>
+</dd></dl>
+
+<p>
+其实 @RequestBody接收的是一个Json对象的字符串，而不是一个Json对象。然而在ajax请求往往传的都是Json对象，后来发现用 JSON.stringify(data)的方式就能将对象变成字符串。同时ajax请求的时候也要指定dataType: “json”,contentType:“application/json” 这样就可以轻易的将一个对象或者List传到Java端，使用@RequestBody即可绑定对象或者List.
+</p>
+<hr />
+
+</div>
+<!-- EDIT4 SECTION "@RequestBody" [1732-2920] -->
+<h3 class="sectionedit5" id="pathvariable">@PathVariable</h3>
+<div class="level3">
+
+</div>
+<!-- EDIT5 SECTION "@PathVariable" [2921-] -->

@@ -1,0 +1,6 @@
+@RequestMapping<span class="br0">&#40;</span>value<span class="sy0">=</span><span class="st0">&quot;/saveUser&quot;</span>,method<span class="sy0">=</span>RequestMethod.<span class="me1">POST</span><span class="br0">&#41;</span> 
+@ResponseBody  
+<span class="kw1">public</span> <span class="kw4">void</span> saveUser<span class="br0">&#40;</span>@RequestBody List<span class="sy0">&lt;</span>User<span class="sy0">&gt;</span> users,@RequestBody DispatchesDTO dispatchesDTO,<span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+   userService.<span class="me1">batchSave</span><span class="br0">&#40;</span>users<span class="br0">&#41;</span><span class="sy0">;</span> 
+   dispatchesService.<span class="me1">saveDispatches</span><span class="br0">&#40;</span>dispatchesDTO<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> 

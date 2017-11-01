@@ -77,3 +77,6 @@ requestbody
 querystring
 cookievalue
 须
+量
+contenttype
+userservice

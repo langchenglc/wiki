@@ -26,3 +26,5 @@ requestparam
 pathvariable
 defaultvalue
 modelandview
+alertsuccess
+responsebody
