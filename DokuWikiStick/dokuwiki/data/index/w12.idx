@@ -22,3 +22,7 @@ getqueryfrom
 serviceorder
 localservice
 organization
+requestparam
+pathvariable
+defaultvalue
+modelandview

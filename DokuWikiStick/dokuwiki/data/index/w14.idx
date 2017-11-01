@@ -7,3 +7,5 @@ rolecontroller
 usercontroller
 pagecontroller
 basecontroller
+modelattribute
+requestmapping

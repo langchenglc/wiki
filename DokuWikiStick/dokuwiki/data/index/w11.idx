@@ -73,3 +73,7 @@ baseservice
 错
 datavalidqo
 项
+requestbody
+querystring
+cookievalue
+须

@@ -1,4 +1,4 @@
-a:73:{i:0;a:3:{i:0;s:14:"document_start";i:1;a:0:{}i:2;i:0;}i:1;a:3:{i:0;s:6:"header";i:1;a:3:{i:0;s:35:"dokuwiki安装以后的基本配置";i:1;i:1;i:2;i:0;}i:2;i:0;}i:2;a:3:{i:0;s:12:"section_open";i:1;a:1:{i:0;i:1;}i:2;i:0;}i:3;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:19:"markdowku_headeratx";i:1;b:1;i:2;i:5;i:3;s:38:"
+a:77:{i:0;a:3:{i:0;s:14:"document_start";i:1;a:0:{}i:2;i:0;}i:1;a:3:{i:0;s:6:"header";i:1;a:3:{i:0;s:35:"dokuwiki安装以后的基本配置";i:1;i:1;i:2;i:0;}i:2;i:0;}i:2;a:3:{i:0;s:12:"section_open";i:1;a:1:{i:0;i:1;}i:2;i:0;}i:3;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:19:"markdowku_headeratx";i:1;b:1;i:2;i:5;i:3;s:38:"
 # dokuwiki安装以后的基本配置";}i:2;i:0;}i:4;a:3:{i:0;s:13:"section_close";i:1;a:0:{}i:2;i:39;}i:5;a:3:{i:0;s:6:"header";i:1;a:3:{i:0;s:12:"插件安装";i:1;i:2;i:2;i:39;}i:2;i:39;}i:6;a:3:{i:0;s:12:"section_open";i:1;a:1:{i:0;i:2;}i:2;i:39;}i:7;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:19:"markdowku_headeratx";i:1;b:1;i:2;i:5;i:3;s:16:"
 ## 插件安装";}i:2;i:39;}i:8;a:3:{i:0;s:13:"section_close";i:1;a:0:{}i:2;i:56;}i:9;a:3:{i:0;s:6:"header";i:1;a:3:{i:0;s:39:"1.markdown插件，支持markdown语法";i:1;i:3;i:2;i:56;}i:2;i:56;}i:10;a:3:{i:0;s:12:"section_open";i:1;a:1:{i:0;i:3;}i:2;i:56;}i:11;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:19:"markdowku_headeratx";i:1;b:1;i:2;i:5;i:3;s:44:"
 ### 1.markdown插件，支持markdown语法";}i:2;i:56;}i:12;a:3:{i:0;s:13:"section_close";i:1;a:0:{}i:2;i:101;}i:13;a:3:{i:0;s:6:"header";i:1;a:3:{i:0;s:48:"2.indexmenu插件，用来自动生成导航栏:";i:1;i:3;i:2;i:101;}i:2;i:101;}i:14;a:3:{i:0;s:12:"section_open";i:1;a:1:{i:0;i:3;}i:2;i:101;}i:15;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:19:"markdowku_headeratx";i:1;b:1;i:2;i:5;i:3;s:53:"
@@ -13,17 +13,17 @@ a:73:{i:0;a:3:{i:0;s:14:"document_start";i:1;a:0:{}i:2;i:0;}i:1;a:3:{i:0;s:6:"he
 ## 乱码修复";}i:2;i:437;}i:48;a:3:{i:0;s:10:"quote_open";i:1;a:0:{}i:2;i:454;}i:49;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:122:"如果使用中文页面名或者文件夹名字的话，dokuwiki会乱码，因此需要对配置进行简单的修改：";}i:2;i:454;}i:50;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:21:"markdowku_blockquotes";i:1;b:1;i:2;i:1;i:3;s:125:"
 > 如果使用中文页面名或者文件夹名字的话，dokuwiki会乱码，因此需要对配置进行简单的修改：";}i:2;i:454;}i:51;a:3:{i:0;s:11:"quote_close";i:1;a:0:{}i:2;i:579;}i:52;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:21:"markdowku_blockquotes";i:1;b:1;i:2;i:4;i:3;s:2:"
 
-";}i:2;i:579;}i:53;a:3:{i:0;s:12:"preformatted";i:1;a:1:{i:0;s:82:"  也可以参考[[https://www.dokuwiki.org/zh:pagename|官方文档]]进行修改";}i:2;i:581;}i:54;a:3:{i:0;s:10:"listo_open";i:1;a:0:{}i:2;i:667;}i:55;a:3:{i:0;s:13:"listitem_open";i:1;a:1:{i:0;i:1;}i:2;i:667;}i:56;a:3:{i:0;s:16:"listcontent_open";i:1;a:0:{}i:2;i:667;}i:57;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:16:"markdowku_olists";i:1;b:1;i:2;i:1;i:3;s:5:"
+";}i:2;i:579;}i:53;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:579;}i:54;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:15:"也可以参考";}i:2;i:582;}i:55;a:3:{i:0;s:12:"externallink";i:1;a:2:{i:0;s:36:"https://www.dokuwiki.org/zh:pagename";i:1;s:12:"官方文档";}i:2;i:597;}i:56;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:12:"进行修改";}i:2;i:650;}i:57;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:663;}i:58;a:3:{i:0;s:10:"listo_open";i:1;a:0:{}i:2;i:663;}i:59;a:3:{i:0;s:13:"listitem_open";i:1;a:1:{i:0;i:1;}i:2;i:663;}i:60;a:3:{i:0;s:16:"listcontent_open";i:1;a:0:{}i:2;i:663;}i:61;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:16:"markdowku_olists";i:1;b:1;i:2;i:1;i:3;s:5:"
 
-1. ";}i:2;i:667;}i:58;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:29:"dokuwiki/conf/local.php修改";}i:2;i:672;}i:59;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:16:"markdowku_olists";i:1;b:1;i:2;i:3;i:3;s:29:"dokuwiki/conf/local.php修改";}i:2;i:672;}i:60;a:3:{i:0;s:17:"listcontent_close";i:1;a:0:{}i:2;i:701;}i:61;a:3:{i:0;s:14:"listitem_close";i:1;a:0:{}i:2;i:701;}i:62;a:3:{i:0;s:11:"listo_close";i:1;a:0:{}i:2;i:701;}i:63;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:16:"markdowku_olists";i:1;b:1;i:2;i:4;i:3;s:1:"
-";}i:2;i:701;}i:64;a:3:{i:0;s:4:"file";i:1;a:3:{i:0;s:45:"
+1. ";}i:2;i:663;}i:62;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:29:"dokuwiki/conf/local.php修改";}i:2;i:668;}i:63;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:16:"markdowku_olists";i:1;b:1;i:2;i:3;i:3;s:29:"dokuwiki/conf/local.php修改";}i:2;i:668;}i:64;a:3:{i:0;s:17:"listcontent_close";i:1;a:0:{}i:2;i:697;}i:65;a:3:{i:0;s:14:"listitem_close";i:1;a:0:{}i:2;i:697;}i:66;a:3:{i:0;s:11:"listo_close";i:1;a:0:{}i:2;i:697;}i:67;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:16:"markdowku_olists";i:1;b:1;i:2;i:4;i:3;s:1:"
+";}i:2;i:697;}i:68;a:3:{i:0;s:4:"file";i:1;a:3:{i:0;s:45:"
 //增加一行
 $conf['fnencode'] = 'utf-8';
-";i:1;s:3:"php";i:2;s:11:"snippet.php";}i:2;i:702;}i:65;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:26:"markdowku_githubcodeblocks";i:1;b:1;i:2;i:5;i:3;s:55:"
+";i:1;s:3:"php";i:2;s:11:"snippet.php";}i:2;i:698;}i:69;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:26:"markdowku_githubcodeblocks";i:1;b:1;i:2;i:5;i:3;s:55:"
 ```php
 //增加一行
 $conf['fnencode'] = 'utf-8';
-```";}i:2;i:702;}i:66;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:702;}i:67;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:47:"2.dokuwiki/inc/pageutils.php 替换两个函数";}i:2;i:759;}i:68;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:807;}i:69;a:3:{i:0;s:4:"file";i:1;a:3:{i:0;s:882:"
+```";}i:2;i:698;}i:70;a:3:{i:0;s:6:"p_open";i:1;a:0:{}i:2;i:698;}i:71;a:3:{i:0;s:5:"cdata";i:1;a:1:{i:0;s:47:"2.dokuwiki/inc/pageutils.php 替换两个函数";}i:2;i:755;}i:72;a:3:{i:0;s:7:"p_close";i:1;a:0:{}i:2;i:803;}i:73;a:3:{i:0;s:4:"file";i:1;a:3:{i:0;s:882:"
 function utf8_encodeFN($file,$safe=true){
     global $conf;
     //if($conf['fnencode'] == 'utf-8') return $file;
@@ -64,7 +64,7 @@ function utf8_decodeFN($file){
     return urldecode($file);
 }
 
-";i:1;s:3:"php";i:2;s:11:"snippet.php";}i:2;i:807;}i:70;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:26:"markdowku_githubcodeblocks";i:1;b:1;i:2;i:5;i:3;s:892:"
+";i:1;s:3:"php";i:2;s:11:"snippet.php";}i:2;i:803;}i:74;a:3:{i:0;s:6:"plugin";i:1;a:4:{i:0;s:26:"markdowku_githubcodeblocks";i:1;b:1;i:2;i:5;i:3;s:892:"
 ```php
 function utf8_encodeFN($file,$safe=true){
     global $conf;
@@ -106,4 +106,4 @@ function utf8_decodeFN($file){
     return urldecode($file);
 }
 
-```";}i:2;i:807;}i:71;a:3:{i:0;s:13:"section_close";i:1;a:0:{}i:2;i:1699;}i:72;a:3:{i:0;s:12:"document_end";i:1;a:0:{}i:2;i:1699;}}
+```";}i:2;i:803;}i:75;a:3:{i:0;s:13:"section_close";i:1;a:0:{}i:2;i:1695;}i:76;a:3:{i:0;s:12:"document_end";i:1;a:0:{}i:2;i:1695;}}

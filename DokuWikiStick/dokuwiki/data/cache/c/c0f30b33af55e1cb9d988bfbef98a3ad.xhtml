@@ -1,0 +1,590 @@
+
+<h1 class="sectionedit1" id="formatting_syntax">Formatting Syntax</h1>
+<div class="level1">
+
+<p>
+<a href="https://www.dokuwiki.org/DokuWiki" class="interwiki iw_doku" title="https://www.dokuwiki.org/DokuWiki">DokuWiki</a> supports some simple markup language, which tries to make the datafiles to be as readable as possible. This page contains all possible syntax you may use when editing the pages. Simply have a look at the source of this page by pressing “Edit this page”. If you want to try something, just use the <a href="/doku.php?id=playground:playground" class="wikilink2" title="playground:playground" rel="nofollow">playground</a> page. The simpler markup is easily accessible via <a href="https://www.dokuwiki.org/toolbar" class="interwiki iw_doku" title="https://www.dokuwiki.org/toolbar">quickbuttons</a>, too.
+</p>
+
+</div>
+<!-- EDIT1 SECTION "Formatting Syntax" [1-472] -->
+<h2 class="sectionedit2" id="basic_text_formatting">Basic Text Formatting</h2>
+<div class="level2">
+
+<p>
+DokuWiki supports <strong>bold</strong>, <em>italic</em>, <em class="u">underlined</em> and <code>monospaced</code> texts. Of course you can <strong><em class="u"><em><code>combine</code></em></em></strong> all these.
+</p>
+<pre class="code">DokuWiki supports **bold**, //italic//, __underlined__ and &#039;&#039;monospaced&#039;&#039; texts.
+Of course you can **__//&#039;&#039;combine&#039;&#039;//__** all these.</pre>
+
+<p>
+You can use <sub>subscript</sub> and <sup>superscript</sup>, too.
+</p>
+<pre class="code">You can use &lt;sub&gt;subscript&lt;/sub&gt; and &lt;sup&gt;superscript&lt;/sup&gt;, too.</pre>
+
+<p>
+You can mark something as <del>deleted</del> as well.
+</p>
+<pre class="code">You can mark something as &lt;del&gt;deleted&lt;/del&gt; as well.</pre>
+
+<p>
+<strong>Paragraphs</strong> are created from blank lines. If you want to <strong>force a newline</strong> without a paragraph, you can use two backslashes followed by a whitespace or the end of line.
+</p>
+
+<p>
+This is some text with some linebreaks<br/>
+Note that the
+two backslashes are only recognized at the end of a line<br/>
+
+or followed by<br/>
+a whitespace \\this happens without it.
+</p>
+<pre class="code">This is some text with some linebreaks\\ Note that the
+two backslashes are only recognized at the end of a line\\
+or followed by\\ a whitespace \\this happens without it.</pre>
+
+<p>
+You should use forced newlines only if really needed.
+</p>
+
+</div>
+<!-- EDIT2 SECTION "Basic Text Formatting" [473-1609] -->
+<h2 class="sectionedit3" id="links">Links</h2>
+<div class="level2">
+
+<p>
+DokuWiki supports multiple ways of creating links.
+</p>
+
+</div>
+<!-- EDIT3 SECTION "Links" [1610-1680] -->
+<h3 class="sectionedit4" id="external">External</h3>
+<div class="level3">
+
+<p>
+External links are recognized automagically: <a href="http://www.google.com" class="urlextern" title="http://www.google.com" rel="nofollow">http://www.google.com</a> or simply <a href="http://www.google.com" class="urlextern" title="http://www.google.com" rel="nofollow">www.google.com</a> - You can set the link text as well: <a href="http://www.google.com" class="urlextern" title="http://www.google.com" rel="nofollow">This Link points to google</a>. Email addresses like this one: <a href="mailto:&#x61;&#x6e;&#x64;&#x69;&#x40;&#x73;&#x70;&#x6c;&#x69;&#x74;&#x62;&#x72;&#x61;&#x69;&#x6e;&#x2e;&#x6f;&#x72;&#x67;" class="mail" title="&#x61;&#x6e;&#x64;&#x69;&#x40;&#x73;&#x70;&#x6c;&#x69;&#x74;&#x62;&#x72;&#x61;&#x69;&#x6e;&#x2e;&#x6f;&#x72;&#x67;">&#x61;&#x6e;&#x64;&#x69;&#x40;&#x73;&#x70;&#x6c;&#x69;&#x74;&#x62;&#x72;&#x61;&#x69;&#x6e;&#x2e;&#x6f;&#x72;&#x67;</a> are recognized, too.
+</p>
+<pre class="code">DokuWiki supports multiple ways of creating links. External links are recognized
+automagically: http://www.google.com or simply www.google.com - You can set
+link text as well: [[http://www.google.com|This Link points to google]]. Email
+addresses like this one: &lt;andi@splitbrain.org&gt; are recognized, too.</pre>
+
+</div>
+<!-- EDIT4 SECTION "External" [1681-2271] -->
+<h3 class="sectionedit5" id="internal">Internal</h3>
+<div class="level3">
+
+<p>
+Internal links are created by using square brackets. You can either just give a <a href="/doku.php?id=wiki:pagename" class="wikilink2" title="wiki:pagename" rel="nofollow">pagename</a> or use an additional <a href="/doku.php?id=wiki:pagename" class="wikilink2" title="wiki:pagename" rel="nofollow">link text</a>.
+</p>
+<pre class="code">Internal links are created by using square brackets. You can either just give
+a [[pagename]] or use an additional [[pagename|link text]].</pre>
+
+<p>
+<a href="https://www.dokuwiki.org/pagename" class="interwiki iw_doku" title="https://www.dokuwiki.org/pagename">Wiki pagenames</a> are converted to lowercase automatically, special characters are not allowed.
+</p>
+
+<p>
+You can use <a href="/doku.php?id=some:namespaces" class="wikilink2" title="some:namespaces" rel="nofollow">namespaces</a> by using a colon in the pagename.
+</p>
+<pre class="code">You can use [[some:namespaces]] by using a colon in the pagename.</pre>
+
+<p>
+For details about namespaces see <a href="https://www.dokuwiki.org/namespaces" class="interwiki iw_doku" title="https://www.dokuwiki.org/namespaces">namespaces</a>.
+</p>
+
+<p>
+Linking to a specific section is possible, too. Just add the section name behind a hash character as known from <abbr title="HyperText Markup Language">HTML</abbr>. This links to <span class="curid"><a href="/doku.php?id=wiki:syntax#internal" class="wikilink1" title="wiki:syntax">this Section</a></span>.
+</p>
+<pre class="code">This links to [[syntax#internal|this Section]].</pre>
+
+<p>
+Notes:
+</p>
+<ul>
+<li class="level1"><div class="li">Links to <span class="curid"><a href="/doku.php?id=wiki:syntax" class="wikilink1" title="wiki:syntax">existing pages</a></span> are shown in a different style from <a href="/doku.php?id=wiki:nonexisting" class="wikilink2" title="wiki:nonexisting" rel="nofollow">nonexisting</a> ones.</div>
+</li>
+<li class="level1"><div class="li">DokuWiki does not use <a href="https://en.wikipedia.org/wiki/CamelCase" class="interwiki iw_wp" title="https://en.wikipedia.org/wiki/CamelCase">CamelCase</a> to automatically create links by default, but this behavior can be enabled in the <a href="https://www.dokuwiki.org/config" class="interwiki iw_doku" title="https://www.dokuwiki.org/config">config</a> file. Hint: If DokuWiki is a link, then it&#039;s enabled.</div>
+</li>
+<li class="level1"><div class="li">When a section&#039;s heading is changed, its bookmark changes, too. So don&#039;t rely on section linking too much.</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT5 SECTION "Internal" [2272-3506] -->
+<h3 class="sectionedit6" id="interwiki">Interwiki</h3>
+<div class="level3">
+
+<p>
+DokuWiki supports <a href="https://www.dokuwiki.org/Interwiki" class="interwiki iw_doku" title="https://www.dokuwiki.org/Interwiki">Interwiki</a> links. These are quick links to other Wikis. For example this is a link to Wikipedia&#039;s page about Wikis: <a href="https://en.wikipedia.org/wiki/Wiki" class="interwiki iw_wp" title="https://en.wikipedia.org/wiki/Wiki">Wiki</a>.
+</p>
+<pre class="code">DokuWiki supports [[doku&gt;Interwiki]] links. These are quick links to other Wikis.
+For example this is a link to Wikipedia&#039;s page about Wikis: [[wp&gt;Wiki]].</pre>
+
+</div>
+<!-- EDIT6 SECTION "Interwiki" [3507-3843] -->
+<h3 class="sectionedit7" id="windows_shares">Windows Shares</h3>
+<div class="level3">
+
+<p>
+Windows shares like <a href="file://///server/share" class="windows" title="\\server\share">this</a> are recognized, too. Please note that these only make sense in a homogeneous user group like a corporate <a href="https://en.wikipedia.org/wiki/Intranet" class="interwiki iw_wp" title="https://en.wikipedia.org/wiki/Intranet">Intranet</a>.
+</p>
+<pre class="code">Windows Shares like [[\\server\share|this]] are recognized, too.</pre>
+
+<p>
+Notes:
+</p>
+<ul>
+<li class="level1"><div class="li">For security reasons direct browsing of windows shares only works in Microsoft Internet Explorer per default (and only in the “local zone”).</div>
+</li>
+<li class="level1"><div class="li">For Mozilla and Firefox it can be enabled through different workaround mentioned in the <a href="http://kb.mozillazine.org/Links_to_local_pages_do_not_work" class="urlextern" title="http://kb.mozillazine.org/Links_to_local_pages_do_not_work" rel="nofollow">Mozilla Knowledge Base</a>. However, there will still be a JavaScript warning about trying to open a Windows Share. To remove this warning (for all users), put the following line in <code>conf/lang/en/lang.php</code> (more details at <a href="https://www.dokuwiki.org/localization#changing_some_localized_texts_and_strings_in_your_installation" class="interwiki iw_doku" title="https://www.dokuwiki.org/localization#changing_some_localized_texts_and_strings_in_your_installation">localization</a>): &lt;code - conf/lang/en/lang.php&gt;
+&lt;?php
+/<strong>
+ * Customization of the english language file
+ * Copy only the strings that needs to be modified
+ */
+$lang[&#039;js&#039;][&#039;nosmblinks&#039;] = <code>;
+&lt;/code&gt;
+
+==== Image Links ====
+
+You can also use an image to link to another internal or external page by combining the syntax for links and <a href="#images_and_other_files" title="wiki:syntax ↵" class="wikilink1">images</a> (see below) like this:
+
+  <a href="http://php.net" class="media" title="http://php.net" rel="nofollow"><img src="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="media" alt="" /></a>
+
+<a href="http://php.net" class="media" title="http://php.net" rel="nofollow"><img src="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="media" alt="" /></a>
+
+Please note: The image formatting is the only formatting syntax accepted in link names.
+
+The whole <a href="#images_and_other_files" title="wiki:syntax ↵" class="wikilink1">image</a> and <a href="#links" title="wiki:syntax ↵" class="wikilink1">link</a> syntax is supported (including image resizing, internal and external images and URLs and interwiki links).
+
+===== Footnotes =====
+
+You can add footnotes <sup><a href="#fn__1" id="fnt__1" class="fn_top">1)</a></sup> by using double parentheses.
+
+  You can add footnotes <sup><a href="#fn__2" id="fnt__2" class="fn_top">2)</a></sup> by using double parentheses.
+
+===== Sectioning =====
+
+You can use up to five different levels of headlines to structure your content. If you have more than three headlines, a table of contents is generated automatically – this can be disabled by including the string </code>~~NOTOC~~<code> in the document.
+
+==== Headline Level 3 ====
+=== Headline Level 4 ===
+== Headline Level 5 ==
+
+  ==== Headline Level 3 ====
+  === Headline Level 4 ===
+  == Headline Level 5 ==
+
+By using four or more dashes, you can make a horizontal line:
+
+—-
+
+===== Media Files =====
+
+You can include external and internal <a href="https://www.dokuwiki.org/images" class="interwiki iw_doku" title="https://www.dokuwiki.org/images">images, videos and audio files</a> with curly brackets. Optionally you can specify the size of them.
+
+Real size:                        <a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="media" alt="" /></a>
+
+Resize to given width:            <a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?w=50&amp;tok=9d18d2&amp;media=wiki:dokuwiki-128.png" class="media" alt="" width="50" /></a>
+
+Resize to given width and height<sup><a href="#fn__3" id="fnt__3" class="fn_top">3)</a></sup>: <a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?w=200&amp;h=50&amp;tok=8a17c9&amp;media=wiki:dokuwiki-128.png" class="media" alt="" width="200" height="50" /></a>
+
+Resized external image:           <a href="/lib/exe/fetch.php?tok=e17778&amp;media=http%3A%2F%2Fphp.net%2Fimages%2Fphp.gif" class="media" title="http://php.net/images/php.gif"><img src="/lib/exe/fetch.php?w=200&amp;h=50&amp;tok=83fbc1&amp;media=http%3A%2F%2Fphp.net%2Fimages%2Fphp.gif" class="media" alt="" width="200" height="50" /></a>
+
+  Real size:                        <a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="media" alt="" /></a>
+  Resize to given width:            <a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?w=50&amp;tok=9d18d2&amp;media=wiki:dokuwiki-128.png" class="media" alt="" width="50" /></a>
+  Resize to given width and height: <a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?w=200&amp;h=50&amp;tok=8a17c9&amp;media=wiki:dokuwiki-128.png" class="media" alt="" width="200" height="50" /></a>
+  Resized external image:           <a href="/lib/exe/fetch.php?tok=e17778&amp;media=http%3A%2F%2Fphp.net%2Fimages%2Fphp.gif" class="media" title="http://php.net/images/php.gif"><img src="/lib/exe/fetch.php?w=200&amp;h=50&amp;tok=83fbc1&amp;media=http%3A%2F%2Fphp.net%2Fimages%2Fphp.gif" class="media" alt="" width="200" height="50" /></a>
+
+
+By using left or right whitespaces you can choose the alignment.
+
+<a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="mediaright" alt="" /></a>
+
+<a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="medialeft" alt="" /></a>
+
+<a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="mediacenter" alt="" /></a>
+
+  <a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="mediaright" alt="" /></a>
+  <a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="medialeft" alt="" /></a>
+  <a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="mediacenter" alt="" /></a>
+
+Of course, you can add a title (displayed as a tooltip by most browsers), too.
+
+<a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="mediacenter" title="This is the caption" alt="This is the caption" /></a>
+
+  <a href="/lib/exe/detail.php?id=wiki%3Asyntax&amp;media=wiki:dokuwiki-128.png" class="media" title="wiki:dokuwiki-128.png"><img src="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="mediacenter" title="This is the caption" alt="This is the caption" /></a>
+
+For linking an image to another page see <a href="#image_links" title="wiki:syntax ↵" class="wikilink1">Image Links</a> above.
+
+==== Supported Media Formats ====
+
+DokuWiki can embed the following media formats directly.
+
+| Image | </code>gif<code>, </code>jpg<code>, </code>png<code>  |
+| Video | </code>webm<code>, </code>ogv<code>, </code>mp4<code> |
+| Audio | </code>ogg<code>, </code>mp3<code>, </code>wav<code>  |
+| Flash | </code>swf<code>                    |
+
+If you specify a filename that is not a supported media format, then it will be displayed as a link instead.
+
+By adding </code>?linkonly<code> you provide a link to the media without displaying it inline
+
+  <a href="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="media mediafile mf_png" title="wiki:dokuwiki-128.png (27.2 KB)">dokuwiki-128.png</a>
+
+<a href="/lib/exe/fetch.php?media=wiki:dokuwiki-128.png" class="media mediafile mf_png" title="wiki:dokuwiki-128.png (27.2 KB)">dokuwiki-128.png</a> This is just a link to the image.
+
+==== Fallback Formats ====
+
+Unfortunately not all browsers understand all video and audio formats. To mitigate the problem, you can upload your file in different formats for maximum browser compatibility.
+
+For example consider this embedded mp4 video:
+
+  <video class="media" title="A funny video" width="320" height="240" controls="controls">
+</video>
+
+
+When you upload a </code>video.webm<code> and </code>video.ogv<code> next to the referenced </code>video.mp4<code>, DokuWiki will automatically add them as alternatives so that one of the three files is understood by your browser.
+
+Additionally DokuWiki supports a “poster” image which will be shown before the video has started. That image needs to have the same filename as the video and be either a jpg or png file. In the example above a </code>video.jpg<code> file would work.
+
+===== Lists =====
+
+Dokuwiki supports ordered and unordered lists. To create a list item, indent your text by two spaces and use a </code>*<code> for unordered lists or a </code>-<code> for ordered ones.
+
+  * This is a list
+  * The second item
+    * You may have different levels
+  * Another item
+
+  - The same list but ordered
+  - Another item
+    - Just use indention for deeper levels
+  - That&#039;s it
+
+&lt;code&gt;
+  * This is a list
+  * The second item
+    * You may have different levels
+  * Another item
+
+  - The same list but ordered
+  - Another item
+    - Just use indention for deeper levels
+  - That&#039;s it
+&lt;/code&gt;
+
+Also take a look at the <a href="https://www.dokuwiki.org/faq%3Alists" class="interwiki iw_doku" title="https://www.dokuwiki.org/faq%3Alists">FAQ on list items</a>.
+
+===== Text Conversions =====
+
+DokuWiki can convert certain pre-defined characters or strings into images or other text or <abbr title="HyperText Markup Language">HTML</abbr>.
+
+The text to image conversion is mainly done for smileys. And the text to <abbr title="HyperText Markup Language">HTML</abbr> conversion is used for typography replacements, but can be configured to use other <abbr title="HyperText Markup Language">HTML</abbr> as well.
+
+==== Text to Image Conversions ====
+
+DokuWiki converts commonly used <a href="https://en.wikipedia.org/wiki/emoticon" class="interwiki iw_wp" title="https://en.wikipedia.org/wiki/emoticon">emoticon</a>s to their graphical equivalents. Those <a href="https://www.dokuwiki.org/Smileys" class="interwiki iw_doku" title="https://www.dokuwiki.org/Smileys">Smileys</a> and other images can be configured and extended. Here is an overview of Smileys included in DokuWiki:
+
+  * <img src="/lib/images/smileys/icon_cool.gif" class="icon" alt="8-)" />   8-)  
+  * <img src="/lib/images/smileys/icon_eek.gif" class="icon" alt="8-O" />   8-O  
+  * <img src="/lib/images/smileys/icon_sad.gif" class="icon" alt=":-(" />   :-(  
+  * <img src="/lib/images/smileys/icon_smile.gif" class="icon" alt=":-)" />   :-)  
+  * <img src="/lib/images/smileys/icon_smile2.gif" class="icon" alt="=)" />    =)   
+  * <img src="/lib/images/smileys/icon_doubt.gif" class="icon" alt=":-/" />   :-/  
+  * <img src="/lib/images/smileys/icon_doubt2.gif" class="icon" alt=":-\" />   :-\  
+  * <img src="/lib/images/smileys/icon_confused.gif" class="icon" alt=":-?" />   :-?  
+  * <img src="/lib/images/smileys/icon_biggrin.gif" class="icon" alt=":-D" />   :-D  
+  * <img src="/lib/images/smileys/icon_razz.gif" class="icon" alt=":-P" />   :-P  
+  * <img src="/lib/images/smileys/icon_surprised.gif" class="icon" alt=":-O" />   :-O  
+  * <img src="/lib/images/smileys/icon_silenced.gif" class="icon" alt=":-X" />   :-X  
+  * <img src="/lib/images/smileys/icon_neutral.gif" class="icon" alt=":-|" />   :-|  
+  * <img src="/lib/images/smileys/icon_wink.gif" class="icon" alt=";-)" />   ;-)  
+  * <img src="/lib/images/smileys/icon_fun.gif" class="icon" alt="^_^" />   ^_^  
+  * <img src="/lib/images/smileys/icon_question.gif" class="icon" alt=":?:" />   :?:  
+  * <img src="/lib/images/smileys/icon_exclaim.gif" class="icon" alt=":!:" />   :!:  
+  * <img src="/lib/images/smileys/icon_lol.gif" class="icon" alt="LOL" />   LOL  
+  * <img src="/lib/images/smileys/fixme.gif" class="icon" alt="FIXME" />   FIXME 
+  * <img src="/lib/images/smileys/delete.gif" class="icon" alt="DELETEME" />  DELETEME 
+
+==== Text to <abbr title="HyperText Markup Language">HTML</abbr> Conversions ====
+
+Typography: <a href="/doku.php?id=wiki:dokuwiki" class="wikilink1" title="wiki:dokuwiki">DokuWiki</a> can convert simple text characters to their typographically correct entities. Here is an example of recognized characters.
+
+→ ← ↔ ⇒ ⇐ ⇔ » « – — 640&times;480 © ™ ®
+“He thought &#039;It&#039;s a man&#039;s world&#039;…”
+
+&lt;code&gt;
+→ ← ↔ ⇒ ⇐ ⇔ » « – — 640&times;480 © ™ ®
+“He thought &#039;It&#039;s a man&#039;s world&#039;…”
+&lt;/code&gt;
+
+The same can be done to produce any kind of <abbr title="HyperText Markup Language">HTML</abbr>, it just needs to be added to the <a href="https://www.dokuwiki.org/entities" class="interwiki iw_doku" title="https://www.dokuwiki.org/entities">pattern file</a>.
+
+There are three exceptions which do not come from that pattern file: multiplication entity (640&times;480), &#039;single&#039; and “double quotes”. They can be turned off through a <a href="https://www.dokuwiki.org/config%3Atypography" class="interwiki iw_doku" title="https://www.dokuwiki.org/config%3Atypography">config option</a>.
+
+===== Quoting =====
+
+Some times you want to mark some text to show it&#039;s a reply or comment. You can use the following syntax:
+
+&lt;code&gt;
+I think we should do it
+
+&gt; No we shouldn&#039;t
+
+» Well, I say we should
+
+&gt; Really?
+
+» Yes!
+
+»&gt; Then lets do it!
+&lt;/code&gt;
+
+I think we should do it
+
+&gt; No we shouldn&#039;t
+
+» Well, I say we should
+
+&gt; Really?
+
+» Yes!
+
+»&gt; Then lets do it!
+
+===== Tables =====
+
+DokuWiki supports a simple syntax to create tables.
+
+^ Heading 1      ^ Heading 2       ^ Heading 3          ^
+| Row 1 Col 1    | Row 1 Col 2     | Row 1 Col 3        |
+| Row 2 Col 1    | some colspan (note the double pipe) ||
+| Row 3 Col 1    | Row 3 Col 2     | Row 3 Col 3        |
+
+Table rows have to start and end with a </code>|<code> for normal rows or a </code>^<code> for headers.
+
+  ^ Heading 1      ^ Heading 2       ^ Heading 3          ^
+  | Row 1 Col 1    | Row 1 Col 2     | Row 1 Col 3        |
+  | Row 2 Col 1    | some colspan (note the double pipe) ||
+  | Row 3 Col 1    | Row 3 Col 2     | Row 3 Col 3        |
+
+To connect cells horizontally, just make the next cell completely empty as shown above. Be sure to have always the same amount of cell separators!
+
+Vertical tableheaders are possible, too.
+
+|              ^ Heading 1            ^ Heading 2          ^
+^ Heading 3    | Row 1 Col 2          | Row 1 Col 3        |
+^ Heading 4    | no colspan this time |                    |
+^ Heading 5    | Row 2 Col 2          | Row 2 Col 3        |
+
+As you can see, it&#039;s the cell separator before a cell which decides about the formatting:
+
+  |              ^ Heading 1            ^ Heading 2          ^
+  ^ Heading 3    | Row 1 Col 2          | Row 1 Col 3        |
+  ^ Heading 4    | no colspan this time |                    |
+  ^ Heading 5    | Row 2 Col 2          | Row 2 Col 3        |
+
+You can have rowspans (vertically connected cells) by adding </code>:::<code> into the cells below the one to which they should connect.
+
+^ Heading 1      ^ Heading 2                  ^ Heading 3          ^
+| Row 1 Col 1    | this cell spans vertically | Row 1 Col 3        |
+| Row 2 Col 1    | :::                        | Row 2 Col 3        |
+| Row 3 Col 1    | :::                        | Row 2 Col 3        |
+
+Apart from the rowspan syntax those cells should not contain anything else.
+
+  ^ Heading 1      ^ Heading 2                  ^ Heading 3          ^
+  | Row 1 Col 1    | this cell spans vertically | Row 1 Col 3        |
+  | Row 2 Col 1    | :::                        | Row 2 Col 3        |
+  | Row 3 Col 1    | :::                        | Row 2 Col 3        |
+
+You can align the table contents, too. Just add at least two whitespaces at the opposite end of your text: Add two spaces on the left to align right, two spaces on the right to align left and two spaces at least at both ends for centered text.
+
+^           Table with alignment           ^^^
+|         right|    center    |left          |
+|left          |         right|    center    |
+| xxxxxxxxxxxx | xxxxxxxxxxxx | xxxxxxxxxxxx |
+
+This is how it looks in the source:
+
+  ^           Table with alignment           ^^^
+  |         right|    center    |left          |
+  |left          |         right|    center    |
+  | xxxxxxxxxxxx | xxxxxxxxxxxx | xxxxxxxxxxxx |
+
+Note: Vertical alignment is not supported.
+
+===== No Formatting =====
+
+If you need to display text exactly like it is typed (without any formatting), enclose the area either with </code>&lt;nowiki&gt;<code> tags or even simpler, with double percent signs </code>%%<code>.
+
+
+This is some text which contains addresses like this: http://www.splitbrain.org and **formatting**, but nothing is done with it.
+
+The same is true for //__this__ text// with a smiley ;-).
+
+  
+  This is some text which contains addresses like this: http://www.splitbrain.org and **formatting**, but nothing is done with it.
+  
+  The same is true for //__this__ text// with a smiley ;-).
+
+===== Code Blocks =====
+
+You can include code blocks into your documents by either indenting them by at least two spaces (like used for the previous examples) or by using the tags </code>&lt;code&gt;<code> or </code>&lt;file&gt;<code>.
+
+  This is text is indented by two spaces.
+
+&lt;code&gt;
+This is preformatted code all spaces are preserved: like              ←this
+&lt;/code&gt;
+
+&lt;file&gt;
+This is pretty much the same, but you could use it to show that you quoted a file.
+&lt;/file&gt;
+
+Those blocks were created by this source:
+
+    This is text is indented by two spaces.
+
+  &lt;code&gt;
+  This is preformatted code all spaces are preserved: like              ←this
+  &lt;/code&gt;
+
+  &lt;file&gt;
+  This is pretty much the same, but you could use it to show that you quoted a file.
+  &lt;/file&gt;
+
+==== Syntax Highlighting ====
+
+<a href="/doku.php?id=wiki:dokuwiki" class="wikilink1" title="wiki:dokuwiki">DokuWiki</a> can highlight sourcecode, which makes it easier to read. It uses the <a href="http://qbnz.com/highlighter/" class="urlextern" title="http://qbnz.com/highlighter/" rel="nofollow">GeSHi</a> Generic Syntax Highlighter – so any language supported by GeSHi is supported. The syntax uses the same code and file blocks described in the previous section, but this time the name of the language syntax to be highlighted is included inside the tag, e.g. </code>&lt;code java&gt;<code> or </code>&lt;file java&gt;<code>.
+
+&lt;code java&gt;
+/<strong>
+ * The HelloWorldApp class implements an application that
+ * simply displays “Hello World!” to the standard output.
+ */
+class HelloWorldApp {
+    public static void main(String[] args) {
+        System.out.println(“Hello World!”); <em>Display the string.
+    }
+}
+&lt;/code&gt;
+
+The following language strings are currently recognized: </em>4cs, 6502acme, 6502kickass, 6502tasm, 68000devpac, abap, actionscript-french, actionscript, actionscript3, ada, algol68, apache, applescript, asm, asp, autoconf, autohotkey, autoit, avisynth, awk, bascomavr, bash, basic4gl, bf, bibtex, blitzbasic, bnf, boo, c, c<em>loadrunner, c</em>mac, caddcl, cadlisp, cfdg, cfm, chaiscript, cil, clojure, cmake, cobol, coffeescript, cpp, cpp-qt, csharp, css, cuesheet, d, dcs, delphi, diff, div, dos, dot, e, epc, ecmascript, eiffel, email, erlang, euphoria, f1, falcon, fo, fortran, freebasic, fsharp, gambas, genero, genie, gdb, glsl, gml, gnuplot, go, groovy, gettext, gwbasic, haskell, hicest, hq9plus, html, html5, icon, idl, ini, inno, intercal, io, j, java5, java, javascript, jquery, kixtart, klonec, klonecpp, latex, lb, lisp, llvm, locobasic, logtalk, lolcode, lotusformulas, lotusscript, lscript, lsl2, lua, m68k, magiksf, make, mapbasic, matlab, mirc, modula2, modula3, mmix, mpasm, mxml, mysql, newlisp, nsis, oberon2, objc, objeck, ocaml-brief, ocaml, oobas, oracle8, oracle11, oxygene, oz, pascal, pcre, perl, perl6, per, pf, php-brief, php, pike, pic16, pixelbender, pli, plsql, postgresql, povray, powerbuilder, powershell, proftpd, progress, prolog, properties, providex, purebasic, pycon, python, q, qbasic, rails, rebol, reg, robots, rpmspec, rsplus, ruby, sas, scala, scheme, scilab, sdlbasic, smalltalk, smarty, sql, systemverilog, tcl, teraterm, text, thinbasic, tsql, typoscript, unicon, uscript, vala, vbnet, vb, verilog, vhdl, vim, visualfoxpro, visualprolog, whitespace, winbatch, whois, xbasic, xml, xorg_conf, xpp, yaml, z80, zxbasic<em>
+
+==== Downloadable Code Blocks ====
+
+When you use the <code>&lt;code&gt;</code> or <code>&lt;file&gt;</code> syntax as above, you might want to make the shown code available for download as well. You can do this by specifying a file name after language code like this:
+
+&lt;code&gt;
+&lt;file php myexample.php&gt;
+&lt;?php echo “hello world!”; ?&gt;
+&lt;/file&gt;
+&lt;/code&gt;
+
+&lt;file php myexample.php&gt;
+&lt;?php echo “hello world!”; ?&gt;
+&lt;/file&gt;
+
+If you don&#039;t want any highlighting but want a downloadable file, specify a dash (<code>-</code>) as the language code: <code>&lt;code - myfile.foo&gt;</code>.
+
+
+===== Embedding <abbr title="HyperText Markup Language">HTML</abbr> and PHP =====
+
+You can embed raw <abbr title="HyperText Markup Language">HTML</abbr> or PHP code into your documents by using the <code>&lt;html&gt;</code> or <code>&lt;php&gt;</code> tags. (Use uppercase tags if you need to enclose block level elements.)
+
+<abbr title="HyperText Markup Language">HTML</abbr> example:
+
+&lt;code&gt;
+&lt;html&gt;
+This is some &lt;span style=“color:red;font-size:150%;”&gt;inline <abbr title="HyperText Markup Language">HTML</abbr>&lt;/span&gt;
+&lt;/html&gt;
+&lt;<abbr title="HyperText Markup Language">HTML</abbr>&gt;
+&lt;p style=“border:2px dashed red;”&gt;And this is some block <abbr title="HyperText Markup Language">HTML</abbr>&lt;/p&gt;
+&lt;/<abbr title="HyperText Markup Language">HTML</abbr>&gt;
+&lt;/code&gt;
+
+&lt;html&gt;
+This is some &lt;span style=“color:red;font-size:150%;”&gt;inline <abbr title="HyperText Markup Language">HTML</abbr>&lt;/span&gt;
+&lt;/html&gt;
+&lt;<abbr title="HyperText Markup Language">HTML</abbr>&gt;
+&lt;p style=“border:2px dashed red;”&gt;And this is some block <abbr title="HyperText Markup Language">HTML</abbr>&lt;/p&gt;
+&lt;/<abbr title="HyperText Markup Language">HTML</abbr>&gt;
+
+PHP example:
+
+&lt;code&gt;
+&lt;php&gt;
+echo &#039;The PHP version: &#039;;
+echo phpversion();
+echo &#039; (generated inline <abbr title="HyperText Markup Language">HTML</abbr>)&#039;;
+&lt;/php&gt;
+&lt;PHP&gt;
+echo &#039;&lt;table class=“inline”&gt;&lt;tr&gt;&lt;td&gt;The same, but inside a block level element:&lt;/td&gt;&#039;;
+echo &#039;&lt;td&gt;&#039;.phpversion().&#039;&lt;/td&gt;&#039;;
+echo &#039;&lt;/tr&gt;&lt;/table&gt;&#039;;
+&lt;/PHP&gt;
+&lt;/code&gt;
+
+&lt;php&gt;
+echo &#039;The PHP version: &#039;;
+echo phpversion();
+echo &#039; (inline <abbr title="HyperText Markup Language">HTML</abbr>)&#039;;
+&lt;/php&gt;
+&lt;PHP&gt;
+echo &#039;&lt;table class=“inline”&gt;&lt;tr&gt;&lt;td&gt;The same, but inside a block level element:&lt;/td&gt;&#039;;
+echo &#039;&lt;td&gt;&#039;.phpversion().&#039;&lt;/td&gt;&#039;;
+echo &#039;&lt;/tr&gt;&lt;/table&gt;&#039;;
+&lt;/PHP&gt;
+
+<strong>Please Note</strong>: <abbr title="HyperText Markup Language">HTML</abbr> and PHP embedding is disabled by default in the configuration. If disabled, the code is displayed instead of executed.
+
+===== RSS/ATOM Feed Aggregation =====
+<a href="/doku.php?id=wiki:dokuwiki" class="wikilink1" title="wiki:dokuwiki">DokuWiki</a> can integrate data from external XML feeds. For parsing the XML feeds, <a href="http://simplepie.org/" class="urlextern" title="http://simplepie.org/" rel="nofollow">SimplePie</a> is used. All formats understood by SimplePie can be used in DokuWiki as well. You can influence the rendering by multiple additional space separated parameters:
+
+^ Parameter  ^ Description ^
+| any number | will be used as maximum number items to show, defaults to 8 |
+| reverse    | display the last items in the feed first |
+| author     | show item authors names |
+| date       | show item dates |
+| description| show the item description. If <a href="https://www.dokuwiki.org/config%3Ahtmlok" class="interwiki iw_doku" title="https://www.dokuwiki.org/config%3Ahtmlok">HTML</a> is disabled all tags will be stripped |
+| nosort     | do not sort the items in the feed |
+| </em>n<em>[dhm] | refresh period, where d=days, h=hours, m=minutes. (e.g. 12h = 12 hours). |
+
+The refresh period defaults to 4 hours. Any value below 10 minutes will be treated as 10 minutes. <a href="/doku.php?id=wiki:dokuwiki" class="wikilink1" title="wiki:dokuwiki">DokuWiki</a> will generally try to supply a cached version of a page, obviously this is inappropriate when the page contains dynamic external content. The parameter tells <a href="/doku.php?id=wiki:dokuwiki" class="wikilink1" title="wiki:dokuwiki">DokuWiki</a> to re-render the page if it is more than </em>refresh period<em> since the page was last rendered.
+
+By default the feed will be sorted by date, newest items first. You can sort it by oldest first using the <code>reverse</code> parameter, or display the feed as is with <code>nosort</code>.
+
+<strong>Example:</strong>
+
+  <ul class="rss"><li><div class="li"><a href="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/nrmBkH2HUJM/google-has-a-new-plan-for-china-and-its-not-about-search" class="urlextern" title="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/nrmBkH2HUJM/google-has-a-new-plan-for-china-and-its-not-about-search" rel="nofollow">Google Has a New Plan for China (and It&#039;s Not About Search)</a> 由 msmash (2017/10/31 11:00)</div></li><li><div class="li"><a href="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/MB_8xTNp-60/is-the-optical-cable-dying" class="urlextern" title="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/MB_8xTNp-60/is-the-optical-cable-dying" rel="nofollow">Is the Optical Cable Dying?</a> 由 BeauHD (2017/10/31 08:00)</div></li><li><div class="li"><a href="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/_Am1IT03npQ/algorithm-can-identify-suicidal-people-using-brain-scans" class="urlextern" title="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/_Am1IT03npQ/algorithm-can-identify-suicidal-people-using-brain-scans" rel="nofollow">Algorithm Can Identify Suicidal People Using Brain Scans</a> 由 BeauHD (2017/10/31 04:30)</div></li><li><div class="li"><a href="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/tyShdZC-vcw/facebook-says-126-million-americans-may-have-seen-russia-linked-political-posts" class="urlextern" title="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/tyShdZC-vcw/facebook-says-126-million-americans-may-have-seen-russia-linked-political-posts" rel="nofollow">Facebook Says 126 Million Americans May Have Seen Russia-Linked Political Posts</a> 由 BeauHD (2017/10/31 01:50)</div></li><li><div class="li"><a href="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/IRQvf9IwBG4/calgary-police-cellphone-surveillance-device-must-remain-top-secret-judge-rules" class="urlextern" title="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/IRQvf9IwBG4/calgary-police-cellphone-surveillance-device-must-remain-top-secret-judge-rules" rel="nofollow">Calgary Police Cellphone Surveillance Device Must Remain Top Secret, Judge Rules</a> 由 BeauHD (2017/10/31 01:10)</div></li></ul><ul class="rss"><li><div class="li"><a href="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/nrmBkH2HUJM/google-has-a-new-plan-for-china-and-its-not-about-search" class="urlextern" title="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/nrmBkH2HUJM/google-has-a-new-plan-for-china-and-its-not-about-search" rel="nofollow">Google Has a New Plan for China (and It&#039;s Not About Search)</a> 由 msmash (2017/10/31 11:00)</div></li><li><div class="li"><a href="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/MB_8xTNp-60/is-the-optical-cable-dying" class="urlextern" title="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/MB_8xTNp-60/is-the-optical-cable-dying" rel="nofollow">Is the Optical Cable Dying?</a> 由 BeauHD (2017/10/31 08:00)</div></li><li><div class="li"><a href="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/_Am1IT03npQ/algorithm-can-identify-suicidal-people-using-brain-scans" class="urlextern" title="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/_Am1IT03npQ/algorithm-can-identify-suicidal-people-using-brain-scans" rel="nofollow">Algorithm Can Identify Suicidal People Using Brain Scans</a> 由 BeauHD (2017/10/31 04:30)</div></li><li><div class="li"><a href="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/tyShdZC-vcw/facebook-says-126-million-americans-may-have-seen-russia-linked-political-posts" class="urlextern" title="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/tyShdZC-vcw/facebook-says-126-million-americans-may-have-seen-russia-linked-political-posts" rel="nofollow">Facebook Says 126 Million Americans May Have Seen Russia-Linked Political Posts</a> 由 BeauHD (2017/10/31 01:50)</div></li><li><div class="li"><a href="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/IRQvf9IwBG4/calgary-police-cellphone-surveillance-device-must-remain-top-secret-judge-rules" class="urlextern" title="http://rss.slashdot.org/~r/Slashdot/slashdot/~3/IRQvf9IwBG4/calgary-police-cellphone-surveillance-device-must-remain-top-secret-judge-rules" rel="nofollow">Calgary Police Cellphone Surveillance Device Must Remain Top Secret, Judge Rules</a> 由 BeauHD (2017/10/31 01:10)</div></li></ul>
+<p>
+
+
+
+===== Control Macros =====
+
+Some syntax influences how DokuWiki renders a page without creating any output it self. The following control macros are availble:
+
+^ Macro           ^ Description |
+| ~~NOTOC~~   | If this macro is found on the page, no table of contents will be created |
+| ~~NOCACHE~~ | DokuWiki caches all output by default. Sometimes this might not be wanted (eg. when the &lt;php&gt; syntax above is used), adding this macro will force DokuWiki to rerender a page on every call |
+
+===== Syntax Plugins =====
+
+DokuWiki&#039;s syntax can be extended by <a href="https://www.dokuwiki.org/plugins" class="interwiki iw_doku" title="https://www.dokuwiki.org/plugins">Plugins</a>. How the installed plugins are used is described on their appropriate description pages. The following syntax plugins are available in this particular DokuWiki installation:
+</p>
+<ul><li><div class="li"><a href="http://www.dokuwiki.org/plugin:gallery" class="urlextern" title="http://www.dokuwiki.org/plugin:gallery" rel="nofollow">Gallery Plugin</a> <em>2017-10-11</em> 由 <a href="mailto:&#x61;&#x6e;&#x64;&#x69;&#x40;&#x73;&#x70;&#x6c;&#x69;&#x74;&#x62;&#x72;&#x61;&#x69;&#x6e;&#x2e;&#x6f;&#x72;&#x67;" class="mail" title="&#x61;&#x6e;&#x64;&#x69;&#x40;&#x73;&#x70;&#x6c;&#x69;&#x74;&#x62;&#x72;&#x61;&#x69;&#x6e;&#x2e;&#x6f;&#x72;&#x67;">Andreas Gohr</a><br />Creates a gallery of images from a namespace or RSS/ATOM feed</div></li><li><div class="li"><a href="https://www.dokuwiki.org/plugin:indexmenu" class="urlextern" title="https://www.dokuwiki.org/plugin:indexmenu" rel="nofollow">Indexmenu Plugin</a> <em>2015-08-26</em> 由 <a href="mailto:&#x73;&#x61;&#x6d;&#x75;&#x65;&#x6c;&#x65;&#x40;&#x73;&#x61;&#x6d;&#x75;&#x65;&#x6c;&#x65;&#x2e;&#x6e;&#x65;&#x74;&#x73;&#x6f;&#x6e;&#x73;&#x2e;&#x6f;&#x72;&#x67;" class="mail" title="&#x73;&#x61;&#x6d;&#x75;&#x65;&#x6c;&#x65;&#x40;&#x73;&#x61;&#x6d;&#x75;&#x65;&#x6c;&#x65;&#x2e;&#x6e;&#x65;&#x74;&#x73;&#x6f;&#x6e;&#x73;&#x2e;&#x6f;&#x72;&#x67;">Samuele Tognini</a><br />Show a customizable and sortable index for a namespace</div></li><li><div class="li"><a href="http://dokuwiki.org/plugin:info" class="urlextern" title="http://dokuwiki.org/plugin:info" rel="nofollow">Info Plugin</a> <em>2014-10-01</em> 由 <a href="mailto:&#x61;&#x6e;&#x64;&#x69;&#x40;&#x73;&#x70;&#x6c;&#x69;&#x74;&#x62;&#x72;&#x61;&#x69;&#x6e;&#x2e;&#x6f;&#x72;&#x67;" class="mail" title="&#x61;&#x6e;&#x64;&#x69;&#x40;&#x73;&#x70;&#x6c;&#x69;&#x74;&#x62;&#x72;&#x61;&#x69;&#x6e;&#x2e;&#x6f;&#x72;&#x67;">Andreas Gohr</a><br />Displays information about various DokuWiki internals</div></li><li><div class="li"><a href="http://www.tolledomain.ch/dokuwiki/doku.php?id=projects:markdowku" class="urlextern" title="http://www.tolledomain.ch/dokuwiki/doku.php?id=projects:markdowku" rel="nofollow">Markdowku</a> <em>2017-02-19</em> 由 <a href="mailto:&#x67;&#x6e;&#x72;&#x70;&#x40;&#x6b;&#x6f;&#x6d;&#x6b;&#x6f;&#x6e;&#x32;&#x2e;&#x64;&#x65;" class="mail" title="&#x67;&#x6e;&#x72;&#x70;&#x40;&#x6b;&#x6f;&#x6d;&#x6b;&#x6f;&#x6e;&#x32;&#x2e;&#x64;&#x65;">Julian Fagir</a><br />Integrates Markdown into Dokuwiki syntax</div></li></ul></div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT7 SECTION "Windows Shares" [3844-] --><div class="footnotes">
+<div class="fn"><sup><a href="#fnt__1" id="fn__1" class="fn_bot">1)</a></sup> 
+, <sup><a href="#fnt__2" id="fn__2" class="fn_bot">2)</a></sup> 
+<div class="content">This is a footnote</div></div>
+<div class="fn"><sup><a href="#fnt__3" id="fn__3" class="fn_bot">3)</a></sup> 
+<div class="content">when the aspect ratio of the given width and height doesn&#039;t match that of the image, it will be cropped to the new ratio before resizing</div></div>
+</div>

@@ -1,1 +1,37 @@
-高复是的风光
+#项目中常见spring注解
+
+>这次主要介绍spring mvc中参数绑定的注解
+
+简介：根据处理的request的不同内容部分分为四类
+
+1. 处理request body部分的注解：@RequestParam,@RequestBody;
+2. 处理requet uri 部分（这里指uri template中variable，不含queryString部分）的注解：@PathVariable;
+3. 处理request header部分的注解：@RequestHeader, @CookieValue;
+4. 处理attribute类型是注解： @SessionAttributes, @ModelAttribute;
+
+###一.@RequestParam
+>该注解类型用于将指定的请求参数赋值给方法中的形参
+
+@RequestParam注解支持的属性
+|属性|类型|是否必要|说明|
+|name|String|否|指定请求头绑定的名称|
+|value|String|否|name属性的别名|
+|required|Boolean|否|指示参数是否必须绑定|
+|defaultValue|String|否|如果没有传递参数而使用的默认值|
+
+用来处理Content-Type: 为 application/x-www-form-urlencoded编码的内容，提交方式GET、POST.
+该注解主要参数：value用来指定要传入值的id名称；required默认是true，表示请求中一定要有相应的参数，否则将报404错误码；default默认值，表示如果请求中没有同名参数时的默认值，默认值可以是SpEL表达式，如“#{systemProperties['java.vm.version']}”。
+
+例：   http：//localhost:8080/login?username=joven&password=123456
+''@RequestMapping("/login")
+public  ModelAndView go(@RequestParam("username") String username,
+                        @RequestParam("password") String password){
+        return .....;        }''
+        
+        
+@RequestMapping("/login")
+public  ModelAndView go(@RequestParam("username") String username,
+                        @RequestParam("password") String password){
+        return .....;        }
+
+

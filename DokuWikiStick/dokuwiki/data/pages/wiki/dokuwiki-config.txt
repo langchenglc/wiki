@@ -17,7 +17,7 @@
 > 如果使用中文页面名或者文件夹名字的话，dokuwiki会乱码，因此需要对配置进行简单的修改：
 
 
-    也可以参考[[https://www.dokuwiki.org/zh:pagename|官方文档]]进行修改
+也可以参考[[https://www.dokuwiki.org/zh:pagename|官方文档]]进行修改
 
 
 1. dokuwiki/conf/local.php修改
