@@ -1,0 +1,17 @@
+
+<h2 class="sectionedit1" id="key_id生成策略">key_id生成策略</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li">存储的主要实体的key<em>id是根据对应数据的统一查询请求实体生成的，也就是说key</em>id是根据数据的请求参数生成的，方便下次再次使用同样的查询参数生成key——id进行查询；</div>
+</li>
+<li class="level1"><div class="li"><code>return StringUtils.replaceNull2Empty(id,name,shortName,type,cell,card,add,number4,number5)+getQueryFrom();</code></div>
+</li>
+<li class="level1"><div class="li">对于查询参数进行了非空拼接以后加上接口名<em>时间戳倒序
+* key——id中使用了时间戳倒序，对于同一条数据的不同时间获取的数据，查询返回的第一条按照key</em>id排序以后，肯定第一条是最近的；</div>
+</li>
+<li class="level1"><div class="li">非主实体，即不需要通过key<em>id进行查询的实体，则key</em>id一般直接是用uuid生成即可；
+</div>
+</li>
+</ul>
+
+</div>

@@ -187,3 +187,11 @@
 1509520351	192.168.5.105	E	学习笔记:java:spring:注解	wangzj	[一.@RequestParam] 		1185
 1509520365	192.168.5.105	E	学习笔记:java:spring:注解	wangzj	[项目中常见spring注解] 		5
 1509520435	192.168.5.105	E	学习笔记:java:spring:注解	wangzj	[@RequestBody] 		23
+1509520899	192.168.5.105	E	学习笔记:java:spring:注解	wangzj	[@PathVariable] 		655
+1509521026	192.168.5.105	E	学习笔记:java:spring:注解	wangzj	[二.@PathVariable] 		123
+1509522081	192.168.5.105	E	学习笔记:java:spring:注解	wangzj	[三.@RequestHeader] 		878
+1509523528	192.168.5.105	E	学习笔记:java:spring:注解	wangzj			591
+1509523866	192.168.5.105	E	学习笔记:java:spring:注解	wangzj	[@CookieValue] 		476
+1509524272	192.168.5.105	E	学习笔记:java:spring:注解	wangzj	[四.@SessionAttributes] 		320
+1509526421	192.168.5.105	E	学习笔记:java:spring:注解	wangzj	[四.@SessionAttributes] 		201
+1509527339	192.168.5.105	E	学习笔记:java:spring:注解	wangzj	[@ModelAttribute] 		501

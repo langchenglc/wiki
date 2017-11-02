@@ -1,4 +1,281 @@
 
+<h1 class="sectionedit1" id="项目中常见spring注解">项目中常见spring注解</h1>
+<div class="level1">
+<blockquote><div class="no">
+这次主要介绍spring mvc中参数绑定的注解</div></blockquote>
+
 <p>
-高复是的风光
+简介：根据处理的request的不同内容部分分为四类
 </p>
+<ol>
+<li class="level1"><div class="li">处理request body部分的注解：@RequestParam,@RequestBody;</div>
+</li>
+<li class="level0"><div class="li">处理requet uri 部分（这里指uri template中variable，不含queryString部分）的注解：@PathVariable;</div>
+</li>
+<li class="level0"><div class="li">处理request header部分的注解：@RequestHeader, @CookieValue;</div>
+</li>
+<li class="level0"><div class="li">处理attribute类型是注解： @SessionAttributes, @ModelAttribute;</div>
+</li>
+</ol>
+<hr />
+
+</div>
+<!-- EDIT1 SECTION "项目中常见spring注解" [0-487] -->
+<h3 class="sectionedit2" id="一_requestparam">一.@RequestParam</h3>
+<div class="level3">
+<blockquote><div class="no">
+该注解类型用于将指定的请求参数赋值给方法中的形参</div></blockquote>
+
+<p>
+@RequestParam注解支持的属性
+</p>
+<div class="table sectionedit3"><table class="inline">
+	<tr class="row0">
+		<td class="col0">属性</td><td class="col1">类型</td><td class="col2">是否必要</td><td class="col3">说明</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0">name</td><td class="col1">String</td><td class="col2">否</td><td class="col3">指定请求头绑定的名称</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0">value</td><td class="col1">String</td><td class="col2">否</td><td class="col3">name属性的别名</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0">required</td><td class="col1">Boolean</td><td class="col2">否</td><td class="col3">指示参数是否必须绑定</td>
+	</tr>
+	<tr class="row4">
+		<td class="col0">defaultValue</td><td class="col1">String</td><td class="col2">否</td><td class="col3">如果没有传递参数而使用的默认值</td>
+	</tr>
+</table></div>
+<!-- EDIT3 TABLE [620-869] -->
+<p>
+@RequestParam用来处理Content-Type: 为 application/x-www-form-urlencoded编码的内容，提交方式GET、POST.
+该注解主要参数：value用来指定要传入值的id名称；required默认是true，表示请求中一定要有相应的参数，否则将报404错误码；default默认值，表示如果请求中没有同名参数时的默认值，默认值可以是SpEL表达式，如“#{systemProperties[&#039;java.vm.version&#039;]}”。
+</p>
+
+<p>
+例：<a href="http://localhost:8080/login?username=joven&amp;password=123456" class="urlextern" title="http://localhost:8080/login?username=joven&amp;password=123456" rel="nofollow">http://localhost:8080/login?username=joven&amp;password=123456</a>
+</p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=0" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/login&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">public</span>  ModelAndView go<span class="br0">&#40;</span>@RequestParam<span class="br0">&#40;</span><span class="st0">&quot;username&quot;</span><span class="br0">&#41;</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> username,
+                        @RequestParam<span class="br0">&#40;</span><span class="st0">&quot;password&quot;</span><span class="br0">&#41;</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> password<span class="br0">&#41;</span><span class="br0">&#123;</span>                        
+        <span class="kw1">return</span> .....<span class="sy0">;</span>        
+<span class="br0">&#125;</span></pre>
+</dd></dl>
+
+<p>
+以上代码会将请求中的loginname参数的值“joven”赋给loginname变量，password参数的值“123456”赋给password变量
+</p>
+<hr />
+
+</div>
+<!-- EDIT2 SECTION "一.@RequestParam" [488-1747] -->
+<h3 class="sectionedit4" id="requestbody">@RequestBody</h3>
+<div class="level3">
+
+<p>
+该注解常用来处理Content-Type: 不是application/x-www-form-urlencoded编码的内容，例如application/json, application/xml等；
+</p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=1" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">$.<span class="me1">ajax</span><span class="br0">&#40;</span><span class="br0">&#123;</span>  
+    type<span class="sy0">:</span> <span class="st0">&quot;post&quot;</span>,  
+    contentType<span class="sy0">:</span><span class="st0">&quot;application/json&quot;</span>,  
+    url<span class="sy0">:</span> <span class="st0">&quot;repairs/saveDispatches&quot;</span>,  
+    data<span class="sy0">:</span> JSON.<span class="me1">stringify</span><span class="br0">&#40;</span>dispatchesDTO<span class="br0">&#41;</span>,  
+    success<span class="sy0">:</span> function<span class="br0">&#40;</span>data<span class="br0">&#41;</span><span class="br0">&#123;</span>  
+        <span class="kw1">if</span><span class="br0">&#40;</span><span class="sy0">!</span>data.<span class="me1">success</span><span class="br0">&#41;</span><span class="br0">&#123;</span>  
+          alertError<span class="br0">&#40;</span><span class="st0">&quot;派工失败&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>  
+        <span class="br0">&#125;</span><span class="kw1">else</span><span class="br0">&#123;</span>  
+        alertSuccess<span class="br0">&#40;</span><span class="st0">&quot;派工成功&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>  
+    <span class="br0">&#125;</span>  
+<span class="br0">&#125;</span><span class="br0">&#41;</span> </pre>
+</dd></dl>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=2" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@RequestMapping<span class="br0">&#40;</span>value<span class="sy0">=</span><span class="st0">&quot;/saveUser&quot;</span>,method<span class="sy0">=</span>RequestMethod.<span class="me1">POST</span><span class="br0">&#41;</span> 
+@ResponseBody  
+<span class="kw1">public</span> <span class="kw4">void</span> saveUser<span class="br0">&#40;</span>@RequestBody List<span class="sy0">&lt;</span>User<span class="sy0">&gt;</span> users,@RequestBody DispatchesDTO dispatchesDTO,<span class="br0">&#41;</span> <span class="br0">&#123;</span> 
+   userService.<span class="me1">batchSave</span><span class="br0">&#40;</span>users<span class="br0">&#41;</span><span class="sy0">;</span> 
+   dispatchesService.<span class="me1">saveDispatches</span><span class="br0">&#40;</span>dispatchesDTO<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span> </pre>
+</dd></dl>
+
+<p>
+其实 @RequestBody接收的是一个Json对象的字符串，而不是一个Json对象。然而在ajax请求往往传的都是Json对象，后来发现用 JSON.stringify(data)的方式就能将对象变成字符串。同时ajax请求的时候也要指定dataType: “json”,contentType:“application/json” 这样就可以轻易的将一个对象或者List传到Java端，使用@RequestBody即可绑定对象或者List.
+</p>
+<hr />
+
+</div>
+<!-- EDIT4 SECTION "@RequestBody" [1748-2936] -->
+<h3 class="sectionedit5" id="二_pathvariable">二.@PathVariable</h3>
+<div class="level3">
+<blockquote><div class="no">
+该注解类型可以非常方便地获得请求URL中的动态参数。注解只支持一个属性value，类型为String，表示绑定的名称，如果省略则默认绑定同名参数</div></blockquote>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=3" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/{id}&quot;</span><span class="br0">&#41;</span>  
+<span class="kw1">public</span>  GeResult  findById<span class="br0">&#40;</span>@PathVariable  <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> id<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+       <span class="kw1">return</span>  roleService. <span class="me1">findById</span> <span class="br0">&#40;</span>Role.<span class="kw1">class</span>,id<span class="br0">&#41;</span><span class="sy0">;</span>    <span class="br0">&#125;</span></pre>
+</dd></dl>
+
+<p>
+当使用@RequestMapping <abbr title="Uniform Resource Identifier">URI</abbr> template 样式映射时， 即 someUrl/{id}, 这时的id可通过 @Pathvariable注解绑定它传过来的值到方法的参数上。若方法参数名称和需要绑定的uri template中变量名称不一致，需要在@PathVariable(“name”)指定uri template中的名称
+</p>
+<hr />
+
+</div>
+<!-- EDIT5 SECTION "二.@PathVariable" [2937-3615] -->
+<h3 class="sectionedit6" id="三_requestheader">三.@RequestHeader</h3>
+<div class="level3">
+<blockquote><div class="no">
+该注解类型用于将请求的头信息区数据映射到功能处理方法的参数上</div></blockquote>
+
+<p>
+@RequestHeader注解支持的属性
+</p>
+<div class="table sectionedit7"><table class="inline">
+	<tr class="row0">
+		<td class="col0">属性</td><td class="col1">类型</td><td class="col2">是否必要</td><td class="col3">说明</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0">name</td><td class="col1">String</td><td class="col2">否</td><td class="col3">指定请求头绑定的名称</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0">value</td><td class="col1">String</td><td class="col2">否</td><td class="col3">name属性的别名</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0">required</td><td class="col1">Boolean</td><td class="col2">否</td><td class="col3">指示参数是否必须绑定</td>
+	</tr>
+	<tr class="row4">
+		<td class="col0">defaultValue</td><td class="col1">String</td><td class="col2">否</td><td class="col3">如果没有传递参数而使用的默认值</td>
+	</tr>
+</table></div>
+<!-- EDIT7 TABLE [3768-4017] -->
+<p>
+这是一个Request 的header部分：
+</p>
+<div class="table sectionedit8"><table class="inline">
+	<tr class="row0">
+		<td class="col0">Host</td><td class="col1">localhost:8080</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0">Accept</td><td class="col1">text/html,application/xhtml+xml,application/xml;q=0.9</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0">Accept-Language</td><td class="col1">fr,en-gb;q=0.7,en;q=0.3</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0">Accept-Encoding</td><td class="col1">gzip,deflate</td>
+	</tr>
+	<tr class="row4">
+		<td class="col0">Accept-Charset</td><td class="col1">ISO-8859-1,utf-8;q=0.7,*;q=0.7</td>
+	</tr>
+	<tr class="row5">
+		<td class="col0">Keep-Alive</td><td class="col1">300</td>
+	</tr>
+</table></div>
+<!-- EDIT8 TABLE [4062-4284] --><dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=4" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/teat&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">public</span> <span class="kw4">void</span> requestHeaderTest<span class="br0">&#40;</span>@RequestHeader<span class="br0">&#40;</span>value<span class="sy0">=</span><span class="st0">&quot;Accept&quot;</span><span class="br0">&#41;</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a><span class="br0">&#91;</span><span class="br0">&#93;</span> accepts<span class="br0">&#41;</span><span class="br0">&#123;</span>
+<span class="br0">&#125;</span></pre>
+</dd></dl>
+
+<p>
+以上配置自动将请求头“Accept”的值赋到accepts参数上
+</p>
+<hr />
+
+</div>
+<!-- EDIT6 SECTION "三.@RequestHeader" [3616-4481] -->
+<h3 class="sectionedit9" id="cookievalue">@CookieValue</h3>
+<div class="level3">
+<blockquote><div class="no">
+该注解将请求的cookie数据映射到功能处理方法的参数上</div></blockquote>
+
+<p>
+@CookieValue注解支持的属性
+</p>
+<div class="table sectionedit10"><table class="inline">
+	<tr class="row0">
+		<td class="col0">属性</td><td class="col1">类型</td><td class="col2">是否必要</td><td class="col3">说明</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0">name</td><td class="col1">String</td><td class="col2">否</td><td class="col3">指定请求头绑定的名称</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0">value</td><td class="col1">String</td><td class="col2">否</td><td class="col3">name属性的别名</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0">required</td><td class="col1">Boolean</td><td class="col2">否</td><td class="col3">指示参数是否必须绑定</td>
+	</tr>
+	<tr class="row4">
+		<td class="col0">defaultValue</td><td class="col1">String</td><td class="col2">否</td><td class="col3">如果没有传递参数而使用的默认值</td>
+	</tr>
+</table></div>
+<!-- EDIT10 TABLE [4608-4857] -->
+<p>
+JSESSIONID=415A4AC178C59DACE0B2C9CA727CDD84 
+</p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=5" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/displayHeaderIndo.do&quot;</span><span class="br0">&#41;</span>  
+<span class="kw1">public</span>  <span class="kw4">void</span>  display<span class="br0">&#40;</span>@CookieValue<span class="br0">&#40;</span>value<span class="sy0">=</span><span class="st0">&quot;JSESSIONID&quot;</span>,defaultValue<span class="sy0">=</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span>  <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> sessionId<span class="br0">&#41;</span><span class="br0">&#123;</span>
+<span class="br0">&#125;</span></pre>
+</dd></dl>
+
+<p>
+以上配置会自动将JSESSIONID值设置到sessionId参数上，defaultValue表示Cookie中没有JSESSIONID时默认为空
+</p>
+<hr />
+
+</div>
+<!-- EDIT9 SECTION "@CookieValue" [4482-5187] -->
+<h3 class="sectionedit11" id="四_sessionattributes">四.@SessionAttributes</h3>
+<div class="level3">
+<blockquote><div class="no">
+该注解类型允许我们有选择地指定Model中哪些参数需要转存到HttpSession对象当中</div></blockquote>
+
+<p>
+@SessionAttributes注解支持的属性
+</p>
+<div class="table sectionedit12"><table class="inline">
+	<tr class="row0">
+		<td class="col0">属性</td><td class="col1">类型</td><td class="col2">是否必要</td><td class="col3">说明</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0">names</td><td class="col1">String[]</td><td class="col2">否</td><td class="col3">Model中属性的名称，即存储在HTTPSession当中的属性名称</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0">value</td><td class="col1">String[]</td><td class="col2">否</td><td class="col3">names属性的别名</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0">types</td><td class="col1">Class&lt;?&gt;[]</td><td class="col2">否</td><td class="col3">指示参数是否必须绑定</td>
+	</tr>
+</table></div>
+<!-- EDIT12 TABLE [5361-5584] -->
+<p>
+<strong>@SessionAttributes只能声明在类上，而不能声明在方法上</strong>
+</p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=6" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@Controller
+@RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/editPet.do&quot;</span><span class="br0">&#41;</span>
+@SessionAttributes<span class="br0">&#40;</span><span class="st0">&quot;pet&quot;</span><span class="br0">&#41;</span>  
+<span class="kw1">public</span>  <span class="kw1">class</span>  EditPetForm<span class="br0">&#123;</span>  <span class="br0">&#125;</span></pre>
+</dd></dl>
+
+<p>
+还有如下写法
+<code>@SessionAttributes(types={User.class),value=&quot;user&quot;)</code>
+</p>
+
+<p>
+还可以设置多个对象到HTTPSession当中
+<code>@SessionAttributes(types={User.class,Dept.class),value={&quot;user&quot;,&quot;dept&quot;})</code>
+</p>
+
+</div>
+<!-- EDIT11 SECTION "四.@SessionAttributes" [5188-] -->

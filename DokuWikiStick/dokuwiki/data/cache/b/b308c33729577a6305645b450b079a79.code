@@ -1,0 +1,4 @@
+@Controller
+@RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/editPet.do&quot;</span><span class="br0">&#41;</span>
+@SessionAttributes<span class="br0">&#40;</span><span class="st0">&quot;pet&quot;</span><span class="br0">&#41;</span>  
+<span class="kw1">public</span>  <span class="kw1">class</span>  EditPetForm<span class="br0">&#123;</span>  <span class="br0">&#125;</span>

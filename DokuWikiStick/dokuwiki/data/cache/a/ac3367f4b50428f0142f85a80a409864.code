@@ -1,0 +1,3 @@
+@RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/displayHeaderIndo.do&quot;</span><span class="br0">&#41;</span>  
+<span class="kw1">public</span>  <span class="kw4">void</span>  display<span class="br0">&#40;</span>@CookieValue<span class="br0">&#40;</span>value<span class="sy0">=</span><span class="st0">&quot;JSESSIONID&quot;</span>,defaultValue<span class="sy0">=</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span>  <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> sessionId<span class="br0">&#41;</span><span class="br0">&#123;</span>
+<span class="br0">&#125;</span>
