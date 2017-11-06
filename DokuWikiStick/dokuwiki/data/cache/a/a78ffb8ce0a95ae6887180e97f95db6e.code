@@ -1,0 +1,23 @@
+@ControllerAdvice
+<span class="kw1">public</span>  <span class="kw1">class</span>  ExceptionsHandler <span class="br0">&#123;</span>
+  @EceptionHandler <span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+exception"><span class="kw3">Exception</span></a>.<span class="kw1">class</span><span class="br0">&#41;</span> <span class="co1">//可以直接写@EceptionHandler，不指明异常类，会自动映射，IOExeption继承于Exception</span>
+  <span class="kw1">public</span>  ModelAndView  allExceptionHandler<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+exception"><span class="kw3">Exception</span></a>  exception<span class="br0">&#41;</span><span class="br0">&#123;</span> <span class="co1">//还可以声明接收其他任意参数</span>
+       ModelAndView  modelAndView <span class="sy0">=</span> <span class="kw1">new</span> ModelAndView<span class="br0">&#40;</span><span class="st0">&quot;generic_error&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+       modelAndView.<span class="me1">addObject</span><span class="br0">&#40;</span><span class="st0">&quot;errMsg&quot;</span>, <span class="st0">&quot;this is Exception.class&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+       <span class="kw1">return</span>  modelAndView<span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+&nbsp;
+  @ExceptionHandler<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+throwable"><span class="kw3">Throwable</span></a>. <span class="kw1">class</span><span class="br0">&#41;</span>
+  @ResponseBody
+  <span class="kw1">public</span>  GeResult<span class="sy0">&lt;</span>Boolean<span class="sy0">&gt;</span>    respThrowable<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+exception"><span class="kw3">Exception</span></a>  ex<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+     logger.<span class="me1">warn</span><span class="br0">&#40;</span><span class="st0">&quot;代码执行异常！&quot;</span>, ex<span class="br0">&#41;</span><span class="sy0">;</span>
+     <span class="kw1">return</span>  error<span class="br0">&#40;</span>CodeEnum.<span class="me1">RUNTIME_ERROR</span>,ex.<span class="me1">getMessage</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+&nbsp;
+  <span class="kw1">public</span>  GeResult<span class="sy0">&lt;</span>Boolean<span class="sy0">&gt;</span>   error<span class="br0">&#40;</span>CodeEnum errorCode,<a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> message<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        GeResult<span class="sy0">&lt;</span>Boolean<span class="sy0">&gt;</span> ret <span class="sy0">=</span> <span class="kw1">new</span> GeResult<span class="sy0">&lt;&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ret.<span class="me1">setCode</span><span class="br0">&#40;</span>errorCode.<span class="me1">getCode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ret.<span class="me1">setMessage</span><span class="br0">&#40;</span>errorCode.<span class="me1">getDesc</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot;：&quot;</span><span class="sy0">+</span>message<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span>   ret<span class="sy0">;</span>
+  <span class="br0">&#125;</span>                          
+<span class="br0">&#125;</span> 

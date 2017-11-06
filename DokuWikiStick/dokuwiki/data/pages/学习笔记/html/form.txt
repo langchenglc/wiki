@@ -1,0 +1,95 @@
+
+> 在使用form表单进行提交数据的时候，有时候我们会注意到我们使用了enctype属性，另外，我们了解一年http的童靴也肯定知道content-type，那他们又有什么关系呢，这里做一个介绍。
+
+
+## enctype属性
+
+1. application/x-www-form-urlencoded发送前对所有字符进行编码（默认）
+2. multipart/form-data 不对字符进行编码，**表单中存在文件上传控件的时候必须使用这个**
+3. text/plain 空格转换为+，但不对特殊字符进行编码
+
+### form-data
+它会将请求的数据处理为一条，中间用一个分隔符分开。既可以上传键值对，也可以上传文件。当上传的时间的时候就有content-type来标记文件的类型;由于字段和字段有boundary来进行分割，可以上传多个文件.
+
+```
+对应的请求头的信息
+Host: 200a:8800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Referer: http://200a:8800/x-www-form-urlencoded.html?name=%E9%BE%9A+gong&age=22&file=qrcode_for_gh_31aacf03edcd_258.jpg
+Content-Type: multipart/form-data; boundary=---------------------------265983038314827
+Content-Length: 28148
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+```
+
+
+```
+参数实体信息
+-----------------------------265983038314827
+Content-Disposition: form-data; name="name"
+
+gong
+-----------------------------265983038314827
+Content-Disposition: form-data; name="age"
+
+12
+-----------------------------265983038314827
+Content-Disposition: form-data; name="file"; filename="qrcode_for_gh_31aacf03edcd_258.jpg"
+Content-Type: image/jpeg
+```
+
+### x-www-form-urlencoded
+就是会将表单内的数据转换为键值对，这个表单进行数据转换的默认方式。
+```name=java&age=23```
+
+---
+
+## Content-Type
+是用来表示请求具体内容的媒体类型信息，也叫做MIME类型
+
+```html
+类型格式：type/subtype(;parameter)? type  
+主类型，任意的字符串，如text，如果是*号代表所有；   
+subtype 子类型，任意的字符串，如html，如果是*号代表所有；   
+parameter 可选，一些参数，如Accept请求头的q参数， Content-Type的 charset参数。   
+```
+
+常见的媒体格式类型如下：
+
+* text/html ： HTML格式
+* text/plain ：纯文本格式
+* text/xml ：  XML格式
+* image/gif ：gif图片格式
+* image/jpeg ：jpg图片格式
+* image/png：png图片格式
+
+以application开头的媒体格式类型：
+
+* application/xhtml+xml ：XHTML格式
+* application/xml     ： XML数据格式
+* application/atom+xml  ：Atom XML聚合格式
+* application/json    ： JSON数据格式
+* application/pdf       ：pdf格式
+* application/msword  ： Word文档格式
+* application/octet-stream ： 二进制流数据（如常见的文件下载)
+* application/x-www-form-urlencoded ： form表单提交中默认的encType，form表单数据被编码为key/value格式发送到服务器（表单默认的提交数据的格式）
+
+另外一种常见的媒体格式是上传文件之时使用的：
+
+* multipart/form-data ： 需要在表单中进行文件上传时，就需要使用该格式
+
+## 总结
+所以在form表单的enctype的几个属性就是对我们常用的contentType的提取。他们本质上描述的东西是一致的。
+
+## 参考文章
+
+[Http请求中Content-Type讲解以及在Spring MVC中的应用](http://blog.csdn.net/blueheart20/article/details/45174399)
+
+[w3c form](http://www.w3school.com.cn/tags/att_form_enctype.asp)
+
+[Content-Type](http://tool.oschina.net/commons)
+
+[springMvc 中使用Content——type](http://www.iteye.com/topic/1127120)

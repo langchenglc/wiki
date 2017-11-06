@@ -1,0 +1,4 @@
+类型格式：type/subtype(;parameter)? type  
+主类型，任意的字符串，如text，如果是*号代表所有；   
+subtype 子类型，任意的字符串，如html，如果是*号代表所有；   
+parameter 可选，一些参数，如Accept请求头的q参数， Content-Type的 charset参数。   

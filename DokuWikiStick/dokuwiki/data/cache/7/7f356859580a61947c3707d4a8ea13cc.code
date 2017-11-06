@@ -1,0 +1,8 @@
+<span class="kw1">public</span> <span class="kw1">class</span> HelloWorldController <span class="br0">&#123;</span>  
+&nbsp;
+        @RequestMapping<span class="br0">&#40;</span>value <span class="sy0">=</span> <span class="st0">&quot;/helloWorld&quot;</span><span class="br0">&#41;</span>  
+        @ModelAttribute<span class="br0">&#40;</span><span class="st0">&quot;attributeName&quot;</span><span class="br0">&#41;</span>  
+        <span class="kw1">public</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> helloWorld<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>  
+           <span class="kw1">return</span> <span class="st0">&quot;hi&quot;</span><span class="sy0">;</span>  
+        <span class="br0">&#125;</span>  
+<span class="br0">&#125;</span>

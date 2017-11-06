@@ -1,0 +1,41 @@
+@Controller
+<span class="kw1">public</span> <span class="kw1">class</span> HelloController<span class="br0">&#123;</span>
+&nbsp;
+   @RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/queryEdubg&quot;</span><span class="br0">&#41;</span>                                           <span class="co1">//验证注解</span>
+   <span class="kw1">public</span> ModelAndView querydata<span class="br0">&#40;</span>ModelAndView modelAndView,@ModelAttribute @Valid CheckInfo checkInfo,BindingResult bindingResult<span class="br0">&#41;</span><span class="br0">&#123;</span><span class="co1">//BindingResult类紧跟@Valid注解后</span>
+   modelAndView.<span class="me1">setViewName</span><span class="br0">&#40;</span><span class="st0">&quot;test/queryDataPage&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+   <span class="kw1">try</span><span class="br0">&#123;</span>
+       Product_data pd<span class="sy0">=</span>dataService.<span class="me1">queryDataFromRemote</span><span class="br0">&#40;</span>checkInfo<span class="br0">&#41;</span><span class="sy0">;</span>
+       modelAndView.<span class="me1">addObject</span><span class="br0">&#40;</span><span class="st0">&quot;data&quot;</span>,pd<span class="br0">&#41;</span><span class="sy0">;</span>
+   <span class="br0">&#125;</span><span class="kw1">catch</span><span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+exception"><span class="kw3">Exception</span></a> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+       e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+       bindingResult.<span class="me1">addError</span><span class="br0">&#40;</span><span class="kw1">new</span> ObjectError<span class="br0">&#40;</span><span class="st0">&quot;errorMsg&quot;</span>,<span class="st0">&quot;查询未得到信息&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+       modelAndView.<span class="me1">addObject</span><span class="br0">&#40;</span><span class="st0">&quot;checkErrorMsg&quot;</span>,bindingResult.<span class="me1">getGlobalError</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+   <span class="br0">&#125;</span>
+   <span class="kw1">return</span> modelAndView<span class="sy0">;</span>
+   <span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+   @InitBinder<span class="br0">&#40;</span><span class="st0">&quot;checkInfo&quot;</span><span class="br0">&#41;</span>
+   <span class="kw1">protected</span> <span class="kw4">void</span> initBinder<span class="br0">&#40;</span>WebDataBinder webDataBinder<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        webDataBinder.<span class="me1">addValidators</span><span class="br0">&#40;</span><span class="kw1">new</span> CheckInfoValidator<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+   <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span>  CheckInfoValidator <span class="kw1">implements</span> Validator <span class="br0">&#123;</span>
+    @Override
+    <span class="kw1">public</span> <span class="kw4">boolean</span> supports<span class="br0">&#40;</span>Class<span class="sy0">&lt;?&gt;</span> claz<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> CheckInfo.<span class="kw1">class</span>.<span class="me1">equals</span><span class="br0">&#40;</span>claz<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    @Override
+    <span class="kw1">public</span> <span class="kw4">void</span> validate<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+object"><span class="kw3">Object</span></a> obj, Errors errors<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        CheckInfo checkInfo<span class="sy0">=</span><span class="br0">&#40;</span>CheckInfo<span class="br0">&#41;</span>obj<span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>StringUtils.<span class="me1">isEmpty</span><span class="br0">&#40;</span>checkInfo.<span class="me1">getName</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+           errors.<span class="me1">rejectValue</span><span class="br0">&#40;</span><span class="st0">&quot;name&quot;</span>,<span class="st0">&quot;query.error.msg&quot;</span>,<span class="st0">&quot;姓名不能为空!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        ValidationUtils.<span class="me1">rejectIfEmpty</span><span class="br0">&#40;</span>errors,<span class="st0">&quot;name&quot;</span>,<span class="st0">&quot;query.error.msg&quot;</span>,<span class="st0">&quot;姓名不能为空!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>

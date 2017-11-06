@@ -1,0 +1,15 @@
+@ResponseStatus<span class="br0">&#40;</span>value <span class="sy0">=</span> HttpStatus.<span class="me1">FORBIDDEN</span>, reason <span class="sy0">=</span> <span class="st0">&quot;Are you okay?&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">public</span> <span class="kw1">class</span> AuthException <span class="kw1">extends</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+runtimeexception"><span class="kw3">RuntimeException</span></a> <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">long</span> serialVersionUID <span class="sy0">=</span> 5759027883028274330L<span class="sy0">;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;
+@Controller<span class="br0">&#40;</span><span class="st0">&quot;/&quot;</span><span class="br0">&#41;</span> <span class="co1">//在控制器方法中，抛出一个 AuthException异常</span>
+<span class="kw1">public</span> <span class="kw1">class</span> SampleControoler <span class="br0">&#123;</span>
+    @RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/say&quot;</span><span class="br0">&#41;</span>
+    @ResponseBody
+    <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> say<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+       <span class="kw1">throw</span> <span class="kw1">new</span> AuthException<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>

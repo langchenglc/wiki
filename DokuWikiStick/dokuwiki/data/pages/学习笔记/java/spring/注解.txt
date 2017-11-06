@@ -136,8 +136,6 @@ public void requestHeaderTest(@RequestHeader(value="Accept") String[] accepts){
 
 
 
-JSESSIONID=415A4AC178C59DACE0B2C9CA727CDD84 
-
 ```java
 @RequestMapping("/displayHeaderIndo.do")  
 public  void  display(@CookieValue(value="JSESSIONID",defaultValue="")  String sessionId){
@@ -177,6 +175,9 @@ public  class  EditPetForm{  }
 ``@SessionAttributes(types={User.class,Dept.class),value={"user","dept"})``
 
 
+[参考链接](http://www.cnblogs.com/caoyc/p/5635914.html)
+
+
 ---
 
 ###@ModelAttribute
@@ -193,3 +194,264 @@ public  class  EditPetForm{  }
 A)@SessionAttributes 启用的attribute 对象上；
 B)@ModelAttribute 用于方法上时指定的model对象；
 C)上述两种情况都没有时，new一个需要绑定的bean对象，然后把request中按名称对应的方式把值绑定到bean中。
+
+
+####@ModelAttribute注释在方法上
+①@ModelAttribute注释void返回值的方法
+
+```java
+public class HelloWorldController {  
+        @ModelAttribute  
+        public void populateModel(@RequestParam String abc, Model model) {  
+           model.addAttribute("attributeName", abc);  
+        }  
+  
+        @RequestMapping(value = "/helloWorld")  
+        public String helloWorld() {  
+           return "helloWorld";  
+        }  
+}
+```
+
+
+***被@ModelAttribute注释的方法会在Controller每个方法执行前被执行***
+
+例子中，在获得请求/helloWorld 后，populateModel方法在helloWorld方法之前先被调用，它把请求参数（/helloWorld?abc="xxx"）加入到一个名为attributeName的model属性中，在它执行后helloWorld被调用，返回视图名helloWorld和model已由@ModelAttribute方法生产好了。
+
+②@ModelAttribute和@RequestMapping同时注释一个方法
+
+```java
+public class HelloWorldController {  
+  
+        @RequestMapping(value = "/helloWorld")  
+        @ModelAttribute("attributeName")  
+        public String helloWorld() {  
+           return "hi";  
+        }  
+}
+```
+
+@ModelAttribute和@RequestMapping同时注释一个方法, 这时这个方法的返回值并不是表示一个视图名称，而是model属性的值，视图名称由RequestToViewNameTranslator根据请求"/helloWorld"转换为逻辑视图helloWorld。Model属性名称有@ModelAttribute(value=””)指定，相当于在request中封装了key=attributeName，value=hi。
+
+③@ModelAttribute注释返回具体类的方法 
+
+
+```java
+@ModelAttribute  
+public Account addAccount(@RequestParam String number) {  
+   return accountManager.findAccount(number);  
+}  
+```
+
+这种情况，model属性的名称没有指定，它由返回类型隐含表示，如这个方法返回Account类型，那么这个model属性的名称是account。这个例子中model属性名称由返回对象类型隐含表示，model属性对象就是方法的返回值。它无须要特定的参数。
+    
+
+④ @ModelAttribute(value="")注释返回具体类的方法    
+
+
+```java
+@Controller  
+public class HelloWorldController {  
+     @ModelAttribute("attributeName")  
+     public String addAccount(@RequestParam String abc) {  
+        return abc;  
+     }  
+  
+     @RequestMapping(value = "/helloWorld")  
+     public String helloWorld() {  
+         return "helloWorld";  
+      }  
+}
+```
+
+这个例子中使用@ModelAttribute注释的value属性，来指定model属性的名称。model属性对象就是方法的返回值。它无须要特定的参数。
+
+
+
+
+---
+
+
+
+
+####@ModelAttribute注释在参数上
+
+
+```java
+@Controller  
+public class HelloWorldController {  
+     @ModelAttribute("user")  
+     public User addAccount() {  
+        return new User("jz","123");  
+     }  
+  
+     @RequestMapping(value = "/helloWorld")  
+     public String helloWorld(@ModelAttribute("user") User user) {  
+        user.setUserName("jizhou");  
+        return "helloWorld";  
+     }  
+}
+```
+
+在这个例子里，@ModelAttribute("user") User user注释方法参数，参数user的值来源于addAccount()方法中的model属性。
+关于user值的获取先后：先查询@SessionAttributes层方面有无，再是@ModelAttribute方法层面上有无，若没有则将URI template中的值或Form表单按对应的名称绑定到user对象的各属性上。所以也可以写成如下代码：
+
+
+```java
+@Controller  
+public class HelloWorldController {  
+  
+   @RequestMapping(value = "/helloWorld")  
+   public String helloWorld(@ModelAttribute User user) {  
+       return "helloWorld";  
+   }  
+}
+```
+
+（实际上，不做此注释也能拿到user对象）
+
+
+
+---
+
+
+
+##spring异常处理
+
+1. @ExceptionHandler：统一处理某一类异常，从而能够减少代码重复率和复杂度
+2. @ControllerAdvice：异常集中处理，更好的使业务逻辑与异常处理剥离开
+3. @ResponseStatus：可以将某种异常映射为HTTP状态码
+
+
+---
+
+
+###一.@ExceptionHandler
+>该注解作用对象为方法，并且在运行时有效，由该注解注释的方法可以具有灵活的输入参数，方法返回值：ModelAndView、Model、Map、View、String还有@ResponseBody、HttpEntity<?>或ResponseEntity<?>，以及void。
+
+使用@ExceptionHandler进行处理有一个不好的地方是进行异常处理的方法必须与出错的方法在同一个Controller里面
+
+
+###二.@ControllerAdvice
+>该注解作用对象为TYPE，包括类、接口和枚举等，在运行时有效，并且可以通过Spring扫描为bean组件。其可以包含由@ExceptionHandler、@InitBinder 和@ModelAttribute标注的方法，可以处理多个Controller类，这样所有控制器的异常可以在一个地方进行处理
+
+
+```java
+@ControllerAdvice
+public  class  ExceptionsHandler {
+  @EceptionHandler (Exception.class) //可以直接写@EceptionHandler，不指明异常类，会自动映射，IOExeption继承于Exception
+  public  ModelAndView  allExceptionHandler(Exception  exception){ //还可以声明接收其他任意参数
+       ModelAndView  modelAndView = new ModelAndView("generic_error");
+       modelAndView.addObject("errMsg", "this is Exception.class");
+       return  modelAndView;
+  }
+  
+  @ExceptionHandler(Throwable. class)
+  @ResponseBody
+  public  GeResult<Boolean>    respThrowable(Exception  ex) {
+     logger.warn("代码执行异常！", ex);
+     return  error(CodeEnum.RUNTIME_ERROR,ex.getMessage());
+  }
+  
+  public  GeResult<Boolean>   error(CodeEnum errorCode,String message) {
+        GeResult<Boolean> ret = new GeResult<>();
+        ret.setCode(errorCode.getCode());
+        ret.setMessage(errorCode.getDesc()+"："+message);
+        return   ret;
+  }                          
+} 
+```
+
+
+
+###三.@ResponseStatus
+>该注解修饰的可以是类或是方法。它有两个属性，value属性是http状态码，比如404，500等。reason是错误信息
+
+
+```java
+@ResponseStatus(value = HttpStatus.FORBIDDEN, reason = "Are you okay?")
+public class AuthException extends RuntimeException {
+    private static final long serialVersionUID = 5759027883028274330L;
+}
+
+@Controller("/hello") //在控制器方法中，抛出一个 AuthException异常
+public class SampleControoler {
+    @RequestMapping("/say")
+    @ResponseBody
+    String say() {
+       throw new AuthException();
+    }
+}
+```
+
+
+
+@ResponseStatus如果修饰目标方法
+
+```java
+@ResponseStatus(value=HttpStatus.FORBIDDEN,reason="用户名不匹配")
+@RequestMapping("/testResponseStatus")
+public String testResponseStatus(int i){
+     if(i==0)
+          throw new UserNotMatchException();
+     return "hello";
+}
+```
+无论它执行方法过程中有没有异常产生，用户都会得到异常的界面。而目标方法正常执行
+
+
+---
+
+##了解型的spring注解
+
+###@Deprecated
+
+用@Deprecated注释的程序元素，不鼓励程序员使用这样的元素，通常是因为它很危险或存在更好的选择。在使用不被赞成的程序元素或在不被赞成的代码中执行重写时，编译器会发出警告。
+
+
+###@Valid验证注解
+
+```java
+@Controller
+public class HelloController{
+
+   @RequestMapping("/queryEdubg")                                           //验证注解
+   public ModelAndView querydata(ModelAndView modelAndView,@ModelAttribute @Valid CheckInfo checkInfo,BindingResult bindingResult){//BindingResult类紧跟@Valid注解后
+   modelAndView.setViewName("test/queryDataPage");
+   try{
+       Product_data pd=dataService.queryDataFromRemote(checkInfo);
+       modelAndView.addObject("data",pd);
+   }catch(Exception e){
+       e.printStackTrace();
+       bindingResult.addError(new ObjectError("errorMsg","查询未得到信息"));
+       modelAndView.addObject("checkErrorMsg",bindingResult.getGlobalError());
+   }
+   return modelAndView;
+   }
+   
+   
+   
+   @InitBinder("checkInfo")
+   protected void initBinder(WebDataBinder webDataBinder){
+        webDataBinder.addValidators(new CheckInfoValidator());
+   }
+}
+
+
+public class  CheckInfoValidator implements Validator {
+    @Override
+    public boolean supports(Class<?> claz) {
+        return CheckInfo.class.equals(claz);
+    }
+    
+    @Override
+    public void validate(Object obj, Errors errors) {
+        CheckInfo checkInfo=(CheckInfo)obj;
+        if(StringUtils.isEmpty(checkInfo.getName){
+           errors.rejectValue("name","query.error.msg","姓名不能为空!");
+        }
+        ValidationUtils.rejectIfEmpty(errors,"name","query.error.msg","姓名不能为空!");
+    }
+}
+```
+

@@ -215,11 +215,7 @@
 		<td class="col0">defaultValue</td><td class="col1">String</td><td class="col2">否</td><td class="col3">如果没有传递参数而使用的默认值</td>
 	</tr>
 </table></div>
-<!-- EDIT10 TABLE [4608-4857] -->
-<p>
-JSESSIONID=415A4AC178C59DACE0B2C9CA727CDD84 
-</p>
-<dl class="file">
+<!-- EDIT10 TABLE [4608-4857] --><dl class="file">
 <dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=5" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
 <dd><pre class="code file java">@RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/displayHeaderIndo.do&quot;</span><span class="br0">&#41;</span>  
 <span class="kw1">public</span>  <span class="kw4">void</span>  display<span class="br0">&#40;</span>@CookieValue<span class="br0">&#40;</span>value<span class="sy0">=</span><span class="st0">&quot;JSESSIONID&quot;</span>,defaultValue<span class="sy0">=</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span>  <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> sessionId<span class="br0">&#41;</span><span class="br0">&#123;</span>
@@ -232,7 +228,7 @@ JSESSIONID=415A4AC178C59DACE0B2C9CA727CDD84
 <hr />
 
 </div>
-<!-- EDIT9 SECTION "@CookieValue" [4482-5187] -->
+<!-- EDIT9 SECTION "@CookieValue" [4482-5141] -->
 <h3 class="sectionedit11" id="四_sessionattributes">四.@SessionAttributes</h3>
 <div class="level3">
 <blockquote><div class="no">
@@ -255,7 +251,7 @@ JSESSIONID=415A4AC178C59DACE0B2C9CA727CDD84
 		<td class="col0">types</td><td class="col1">Class&lt;?&gt;[]</td><td class="col2">否</td><td class="col3">指示参数是否必须绑定</td>
 	</tr>
 </table></div>
-<!-- EDIT12 TABLE [5361-5584] -->
+<!-- EDIT12 TABLE [5315-5538] -->
 <p>
 <strong>@SessionAttributes只能声明在类上，而不能声明在方法上</strong>
 </p>
@@ -279,7 +275,7 @@ JSESSIONID=415A4AC178C59DACE0B2C9CA727CDD84
 <hr />
 
 </div>
-<!-- EDIT11 SECTION "四.@SessionAttributes" [5188-5984] -->
+<!-- EDIT11 SECTION "四.@SessionAttributes" [5142-5938] -->
 <h3 class="sectionedit13" id="modelattribute">@ModelAttribute</h3>
 <div class="level3">
 <blockquote><div class="no">
@@ -298,10 +294,304 @@ JSESSIONID=415A4AC178C59DACE0B2C9CA727CDD84
 <li class="level0"><div class="li">用于参数上：用来通过名称对应，把相应名称的值绑定到注解的参数bean上；要绑定的值来源于：
 A)@SessionAttributes 启用的attribute 对象上；
 B)@ModelAttribute 用于方法上时指定的model对象；
-C)上述两种情况都没有时，new一个需要绑定的bean对象，然后把request中按名称对应的方式把值绑定到bean中。
-</div>
+C)上述两种情况都没有时，new一个需要绑定的bean对象，然后把request中按名称对应的方式把值绑定到bean中。</div>
 </li>
 </ol>
 
 </div>
-<!-- EDIT13 SECTION "@ModelAttribute" [5985-] -->
+
+<h4 id="modelattribute注释在方法上">@ModelAttribute注释在方法上</h4>
+<div class="level4">
+
+<p>
+①@ModelAttribute注释void返回值的方法
+</p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=7" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java"><span class="kw1">public</span> <span class="kw1">class</span> HelloWorldController <span class="br0">&#123;</span>  
+        @ModelAttribute  
+        <span class="kw1">public</span> <span class="kw4">void</span> populateModel<span class="br0">&#40;</span>@RequestParam <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> abc, Model model<span class="br0">&#41;</span> <span class="br0">&#123;</span>  
+           model.<span class="me1">addAttribute</span><span class="br0">&#40;</span><span class="st0">&quot;attributeName&quot;</span>, abc<span class="br0">&#41;</span><span class="sy0">;</span>  
+        <span class="br0">&#125;</span>  
+&nbsp;
+        @RequestMapping<span class="br0">&#40;</span>value <span class="sy0">=</span> <span class="st0">&quot;/helloWorld&quot;</span><span class="br0">&#41;</span>  
+        <span class="kw1">public</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> helloWorld<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>  
+           <span class="kw1">return</span> <span class="st0">&quot;helloWorld&quot;</span><span class="sy0">;</span>  
+        <span class="br0">&#125;</span>  
+<span class="br0">&#125;</span></pre>
+</dd></dl>
+
+<p>
+<strong><em>被@ModelAttribute注释的方法会在Controller每个方法执行前被执行</em></strong>
+</p>
+
+<p>
+例子中，在获得请求/helloWorld 后，populateModel方法在helloWorld方法之前先被调用，它把请求参数（/helloWorld?abc=“xxx”）加入到一个名为attributeName的model属性中，在它执行后helloWorld被调用，返回视图名helloWorld和model已由@ModelAttribute方法生产好了。
+</p>
+
+<p>
+②@ModelAttribute和@RequestMapping同时注释一个方法
+</p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=8" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java"><span class="kw1">public</span> <span class="kw1">class</span> HelloWorldController <span class="br0">&#123;</span>  
+&nbsp;
+        @RequestMapping<span class="br0">&#40;</span>value <span class="sy0">=</span> <span class="st0">&quot;/helloWorld&quot;</span><span class="br0">&#41;</span>  
+        @ModelAttribute<span class="br0">&#40;</span><span class="st0">&quot;attributeName&quot;</span><span class="br0">&#41;</span>  
+        <span class="kw1">public</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> helloWorld<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>  
+           <span class="kw1">return</span> <span class="st0">&quot;hi&quot;</span><span class="sy0">;</span>  
+        <span class="br0">&#125;</span>  
+<span class="br0">&#125;</span></pre>
+</dd></dl>
+
+<p>
+@ModelAttribute和@RequestMapping同时注释一个方法, 这时这个方法的返回值并不是表示一个视图名称，而是model属性的值，视图名称由RequestToViewNameTranslator根据请求“/helloWorld”转换为逻辑视图helloWorld。Model属性名称有@ModelAttribute(value=””)指定，相当于在request中封装了key=attributeName，value=hi。
+</p>
+
+<p>
+③@ModelAttribute注释返回具体类的方法 
+</p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=9" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@ModelAttribute  
+<span class="kw1">public</span> Account addAccount<span class="br0">&#40;</span>@RequestParam <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> number<span class="br0">&#41;</span> <span class="br0">&#123;</span>  
+   <span class="kw1">return</span> accountManager.<span class="me1">findAccount</span><span class="br0">&#40;</span>number<span class="br0">&#41;</span><span class="sy0">;</span>  
+<span class="br0">&#125;</span>  </pre>
+</dd></dl>
+
+<p>
+这种情况，model属性的名称没有指定，它由返回类型隐含表示，如这个方法返回Account类型，那么这个model属性的名称是account。这个例子中model属性名称由返回对象类型隐含表示，model属性对象就是方法的返回值。它无须要特定的参数。
+</p>
+
+<p>
+④ @ModelAttribute(value=“”)注释返回具体类的方法<br/>
+
+</p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=10" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@Controller  
+<span class="kw1">public</span> <span class="kw1">class</span> HelloWorldController <span class="br0">&#123;</span>  
+     @ModelAttribute<span class="br0">&#40;</span><span class="st0">&quot;attributeName&quot;</span><span class="br0">&#41;</span>  
+     <span class="kw1">public</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> addAccount<span class="br0">&#40;</span>@RequestParam <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> abc<span class="br0">&#41;</span> <span class="br0">&#123;</span>  
+        <span class="kw1">return</span> abc<span class="sy0">;</span>  
+     <span class="br0">&#125;</span>  
+&nbsp;
+     @RequestMapping<span class="br0">&#40;</span>value <span class="sy0">=</span> <span class="st0">&quot;/helloWorld&quot;</span><span class="br0">&#41;</span>  
+     <span class="kw1">public</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> helloWorld<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>  
+         <span class="kw1">return</span> <span class="st0">&quot;helloWorld&quot;</span><span class="sy0">;</span>  
+      <span class="br0">&#125;</span>  
+<span class="br0">&#125;</span></pre>
+</dd></dl>
+
+<p>
+这个例子中使用@ModelAttribute注释的value属性，来指定model属性的名称。model属性对象就是方法的返回值。它无须要特定的参数。
+</p>
+<hr />
+
+</div>
+
+<h4 id="modelattribute注释在参数上">@ModelAttribute注释在参数上</h4>
+<div class="level4">
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=11" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@Controller  
+<span class="kw1">public</span> <span class="kw1">class</span> HelloWorldController <span class="br0">&#123;</span>  
+     @ModelAttribute<span class="br0">&#40;</span><span class="st0">&quot;user&quot;</span><span class="br0">&#41;</span>  
+     <span class="kw1">public</span> User addAccount<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>  
+        <span class="kw1">return</span> <span class="kw1">new</span> User<span class="br0">&#40;</span><span class="st0">&quot;jz&quot;</span>,<span class="st0">&quot;123&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>  
+     <span class="br0">&#125;</span>  
+&nbsp;
+     @RequestMapping<span class="br0">&#40;</span>value <span class="sy0">=</span> <span class="st0">&quot;/helloWorld&quot;</span><span class="br0">&#41;</span>  
+     <span class="kw1">public</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> helloWorld<span class="br0">&#40;</span>@ModelAttribute<span class="br0">&#40;</span><span class="st0">&quot;user&quot;</span><span class="br0">&#41;</span> User user<span class="br0">&#41;</span> <span class="br0">&#123;</span>  
+        user.<span class="me1">setUserName</span><span class="br0">&#40;</span><span class="st0">&quot;jizhou&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>  
+        <span class="kw1">return</span> <span class="st0">&quot;helloWorld&quot;</span><span class="sy0">;</span>  
+     <span class="br0">&#125;</span>  
+<span class="br0">&#125;</span></pre>
+</dd></dl>
+
+<p>
+在这个例子里，@ModelAttribute(“user”) User user注释方法参数，参数user的值来源于addAccount()方法中的model属性。
+关于user值的获取先后：先查询@SessionAttributes层方面有无，再是@ModelAttribute方法层面上有无，若没有则将URI template中的值或Form表单按对应的名称绑定到user对象的各属性上。所以也可以写成如下代码：
+</p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=12" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@Controller  
+<span class="kw1">public</span> <span class="kw1">class</span> HelloWorldController <span class="br0">&#123;</span>  
+&nbsp;
+   @RequestMapping<span class="br0">&#40;</span>value <span class="sy0">=</span> <span class="st0">&quot;/helloWorld&quot;</span><span class="br0">&#41;</span>  
+   <span class="kw1">public</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> helloWorld<span class="br0">&#40;</span>@ModelAttribute User user<span class="br0">&#41;</span> <span class="br0">&#123;</span>  
+       <span class="kw1">return</span> <span class="st0">&quot;helloWorld&quot;</span><span class="sy0">;</span>  
+   <span class="br0">&#125;</span>  
+<span class="br0">&#125;</span></pre>
+</dd></dl>
+
+<p>
+（实际上，不做此注释也能拿到user对象）
+</p>
+<hr />
+
+</div>
+<!-- EDIT13 SECTION "@ModelAttribute" [5939-10321] -->
+<h2 class="sectionedit14" id="spring异常处理">spring异常处理</h2>
+<div class="level2">
+<ol>
+<li class="level1"><div class="li">@ExceptionHandler：统一处理某一类异常，从而能够减少代码重复率和复杂度</div>
+</li>
+<li class="level0"><div class="li">@ControllerAdvice：异常集中处理，更好的使业务逻辑与异常处理剥离开</div>
+</li>
+<li class="level0"><div class="li">@ResponseStatus：可以将某种异常映射为HTTP状态码</div>
+</li>
+</ol>
+<hr />
+
+</div>
+<!-- EDIT14 SECTION "spring异常处理" [10322-10608] -->
+<h3 class="sectionedit15" id="一_exceptionhandler">一.@ExceptionHandler</h3>
+<div class="level3">
+<blockquote><div class="no">
+该注解作用对象为方法，并且在运行时有效，由该注解注释的方法可以具有灵活的输入参数，方法返回值：ModelAndView、Model、Map、View、String还有@ResponseBody、HttpEntity&lt;?&gt;或ResponseEntity&lt;?&gt;，以及void。</div></blockquote>
+
+<p>
+使用@ExceptionHandler进行处理有一个不好的地方是进行异常处理的方法必须与出错的方法在同一个Controller里面
+</p>
+
+</div>
+<!-- EDIT15 SECTION "一.@ExceptionHandler" [10609-11034] -->
+<h3 class="sectionedit16" id="二_controlleradvice">二.@ControllerAdvice</h3>
+<div class="level3">
+<blockquote><div class="no">
+该注解作用对象为TYPE，包括类、接口和枚举等，在运行时有效，并且可以通过Spring扫描为bean组件。其可以包含由@ExceptionHandler、@InitBinder 和@ModelAttribute标注的方法，可以处理多个Controller类，这样所有控制器的异常可以在一个地方进行处理</div></blockquote>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=13" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@ControllerAdvice
+<span class="kw1">public</span>  <span class="kw1">class</span>  ExceptionsHandler <span class="br0">&#123;</span>
+  @EceptionHandler <span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+exception"><span class="kw3">Exception</span></a>.<span class="kw1">class</span><span class="br0">&#41;</span> <span class="co1">//可以直接写@EceptionHandler，不指明异常类，会自动映射，IOExeption继承于Exception</span>
+  <span class="kw1">public</span>  ModelAndView  allExceptionHandler<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+exception"><span class="kw3">Exception</span></a>  exception<span class="br0">&#41;</span><span class="br0">&#123;</span> <span class="co1">//还可以声明接收其他任意参数</span>
+       ModelAndView  modelAndView <span class="sy0">=</span> <span class="kw1">new</span> ModelAndView<span class="br0">&#40;</span><span class="st0">&quot;generic_error&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+       modelAndView.<span class="me1">addObject</span><span class="br0">&#40;</span><span class="st0">&quot;errMsg&quot;</span>, <span class="st0">&quot;this is Exception.class&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+       <span class="kw1">return</span>  modelAndView<span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+&nbsp;
+  @ExceptionHandler<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+throwable"><span class="kw3">Throwable</span></a>. <span class="kw1">class</span><span class="br0">&#41;</span>
+  @ResponseBody
+  <span class="kw1">public</span>  GeResult<span class="sy0">&lt;</span>Boolean<span class="sy0">&gt;</span>    respThrowable<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+exception"><span class="kw3">Exception</span></a>  ex<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+     logger.<span class="me1">warn</span><span class="br0">&#40;</span><span class="st0">&quot;代码执行异常！&quot;</span>, ex<span class="br0">&#41;</span><span class="sy0">;</span>
+     <span class="kw1">return</span>  error<span class="br0">&#40;</span>CodeEnum.<span class="me1">RUNTIME_ERROR</span>,ex.<span class="me1">getMessage</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+&nbsp;
+  <span class="kw1">public</span>  GeResult<span class="sy0">&lt;</span>Boolean<span class="sy0">&gt;</span>   error<span class="br0">&#40;</span>CodeEnum errorCode,<a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> message<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        GeResult<span class="sy0">&lt;</span>Boolean<span class="sy0">&gt;</span> ret <span class="sy0">=</span> <span class="kw1">new</span> GeResult<span class="sy0">&lt;&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ret.<span class="me1">setCode</span><span class="br0">&#40;</span>errorCode.<span class="me1">getCode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ret.<span class="me1">setMessage</span><span class="br0">&#40;</span>errorCode.<span class="me1">getDesc</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot;：&quot;</span><span class="sy0">+</span>message<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span>   ret<span class="sy0">;</span>
+  <span class="br0">&#125;</span>                          
+<span class="br0">&#125;</span> </pre>
+</dd></dl>
+
+</div>
+<!-- EDIT16 SECTION "二.@ControllerAdvice" [11035-12379] -->
+<h3 class="sectionedit17" id="三_responsestatus">三.@ResponseStatus</h3>
+<div class="level3">
+<blockquote><div class="no">
+该注解修饰的可以是类或是方法。它有两个属性，value属性是http状态码，比如404，500等。reason是错误信息</div></blockquote>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=14" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@ResponseStatus<span class="br0">&#40;</span>value <span class="sy0">=</span> HttpStatus.<span class="me1">FORBIDDEN</span>, reason <span class="sy0">=</span> <span class="st0">&quot;Are you okay?&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">public</span> <span class="kw1">class</span> AuthException <span class="kw1">extends</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+runtimeexception"><span class="kw3">RuntimeException</span></a> <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">long</span> serialVersionUID <span class="sy0">=</span> 5759027883028274330L<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+@Controller<span class="br0">&#40;</span><span class="st0">&quot;/hello&quot;</span><span class="br0">&#41;</span> <span class="co1">//在控制器方法中，抛出一个 AuthException异常</span>
+<span class="kw1">public</span> <span class="kw1">class</span> SampleControoler <span class="br0">&#123;</span>
+    @RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/say&quot;</span><span class="br0">&#41;</span>
+    @ResponseBody
+    <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> say<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+       <span class="kw1">throw</span> <span class="kw1">new</span> AuthException<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</dd></dl>
+
+<p>
+@ResponseStatus如果修饰目标方法
+</p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=15" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@ResponseStatus<span class="br0">&#40;</span>value<span class="sy0">=</span>HttpStatus.<span class="me1">FORBIDDEN</span>,reason<span class="sy0">=</span><span class="st0">&quot;用户名不匹配&quot;</span><span class="br0">&#41;</span>
+@RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/testResponseStatus&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">public</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> testResponseStatus<span class="br0">&#40;</span><span class="kw4">int</span> i<span class="br0">&#41;</span><span class="br0">&#123;</span>
+     <span class="kw1">if</span><span class="br0">&#40;</span>i<span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span>
+          <span class="kw1">throw</span> <span class="kw1">new</span> UserNotMatchException<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+     <span class="kw1">return</span> <span class="st0">&quot;hello&quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+</dd></dl>
+
+<p>
+无论它执行方法过程中有没有异常产生，用户都会得到异常的界面。而目标方法正常执行
+</p>
+<hr />
+
+</div>
+<!-- EDIT17 SECTION "三.@ResponseStatus" [12380-13391] -->
+<h2 class="sectionedit18" id="了解型的spring注解">了解型的spring注解</h2>
+<div class="level2">
+
+</div>
+<!-- EDIT18 SECTION "了解型的spring注解" [13392-13419] -->
+<h3 class="sectionedit19" id="deprecated">@Deprecated</h3>
+<div class="level3">
+
+<p>
+用@Deprecated注释的程序元素，不鼓励程序员使用这样的元素，通常是因为它很危险或存在更好的选择。在使用不被赞成的程序元素或在不被赞成的代码中执行重写时，编译器会发出警告。
+</p>
+
+</div>
+<!-- EDIT19 SECTION "@Deprecated" [13420-13683] -->
+<h3 class="sectionedit20" id="valid验证注解">@Valid验证注解</h3>
+<div class="level3">
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:java:spring:%E6%B3%A8%E8%A7%A3&amp;codeblock=16" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java">@Controller
+<span class="kw1">public</span> <span class="kw1">class</span> HelloController<span class="br0">&#123;</span>
+&nbsp;
+   @RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/queryEdubg&quot;</span><span class="br0">&#41;</span>                                           <span class="co1">//验证注解</span>
+   <span class="kw1">public</span> ModelAndView querydata<span class="br0">&#40;</span>ModelAndView modelAndView,@ModelAttribute @Valid CheckInfo checkInfo,BindingResult bindingResult<span class="br0">&#41;</span><span class="br0">&#123;</span><span class="co1">//BindingResult类紧跟@Valid注解后</span>
+   modelAndView.<span class="me1">setViewName</span><span class="br0">&#40;</span><span class="st0">&quot;test/queryDataPage&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+   <span class="kw1">try</span><span class="br0">&#123;</span>
+       Product_data pd<span class="sy0">=</span>dataService.<span class="me1">queryDataFromRemote</span><span class="br0">&#40;</span>checkInfo<span class="br0">&#41;</span><span class="sy0">;</span>
+       modelAndView.<span class="me1">addObject</span><span class="br0">&#40;</span><span class="st0">&quot;data&quot;</span>,pd<span class="br0">&#41;</span><span class="sy0">;</span>
+   <span class="br0">&#125;</span><span class="kw1">catch</span><span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+exception"><span class="kw3">Exception</span></a> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+       e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+       bindingResult.<span class="me1">addError</span><span class="br0">&#40;</span><span class="kw1">new</span> ObjectError<span class="br0">&#40;</span><span class="st0">&quot;errorMsg&quot;</span>,<span class="st0">&quot;查询未得到信息&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+       modelAndView.<span class="me1">addObject</span><span class="br0">&#40;</span><span class="st0">&quot;checkErrorMsg&quot;</span>,bindingResult.<span class="me1">getGlobalError</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+   <span class="br0">&#125;</span>
+   <span class="kw1">return</span> modelAndView<span class="sy0">;</span>
+   <span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+   @InitBinder<span class="br0">&#40;</span><span class="st0">&quot;checkInfo&quot;</span><span class="br0">&#41;</span>
+   <span class="kw1">protected</span> <span class="kw4">void</span> initBinder<span class="br0">&#40;</span>WebDataBinder webDataBinder<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        webDataBinder.<span class="me1">addValidators</span><span class="br0">&#40;</span><span class="kw1">new</span> CheckInfoValidator<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+   <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span>  CheckInfoValidator <span class="kw1">implements</span> Validator <span class="br0">&#123;</span>
+    @Override
+    <span class="kw1">public</span> <span class="kw4">boolean</span> supports<span class="br0">&#40;</span>Class<span class="sy0">&lt;?&gt;</span> claz<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> CheckInfo.<span class="kw1">class</span>.<span class="me1">equals</span><span class="br0">&#40;</span>claz<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    @Override
+    <span class="kw1">public</span> <span class="kw4">void</span> validate<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+object"><span class="kw3">Object</span></a> obj, Errors errors<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        CheckInfo checkInfo<span class="sy0">=</span><span class="br0">&#40;</span>CheckInfo<span class="br0">&#41;</span>obj<span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>StringUtils.<span class="me1">isEmpty</span><span class="br0">&#40;</span>checkInfo.<span class="me1">getName</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+           errors.<span class="me1">rejectValue</span><span class="br0">&#40;</span><span class="st0">&quot;name&quot;</span>,<span class="st0">&quot;query.error.msg&quot;</span>,<span class="st0">&quot;姓名不能为空!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        ValidationUtils.<span class="me1">rejectIfEmpty</span><span class="br0">&#40;</span>errors,<span class="st0">&quot;name&quot;</span>,<span class="st0">&quot;query.error.msg&quot;</span>,<span class="st0">&quot;姓名不能为空!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+</dd></dl>
+
+</div>
+<!-- EDIT20 SECTION "@Valid验证注解" [13684-] -->

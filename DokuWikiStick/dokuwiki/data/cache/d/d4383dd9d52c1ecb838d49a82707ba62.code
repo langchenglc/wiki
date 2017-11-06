@@ -1,0 +1,7 @@
+@ResponseStatus<span class="br0">&#40;</span>value<span class="sy0">=</span>HttpStatus.<span class="me1">FORBIDDEN</span>,reason<span class="sy0">=</span><span class="st0">&quot;用户名不匹配&quot;</span><span class="br0">&#41;</span>
+@RequestMapping<span class="br0">&#40;</span><span class="st0">&quot;/testResponseStatus&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">public</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> testResponseStatus<span class="br0">&#40;</span><span class="kw4">int</span> i<span class="br0">&#41;</span><span class="br0">&#123;</span>
+     <span class="kw1">if</span><span class="br0">&#40;</span>i<span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span>
+          <span class="kw1">throw</span> <span class="kw1">new</span> UserNotMatchException<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+     <span class="kw1">return</span> <span class="st0">&quot;hello&quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>

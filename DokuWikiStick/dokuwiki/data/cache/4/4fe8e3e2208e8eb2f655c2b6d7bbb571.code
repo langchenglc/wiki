@@ -1,0 +1,4 @@
+@ModelAttribute  
+    <span class="kw1">public</span> Account addAccount<span class="br0">&#40;</span>@RequestParam <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> number<span class="br0">&#41;</span> <span class="br0">&#123;</span>  
+       <span class="kw1">return</span> accountManager.<span class="me1">findAccount</span><span class="br0">&#40;</span>number<span class="br0">&#41;</span><span class="sy0">;</span>  
+    <span class="br0">&#125;</span>  
