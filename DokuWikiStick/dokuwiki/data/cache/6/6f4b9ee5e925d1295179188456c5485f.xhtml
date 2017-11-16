@@ -1,0 +1,453 @@
+<blockquote><div class="no">
+正则表达式平时我们接触也使用过一些，但是一直没有比较深入的了解过。这次看看正则表达式的知识！</div></blockquote>
+
+<h2 class="sectionedit1" id="正则字符">正则字符</h2>
+<div class="level2">
+<div class="table sectionedit2"><table class="inline">
+	<tr class="row0">
+		<td class="col0">字符 </td><td class="col1"> 意义</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0"><code>.</code> </td><td class="col1"> 匹配不包括换行的任意字符，谨慎使用</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"><code>\s</code> </td><td class="col1"> 匹配空格，tab，换行;\S 相反  [\s\S]天下无敌</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0"><code>\</code> </td><td class="col1"> 转义</td>
+	</tr>
+	<tr class="row4">
+		<td class="col0"><code>[]</code> </td><td class="col1"> <code>单字符取一个，比如[abc]会匹配 a 或b 或c；如果[]里面加了^，代表排除这个字符；[^abc]表示不是a，不是b，也不是c;[0-9a-zA-Z];[ab|bz]=&gt;[abz|]匹配abz或者|字符中的一个；[\u4e00-\u9fa5]匹配中文</code></td>
+	</tr>
+	<tr class="row5">
+		<td class="col0"><code>^</code> </td><td class="col1"> 限定开始符号；在<code>[^X]</code>表示是取反的意思</td>
+	</tr>
+	<tr class="row6">
+		<td class="col0"><code>$</code> </td><td class="col1"> 限定结束符号；</td>
+	</tr>
+	<tr class="row7">
+		<td class="col0"><code>|</code> </td><td class="col1"> 或；http/ftp/svn</td>
+	</tr>
+	<tr class="row8">
+		<td class="col0"><code>\b</code> </td><td class="col1"> 单词首尾，用来做单词边界处理  \bhi\b  匹配hi，不匹配high单词</td>
+	</tr>
+	<tr class="row9">
+		<td class="col0"><code>\d</code> </td><td class="col1"> 数字</td>
+	</tr>
+	<tr class="row10">
+		<td class="col0"><code>\w</code> </td><td class="col1"> 字符(字母数字下划线)</td>
+	</tr>
+</table></div>
+<!-- EDIT2 TABLE [162-849] -->
+</div>
+<!-- EDIT1 SECTION "正则字符" [144-849] -->
+<h2 class="sectionedit3" id="限定符">限定符</h2>
+<div class="level2">
+<div class="table sectionedit4"><table class="inline">
+	<tr class="row0">
+		<td class="col0">限定符 </td><td class="col1"> 意义</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0"><code>*</code> </td><td class="col1"> 无论多少次</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"><code>?</code></td><td class="col1"> 0次或者1次  有还是没有；如果？加在限定符后面，就是改成了非贪婪模式</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0"><code>+</code> </td><td class="col1"> 至少有一次</td>
+	</tr>
+	<tr class="row4">
+		<td class="col0"><code>{n}</code> </td><td class="col1"> n次</td>
+	</tr>
+	<tr class="row5">
+		<td class="col0"><code>{n,m}</code> </td><td class="col1"> n次到m次</td>
+	</tr>
+	<tr class="row6">
+		<td class="col0"><code>{n,}</code> </td><td class="col1"> 大于等于n次</td>
+	</tr>
+</table></div>
+<!-- EDIT4 TABLE [865-1105] -->
+</div>
+<!-- EDIT3 SECTION "限定符" [850-1105] -->
+<h2 class="sectionedit5" id="匹配模式">匹配模式</h2>
+<div class="level2">
+
+<p>
+1.贪婪模式
+:    当正则表达式中包含能接受重复的限定符时，匹配尽可能多的字符(默认)
+</p>
+
+<p>
+2.懒惰模式
+:    当正则表达式中包含能接受重复的限定符时，匹配尽可能少的字符，只需在重复的限定符后面加？；
+</p>
+<div class="table sectionedit6"><table class="inline">
+	<tr class="row0">
+		<td class="col0 leftalign">懒惰限定符代码/语法	</td><td class="col1"> 描述</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0 leftalign"><code>*?</code>	</td><td class="col1"> 重复0次或更多次，但尽可能的少重复</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0 leftalign"><code>+?</code>	</td><td class="col1"> 重复一次或更多次，但尽可能的少重复</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0 leftalign"><code>??</code>	</td><td class="col1"> 重复0次或一次，但尽可能的少重复</td>
+	</tr>
+	<tr class="row4">
+		<td class="col0 leftalign"><code>{n,}?</code>	</td><td class="col1"> 重复n次或更多次，但尽可能的少重复</td>
+	</tr>
+	<tr class="row5">
+		<td class="col0 leftalign"><code>{n,m}?</code>	</td><td class="col1"> 重复n到m次，但尽可能的少重复</td>
+	</tr>
+</table></div>
+<!-- EDIT6 TABLE [1394-1726] -->
+</div>
+<!-- EDIT5 SECTION "匹配模式" [1106-1727] -->
+<h2 class="sectionedit7" id="模式修正符">模式修正符</h2>
+<div class="level2">
+
+<p>
+正则表达式中的模式修正符有i,g,m,s,x,e  他们可以组合使用
+(?imnsx-imnsx)  启用-不启用
+</p>
+<div class="table sectionedit8"><table class="inline">
+	<tr class="row0">
+		<td class="col0 leftalign">模式修正符	</td><td class="col1"> 说明</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0 leftalign">i	</td><td class="col1"> 表示在和模式进行匹配进不区分大小写</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0 leftalign">m	</td><td class="col1"> 将模式视为多行，使用<code>^</code>和<code>$</code>表示任何一行都可以以正则表达式开始或结束</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0 leftalign">s	</td><td class="col1"> 如果没有使用这个模式修正符号，元字符中的“.”默认不能表示换行符号,将字符串视为单行</td>
+	</tr>
+	<tr class="row4">
+		<td class="col0 leftalign">x	</td><td class="col1"> 表示模式中的空白忽略不计</td>
+	</tr>
+	<tr class="row5">
+		<td class="col0 leftalign">e	</td><td class="col1"> 正则表达式必须使用在preg_replace替换字符串的函数中时才可以使用(讲这个函数时再说)</td>
+	</tr>
+	<tr class="row6">
+		<td class="col0 leftalign">A	</td><td class="col1"> 以模式字符串开头，相当于元字符<code>^</code></td>
+	</tr>
+	<tr class="row7">
+		<td class="col0 leftalign">Z	</td><td class="col1"> 以模式字符串结尾，相当于元字符<code>$</code></td>
+	</tr>
+	<tr class="row8">
+		<td class="col0 leftalign">U	</td><td class="col1"> 正则表达式的特点：就是比较“贪婪”，使用该模式修正符可以取消贪婪模式</td>
+	</tr>
+	<tr class="row9">
+		<td class="col0 leftalign">g   </td><td class="col1"> 全局匹配</td>
+	</tr>
+	<tr class="row10">
+		<td class="col0 leftalign">D   </td><td class="col1"> 匹配时限定$匹配出来的不可有换行</td>
+	</tr>
+</table></div>
+<!-- EDIT8 TABLE [1860-2641] -->
+</div>
+<!-- EDIT7 SECTION "模式修正符" [1728-2642] -->
+<h2 class="sectionedit9" id="分组">分组</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li">分组符号（）  ⇒ （\d{1,3}.）{3}\d{1,3}简单的匹配IP地址</div>
+</li>
+<li class="level1"><div class="li">分组按照形式又分成捕获组和非捕获组</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT9 SECTION "分组" [2643-2781] -->
+<h3 class="sectionedit10" id="捕获组">捕获组</h3>
+<div class="level3">
+
+<p>
+分组编号
+:    捕获组通过从左到右计算它的开括号来进行编号；整个正则表达式自己编号为0；
+</p>
+
+<p>
+(A)(B(C))这个表达式中，我们认为存在这样的四个分组:
+</p>
+<div class="table sectionedit11"><table class="inline">
+	<tr class="row0">
+		<td class="col0">编号 </td><td class="col1"> 分组</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0">0</td><td class="col1"> (A)(B(C))</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0">1</td><td class="col1"> (A)</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0">2</td><td class="col1"> (B(C))</td>
+	</tr>
+	<tr class="row4">
+		<td class="col0">3</td><td class="col1"> (C)</td>
+	</tr>
+</table></div>
+<!-- EDIT11 TABLE [2995-3057] -->
+<p>
+这样我们就可以在匹配操作完成后从匹配器通过序列号来获取对应匹配子序列了。
+</p>
+
+<p>
+<code>([&#039;&quot;]).*\1</code>，其中\1就是对引号这个分组的引用
+<code>(\d)\1\1</code> 匹配连续出现3次的数字
+</p>
+
+</div>
+
+<h4 id="特殊形式">特殊形式:</h4>
+<div class="level4">
+
+<p>
+<code>(?&lt;name&gt;exp)</code>  自己命名分组，匹配的文本捕获到命名的name组内，使用<code>\k&lt;name&gt;</code>引用捕获的内容
+<code>(?#comment)</code> 提供注释，不对正则产生影响
+</p>
+
+</div>
+<!-- EDIT10 SECTION "捕获组" [2782-3467] -->
+<h3 class="sectionedit12" id="非捕获组">非捕获组</h3>
+<div class="level3">
+
+<p>
+非捕获组一般情况下是以(?)开头的组。它不捕获文本也不对组合进行计数。他有下面几种形式
+</p>
+
+</div>
+
+<h4 id="pattern_形式">1.(?:Pattern)形式</h4>
+<div class="level4">
+
+<p>
+它的作用就是匹配Pattern字符，好处就是不捕获文本，不将匹配的字符存在内存中，更省内存
+例子：(?:a|A)123(?:b)可以匹配a123b 或者A123b
+</p>
+
+</div>
+
+<h4 id="零宽度断言">2.零宽度断言</h4>
+<div class="level4">
+<div class="table sectionedit13"><table class="inline">
+	<tr class="row0">
+		<td class="col0"> 形式 </td><td class="col1"> 意义 </td><td class="col2"> 说明 </td>
+	</tr>
+	<tr class="row1">
+		<td class="col0"><code>(?= X )</code></td><td class="col1"><code>X ，通过零宽度的正 lookahead</code></td><td class="col2"><code>零宽度正先行断言。仅当子表达式 X 在 此位置的右侧匹配时才继续匹配。也就是说要使此零宽度断言起到我们想要的效果的话，就必须把这个非捕获组放在整个表达式的右侧。例如，/w+(?=/d) 与后跟数字的单词匹配，而不与该数字匹配。此构造不会回溯。</code></td>
+	</tr>
+	<tr class="row2">
+		<td class="col0"><code>(?! X )</code></td><td class="col1"><code>X ，通过零宽度的负 lookahead</code></td><td class="col2"><code>零宽度负先行断言。仅当子表达式 X 不在 此位置的右侧匹配时才继续匹配。例如，例如，/w+(?!/d) 与后不跟数字的单词匹配，而不与该数字匹配 。</code></td>
+	</tr>
+	<tr class="row3">
+		<td class="col0"><code>(?&lt;= X )</code></td><td class="col1"><code>X ，通过零宽度的正 lookbehind</code></td><td class="col2"><code>零宽度正后发断言。仅当子表达式 X 在 此位置的左侧匹配时才继续匹配。例如，(?&lt;=19)99 与跟在 19 后面的 99 的实例匹配。此构造不会回溯。</code></td>
+	</tr>
+	<tr class="row4">
+		<td class="col0"><code>(?&lt;! X )</code></td><td class="col1"><code>X ，通过零宽度的负 lookbehind</code></td><td class="col2"><code>零宽度负后发断言。仅当子表达式 X 不在此位置的左侧匹配时才继续匹配。例如，(?&lt;!19)99 与不跟在 19 后面的 99 的实例匹配</code></td>
+	</tr>
+</table></div>
+<!-- EDIT13 TABLE [3840-4961] -->
+<p>
+例子：
+1. (?&lt; !4)56(?=9) 匹配后面的文本56前面不能是4，后面不能是9   5569能够匹配
+2. 提取字符串 da12bka3434bdca4343bdca234bm中包含在字符a和b之间的数字，但是这个a之前的字符不能是c；b后面的字符必须是d才能提取。显然，这里就只有3434这个数字满足要求。那么我们怎么提取呢？首先，我们写出含有捕获组的正则表达式：[^c]a\d<em>bd;然后我们再将其变为非捕获组的正则表达式：(?⇐[^c]a)\d</em>(?=bd)
+</p>
+
+</div>
+<!-- EDIT12 SECTION "非捕获组" [3468-5471] -->
+<h2 class="sectionedit14" id="正则表达式匹配原理">正则表达式匹配原理</h2>
+<div class="level2">
+
+<p>
+匹配的两个原则：
+</p>
+<ol>
+<li class="level1"><div class="li">优先选择最左边的匹配结果
+</div>
+</li>
+<li class="level0"><div class="li">标准的匹配量词（* + ？ {m,n}）是优先匹配的；</div>
+</li>
+</ol>
+<blockquote><div class="no">
+（量词优先会导致NFA匹配问题，使用懒惰模式可以忽略量词优先）</div></blockquote>
+
+</div>
+<!-- EDIT14 SECTION "正则表达式匹配原理" [5472-5728] -->
+<h3 class="sectionedit15" id="正则引擎">正则引擎</h3>
+<div class="level3">
+<div class="table sectionedit16"><table class="inline">
+	<tr class="row0">
+		<td class="col0">引擎类型</td><td class="col1 rightalign">	程序</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0 leftalign">DFA	</td><td class="col1">awk(大多数版本)、egrep（大多数版本）、flex、lex、MySQL、Procmail</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0 leftalign">传统型 NFA	</td><td class="col1">GNU Emacs、Java、grep（大多数版本）、less、more、.NET语言、PCRE library、Perl、PHP（所有三套正则库）、Python、Ruby、set（大多数版本）、vi</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0 leftalign">POSIX NFA	</td><td class="col1">mawk、Mortice Lern System&#039;s utilities、GUN Emacs（明确指定时使用）</td>
+	</tr>
+	<tr class="row4">
+		<td class="col0 leftalign">DFA/NFA混合	</td><td class="col1">GNU awk、 GNU grep/egrep、 Tcl</td>
+	</tr>
+</table></div>
+<!-- EDIT16 TABLE [5749-6193] -->
+<p>
+正则引擎中的零件：
+1. 文本字符
+2. 字符组，点号，Unicode属性及其他
+3. 捕获型括号
+4. 锚点  ^ \z  \b等，环视（零宽度断言）
+</p>
+
+</div>
+
+<h4 id="nfa非确定型有穷自动机">NFA:非确定型有穷自动机</h4>
+<div class="level4">
+
+<p>
+<strong>表达式主导</strong>—每次取表达式一个字符出来进行文本比对；在比较过程中经常需要进行<strong>回溯</strong>；
+正则表达式的编写对匹配过程有很大的影响，如果改变表达式的编写方式，效率会有一些差距
+</p>
+
+<p>
+eg:
+用<code>&quot;.*&quot;</code> 匹配双引号下的文本<code>The name &quot;McDonald&#039;s&quot; is said &quot;makudonarudo&quot; in Japanese</code>
+一种正确的方法就是<code>[^&quot;]*</code>
+</p>
+
+</div>
+
+<h4 id="dfa确定型有穷自动机">DFA:确定型有穷自动机</h4>
+<div class="level4">
+
+<p>
+<strong>文本主导</strong>—扫描文本中的每一个字符，记录当前处理的匹配正则表达式的可能性
+需要匹配的文本只被扫描一遍，所有效率基本是确定的。
+</p>
+
+</div>
+<!-- EDIT15 SECTION "正则引擎" [5729-7022] -->
+<h2 class="sectionedit17" id="正则表达式效率">正则表达式效率</h2>
+<div class="level2">
+
+<p>
+匹配优先和忽略优先都不会影响需要检测路径本身，而只会影响检测的顺序。如果不能匹配，无论是按照匹配优先还是忽略优先的顺序，最终每条路径都会被测试。
+</p>
+
+</div>
+<!-- EDIT17 SECTION "正则表达式效率" [7023-7265] -->
+<h3 class="sectionedit18" id="固化分组">固化分组</h3>
+<div class="level3">
+
+<p>
+(?&gt;…)就是将上面可能尝试的备用状态全部舍弃掉；
+<code>（?&gt;.*?）</code>将匹配不到任何字符，<code>.*?</code>是忽略优先，将这个字符放过去让后面的表达式去检测，但是使用了固话分组，所有的备用状态被舍弃，后面即便无法匹配，也无法回溯到备用状态，所以最后这个表达式将匹配不到任何东西。
+</p>
+
+</div>
+<!-- EDIT18 SECTION "固化分组" [7266-7655] -->
+<h2 class="sectionedit19" id="正则表达式使用">正则表达式使用</h2>
+<div class="level2">
+<pre class="code">
+java.util.regex.Pattern   =&gt; 编译好的正则表达式
+java.util.regex.Matcher   =&gt; 对应单独的实例，表示将正则表达式应用到具体的目标字符串上
+java.util.regex.MatcherResult  =&gt; 封装成功匹配的数据
+java.util.regex.PatternSyntaxException =&gt; 表达式格式不正确</pre>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F&amp;codeblock=1" title="下载片段" class="mediafile mf_java">snippet.java</a></dt>
+<dd><pre class="code file java"><span class="kw1">public</span> <span class="kw1">class</span> RegexDemo <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> myText <span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> Pattern p<span class="sy0">;</span>
+    @Before
+    <span class="kw1">public</span> <span class="kw4">void</span> init<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        myText <span class="sy0">=</span> <span class="st0">&quot;this is my 1st test string 2wd&quot;</span><span class="sy0">;</span>
+        <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> myRegex <span class="sy0">=</span> <span class="st0">&quot;<span class="es0">\\</span>d<span class="es0">\\</span>w+&quot;</span><span class="sy0">;</span>
+        p <span class="sy0">=</span> Pattern.<span class="me1">compile</span><span class="br0">&#40;</span>myRegex<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    @Test
+    <span class="kw1">public</span> <span class="kw4">void</span> regex1<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="co1">//Pattern.compile(myRegex,Pattern.CASE_INSENSITIVE);//第二个参数是模式参数</span>
+        Matcher m <span class="sy0">=</span> p.<span class="me1">matcher</span><span class="br0">&#40;</span>myText<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">while</span><span class="br0">&#40;</span>m.<span class="me1">find</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><span class="co1">//对具体的字符串进行检索</span>
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> group <span class="sy0">=</span> m.<span class="me1">group</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw4">int</span> from <span class="sy0">=</span> m.<span class="me1">start</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw4">int</span> end <span class="sy0">=</span> m.<span class="me1">end</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;matched &quot;</span> <span class="sy0">+</span> group <span class="sy0">+</span> <span class="st0">&quot; from &quot;</span> <span class="sy0">+</span> from <span class="sy0">+</span> <span class="st0">&quot; to &quot;</span> <span class="sy0">+</span> end<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">//            matched 1st from 11 to 14</span>
+<span class="co1">//            matched 2wd from 27 to 30</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    @Test
+    <span class="kw1">public</span> <span class="kw4">void</span> regex2<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        Matcher m <span class="sy0">=</span> p.<span class="me1">matcher</span><span class="br0">&#40;</span>myText<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">boolean</span> matches <span class="sy0">=</span> m.<span class="me1">matches</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//全匹配</span>
+        <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>matches<span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//false</span>
+        <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>myText.<span class="me1">matches</span><span class="br0">&#40;</span><span class="st0">&quot;(<span class="es0">\\</span>w+<span class="es0">\\</span>s*)+&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//true</span>
+        <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>myText.<span class="me1">replaceAll</span><span class="br0">&#40;</span><span class="st0">&quot;<span class="es0">\\</span>d+&quot;</span>,<span class="st0">&quot;*&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//Pattern.compile().replaceAll()</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    @Test
+    <span class="kw1">public</span> <span class="kw4">void</span> regex3<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> regex  <span class="sy0">=</span> <span class="st0">&quot;(?x)(https?)://([^/:]+)   (:(<span class="es0">\\</span>d+))?&quot;</span><span class="sy0">;</span>
+        Pattern compile <span class="sy0">=</span> Pattern.<span class="me1">compile</span><span class="br0">&#40;</span>regex<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> text3 <span class="sy0">=</span> <span class="st0">&quot;&lt;a href='http://regex.info:800/blog'&gt;正则表达式&lt;/a&gt;&quot;</span><span class="sy0">;</span>
+        Matcher matcher <span class="sy0">=</span> compile.<span class="me1">matcher</span><span class="br0">&#40;</span>text3<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>matcher.<span class="me1">find</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> group <span class="sy0">=</span> matcher.<span class="me1">group</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot; match all: &quot;</span> <span class="sy0">+</span>group<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot; protocol: &quot;</span><span class="sy0">+</span>matcher.<span class="me1">group</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">+</span><span class="st0">&quot; from &quot;</span><span class="sy0">+</span>matcher.<span class="me1">start</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">+</span> <span class="st0">&quot; to &quot;</span><span class="sy0">+</span>matcher.<span class="me1">end</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot; hostname: &quot;</span><span class="sy0">+</span> matcher.<span class="me1">group</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span> <span class="sy0">+</span><span class="st0">&quot; from &quot;</span><span class="sy0">+</span>matcher.<span class="me1">start</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">+</span> <span class="st0">&quot; to &quot;</span><span class="sy0">+</span>matcher.<span class="me1">end</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>matcher.<span class="me1">group</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot; port :&quot;</span> <span class="sy0">+</span> matcher.<span class="me1">group</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span><span class="kw1">else</span><span class="br0">&#123;</span>
+                <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot; default port:80&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+<span class="co1">//        match all: http://regex.info:800</span>
+<span class="co1">//        protocol: http from 9 to 13</span>
+<span class="co1">//        hostname: regex.info from 16 to 26</span>
+<span class="co1">//        port :800</span>
+    <span class="br0">&#125;</span></pre>
+</dd></dl>
+
+</div>
+<!-- EDIT19 SECTION "正则表达式使用" [7656-10105] -->
+<h2 class="sectionedit20" id="参考文章">参考文章</h2>
+<div class="level2">
+
+<p>
+书籍：《精通正则表达式》
+</p>
+
+<p>
+<a href="http://www.cnblogs.com/kevin-yuan/archive/2012/11/11/2765340.html" class="urlextern" title="http://www.cnblogs.com/kevin-yuan/archive/2012/11/11/2765340.html" rel="nofollow">正则表达式的高级用法(分组和捕获)</a>
+</p>
+
+<p>
+<a href="http://www.zjmainstay.cn/my-regexp" class="urlextern" title="http://www.zjmainstay.cn/my-regexp" rel="nofollow">我眼里的正则表达式入门教程</a>
+</p>
+
+<p>
+<a href="http://www.zjmainstay.cn/deep-regexp" class="urlextern" title="http://www.zjmainstay.cn/deep-regexp" rel="nofollow">深入理解正则表达式高级教程</a>
+</p>
+
+<p>
+<a href="http://deerchao.net/tutorials/regex/regex.htm" class="urlextern" title="http://deerchao.net/tutorials/regex/regex.htm" rel="nofollow">正则表达式30分钟入门教程</a>
+</p>
+
+<p>
+<a href="http://deerchao.net/tutorials/regex/common.htm" class="urlextern" title="http://deerchao.net/tutorials/regex/common.htm" rel="nofollow">常用正则表达式</a>
+</p>
+
+<p>
+<a href="http://tool.chinaz.com/regex/" class="urlextern" title="http://tool.chinaz.com/regex/" rel="nofollow">正则在线测试工具</a>
+</p>
+
+</div>
+<!-- EDIT20 SECTION "参考文章" [10106-] -->

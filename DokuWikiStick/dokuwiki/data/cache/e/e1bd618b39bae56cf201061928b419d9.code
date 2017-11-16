@@ -1,0 +1,55 @@
+<span class="kw1">public</span> <span class="kw1">class</span> RegexDemo <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> myText <span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> Pattern p<span class="sy0">;</span>
+    @Before
+    <span class="kw1">public</span> <span class="kw4">void</span> init<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        myText <span class="sy0">=</span> <span class="st0">&quot;this is my 1st test string 2wd&quot;</span><span class="sy0">;</span>
+        <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> myRegex <span class="sy0">=</span> <span class="st0">&quot;<span class="es0">\\</span>d<span class="es0">\\</span>w+&quot;</span><span class="sy0">;</span>
+        p <span class="sy0">=</span> Pattern.<span class="me1">compile</span><span class="br0">&#40;</span>myRegex<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    @Test
+    <span class="kw1">public</span> <span class="kw4">void</span> regex1<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="co1">//Pattern.compile(myRegex,Pattern.CASE_INSENSITIVE);//第二个参数是模式参数</span>
+        Matcher m <span class="sy0">=</span> p.<span class="me1">matcher</span><span class="br0">&#40;</span>myText<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">while</span><span class="br0">&#40;</span>m.<span class="me1">find</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><span class="co1">//对具体的字符串进行检索</span>
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> group <span class="sy0">=</span> m.<span class="me1">group</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw4">int</span> from <span class="sy0">=</span> m.<span class="me1">start</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw4">int</span> end <span class="sy0">=</span> m.<span class="me1">end</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;matched &quot;</span> <span class="sy0">+</span> group <span class="sy0">+</span> <span class="st0">&quot; from &quot;</span> <span class="sy0">+</span> from <span class="sy0">+</span> <span class="st0">&quot; to &quot;</span> <span class="sy0">+</span> end<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">//            matched 1st from 11 to 14</span>
+<span class="co1">//            matched 2wd from 27 to 30</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    @Test
+    <span class="kw1">public</span> <span class="kw4">void</span> regex2<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        Matcher m <span class="sy0">=</span> p.<span class="me1">matcher</span><span class="br0">&#40;</span>myText<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">boolean</span> matches <span class="sy0">=</span> m.<span class="me1">matches</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//全匹配</span>
+        <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>matches<span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//false</span>
+        <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>myText.<span class="me1">matches</span><span class="br0">&#40;</span><span class="st0">&quot;(<span class="es0">\\</span>w+<span class="es0">\\</span>s*)+&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//true</span>
+        <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>myText.<span class="me1">replaceAll</span><span class="br0">&#40;</span><span class="st0">&quot;<span class="es0">\\</span>d+&quot;</span>,<span class="st0">&quot;*&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="co1">//Pattern.compile().replaceAll()</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    @Test
+    <span class="kw1">public</span> <span class="kw4">void</span> regex3<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> regex  <span class="sy0">=</span> <span class="st0">&quot;(?x)(https?)://([^/:]+)   (:(<span class="es0">\\</span>d+))?&quot;</span><span class="sy0">;</span>
+        Pattern compile <span class="sy0">=</span> Pattern.<span class="me1">compile</span><span class="br0">&#40;</span>regex<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> text3 <span class="sy0">=</span> <span class="st0">&quot;&lt;a href='http://regex.info:800/blog'&gt;正则表达式&lt;/a&gt;&quot;</span><span class="sy0">;</span>
+        Matcher matcher <span class="sy0">=</span> compile.<span class="me1">matcher</span><span class="br0">&#40;</span>text3<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>matcher.<span class="me1">find</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> group <span class="sy0">=</span> matcher.<span class="me1">group</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot; match all: &quot;</span> <span class="sy0">+</span>group<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot; protocol: &quot;</span><span class="sy0">+</span>matcher.<span class="me1">group</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">+</span><span class="st0">&quot; from &quot;</span><span class="sy0">+</span>matcher.<span class="me1">start</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">+</span> <span class="st0">&quot; to &quot;</span><span class="sy0">+</span>matcher.<span class="me1">end</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot; hostname: &quot;</span><span class="sy0">+</span> matcher.<span class="me1">group</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span> <span class="sy0">+</span><span class="st0">&quot; from &quot;</span><span class="sy0">+</span>matcher.<span class="me1">start</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">+</span> <span class="st0">&quot; to &quot;</span><span class="sy0">+</span>matcher.<span class="me1">end</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>matcher.<span class="me1">group</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot; port :&quot;</span> <span class="sy0">+</span> matcher.<span class="me1">group</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span><span class="kw1">else</span><span class="br0">&#123;</span>
+                <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot; default port:80&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+<span class="co1">//        match all: http://regex.info:800</span>
+<span class="co1">//        protocol: http from 9 to 13</span>
+<span class="co1">//        hostname: regex.info from 16 to 26</span>
+<span class="co1">//        port :800</span>
+    <span class="br0">&#125;</span>

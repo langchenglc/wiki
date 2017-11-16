@@ -1,0 +1,243 @@
+> 正则表达式平时我们接触也使用过一些，但是一直没有比较深入的了解过。这次看看正则表达式的知识！
+
+
+
+## 正则字符
+
+|字符 | 意义|
+|`.` | 匹配不包括换行的任意字符，谨慎使用|
+|`\s` | 匹配空格，tab，换行;\S 相反  [\s\S]天下无敌|
+|`\` | 转义|
+|`[]` | ```单字符取一个，比如[abc]会匹配 a 或b 或c；如果[]里面加了^，代表排除这个字符；[^abc]表示不是a，不是b，也不是c;[0-9a-zA-Z];[ab|bz]=>[abz|]匹配abz或者|字符中的一个；[\u4e00-\u9fa5]匹配中文```|
+|`^` | 限定开始符号；在```[^X]```表示是取反的意思|
+|`$` | 限定结束符号；|
+|`|` | 或；http/ftp/svn|
+|`\b` | 单词首尾，用来做单词边界处理  \bhi\b  匹配hi，不匹配high单词|
+|`\d` | 数字|
+|`\w` | 字符(字母数字下划线)|
+
+## 限定符
+
+|限定符 | 意义|
+|`*` | 无论多少次|
+|`?`| 0次或者1次  有还是没有；如果？加在限定符后面，就是改成了非贪婪模式|
+|`+` | 至少有一次|
+|`{n}` | n次|
+|`{n,m}` | n次到m次|
+|`{n,}` | 大于等于n次|
+
+## 匹配模式
+1.贪婪模式
+:    当正则表达式中包含能接受重复的限定符时，匹配尽可能多的字符(默认)
+
+2.懒惰模式
+:    当正则表达式中包含能接受重复的限定符时，匹配尽可能少的字符，只需在重复的限定符后面加？；
+
+|懒惰限定符代码/语法	| 描述|
+|`*?`	| 重复0次或更多次，但尽可能的少重复|
+|`+?`	| 重复一次或更多次，但尽可能的少重复|
+|`??`	| 重复0次或一次，但尽可能的少重复|
+|`{n,}?`	| 重复n次或更多次，但尽可能的少重复|
+|`{n,m}?`	| 重复n到m次，但尽可能的少重复|
+
+
+## 模式修正符
+
+正则表达式中的模式修正符有i,g,m,s,x,e  他们可以组合使用
+(?imnsx-imnsx)  启用-不启用
+
+|模式修正符	| 说明|
+|i	| 表示在和模式进行匹配进不区分大小写|
+|m	| 将模式视为多行，使用`^`和`$`表示任何一行都可以以正则表达式开始或结束|
+|s	| 如果没有使用这个模式修正符号，元字符中的"."默认不能表示换行符号,将字符串视为单行|
+|x	| 表示模式中的空白忽略不计|
+|e	| 正则表达式必须使用在preg_replace替换字符串的函数中时才可以使用(讲这个函数时再说)|
+|A	| 以模式字符串开头，相当于元字符```^```|
+|Z	| 以模式字符串结尾，相当于元字符```$```|
+|U	| 正则表达式的特点：就是比较“贪婪”，使用该模式修正符可以取消贪婪模式|
+|g   | 全局匹配|
+|D   | 匹配时限定$匹配出来的不可有换行|
+
+
+## 分组
+
+* 分组符号（）  => （\d{1,3}.）{3}\d{1,3}简单的匹配IP地址
+* 分组按照形式又分成捕获组和非捕获组
+
+### 捕获组
+
+分组编号
+:    捕获组通过从左到右计算它的开括号来进行编号；整个正则表达式自己编号为0；
+
+(A)(B(C))这个表达式中，我们认为存在这样的四个分组:
+|编号 | 分组|
+|0| (A)(B(C))|
+|1| (A)|
+|2| (B(C))|
+|3| (C)|
+
+这样我们就可以在匹配操作完成后从匹配器通过序列号来获取对应匹配子序列了。
+
+`(['"]).*\1`，其中\1就是对引号这个分组的引用
+`(\d)\1\1` 匹配连续出现3次的数字
+
+#### 特殊形式:
+
+`(?<name>exp)`  自己命名分组，匹配的文本捕获到命名的name组内，使用`\k<name>`引用捕获的内容
+`(?#comment)` 提供注释，不对正则产生影响
+
+### 非捕获组
+
+非捕获组一般情况下是以(?)开头的组。它不捕获文本也不对组合进行计数。他有下面几种形式
+
+
+#### 1.(?:Pattern)形式
+
+它的作用就是匹配Pattern字符，好处就是不捕获文本，不将匹配的字符存在内存中，更省内存
+例子：(?:a|A)123(?:b)可以匹配a123b 或者A123b
+
+#### 2.零宽度断言
+
+| 形式 | 意义 | 说明 |
+|`(?= X )`|`X ，通过零宽度的正 lookahead`|`零宽度正先行断言。仅当子表达式 X 在 此位置的右侧匹配时才继续匹配。也就是说要使此零宽度断言起到我们想要的效果的话，就必须把这个非捕获组放在整个表达式的右侧。例如，/w+(?=/d) 与后跟数字的单词匹配，而不与该数字匹配。此构造不会回溯。`|
+|`(?! X )`|`X ，通过零宽度的负 lookahead`|`零宽度负先行断言。仅当子表达式 X 不在 此位置的右侧匹配时才继续匹配。例如，例如，/w+(?!/d) 与后不跟数字的单词匹配，而不与该数字匹配 。`|
+|`(?<= X )`|`X ，通过零宽度的正 lookbehind`|`零宽度正后发断言。仅当子表达式 X 在 此位置的左侧匹配时才继续匹配。例如，(?<=19)99 与跟在 19 后面的 99 的实例匹配。此构造不会回溯。`|
+|`(?<! X )`|`X ，通过零宽度的负 lookbehind`|`零宽度负后发断言。仅当子表达式 X 不在此位置的左侧匹配时才继续匹配。例如，(?<!19)99 与不跟在 19 后面的 99 的实例匹配`|
+
+例子：
+1. (?< !4)56(?=9) 匹配后面的文本56前面不能是4，后面不能是9   5569能够匹配
+2. 提取字符串 da12bka3434bdca4343bdca234bm中包含在字符a和b之间的数字，但是这个a之前的字符不能是c；b后面的字符必须是d才能提取。显然，这里就只有3434这个数字满足要求。那么我们怎么提取呢？首先，我们写出含有捕获组的正则表达式：[^c]a\d*bd;然后我们再将其变为非捕获组的正则表达式：(?<=[^c]a)\d*(?=bd)
+
+## 正则表达式匹配原理
+
+匹配的两个原则：
+
+1. 优先选择最左边的匹配结果
+
+2. 标准的匹配量词（\* + ？ {m,n}）是优先匹配的；
+
+>（量词优先会导致NFA匹配问题，使用懒惰模式可以忽略量词优先）
+
+
+### 正则引擎 
+
+|引擎类型|	程序|
+|DFA	|awk(大多数版本)、egrep（大多数版本）、flex、lex、MySQL、Procmail|
+|传统型 NFA	|GNU Emacs、Java、grep（大多数版本）、less、more、.NET语言、PCRE library、Perl、PHP（所有三套正则库）、Python、Ruby、set（大多数版本）、vi|
+|POSIX NFA	|mawk、Mortice Lern System's utilities、GUN Emacs（明确指定时使用）|
+|DFA/NFA混合	|GNU awk、 GNU grep/egrep、 Tcl|
+
+
+正则引擎中的零件：
+1. 文本字符
+2. 字符组，点号，Unicode属性及其他
+3. 捕获型括号
+4. 锚点  ^ \z  \b等，环视（零宽度断言）
+
+#### NFA:非确定型有穷自动机
+
+**表达式主导**---每次取表达式一个字符出来进行文本比对；在比较过程中经常需要进行**回溯**；
+正则表达式的编写对匹配过程有很大的影响，如果改变表达式的编写方式，效率会有一些差距
+
+eg:
+用```".*"``` 匹配双引号下的文本```The name "McDonald's" is said "makudonarudo" in Japanese```
+一种正确的方法就是```[^"]*```
+
+
+
+#### DFA:确定型有穷自动机
+
+**文本主导**---扫描文本中的每一个字符，记录当前处理的匹配正则表达式的可能性
+需要匹配的文本只被扫描一遍，所有效率基本是确定的。
+
+## 正则表达式效率
+
+匹配优先和忽略优先都不会影响需要检测路径本身，而只会影响检测的顺序。如果不能匹配，无论是按照匹配优先还是忽略优先的顺序，最终每条路径都会被测试。
+### 固化分组
+(?>...)就是将上面可能尝试的备用状态全部舍弃掉；
+`（?>.*?）`将匹配不到任何字符，`.*?`是忽略优先，将这个字符放过去让后面的表达式去检测，但是使用了固话分组，所有的备用状态被舍弃，后面即便无法匹配，也无法回溯到备用状态，所以最后这个表达式将匹配不到任何东西。
+
+## 正则表达式使用
+
+```
+java.util.regex.Pattern   => 编译好的正则表达式
+java.util.regex.Matcher   => 对应单独的实例，表示将正则表达式应用到具体的目标字符串上
+java.util.regex.MatcherResult  => 封装成功匹配的数据
+java.util.regex.PatternSyntaxException => 表达式格式不正确
+```
+
+```java
+public class RegexDemo {
+    private static String myText ;
+    private static Pattern p;
+    @Before
+    public void init(){
+        myText = "this is my 1st test string 2wd";
+        String myRegex = "\\d\\w+";
+        p = Pattern.compile(myRegex);
+    }
+    @Test
+    public void regex1(){
+        //Pattern.compile(myRegex,Pattern.CASE_INSENSITIVE);//第二个参数是模式参数
+        Matcher m = p.matcher(myText);
+        while(m.find()) {//对具体的字符串进行检索
+            String group = m.group();
+            int from = m.start();
+            int end = m.end();
+            System.out.println("matched " + group + " from " + from + " to " + end);
+//            matched 1st from 11 to 14
+//            matched 2wd from 27 to 30
+        }
+    }
+    @Test
+    public void regex2(){
+        Matcher m = p.matcher(myText);
+        boolean matches = m.matches();//全匹配
+        System.out.println(matches);//false
+        System.out.println(myText.matches("(\\w+\\s*)+"));//true
+        System.out.println(myText.replaceAll("\\d+","*"));//Pattern.compile().replaceAll()
+    }
+
+    @Test
+    public void regex3(){
+        String regex  = "(?x)(https?)://([^/:]+)   (:(\\d+))?";
+        Pattern compile = Pattern.compile(regex);
+
+        String text3 = "<a href='http://regex.info:800/blog'>正则表达式</a>";
+        Matcher matcher = compile.matcher(text3);
+        if(matcher.find()){
+            String group = matcher.group();
+            System.out.println(" match all: " +group);
+
+            System.out.println(" protocol: "+matcher.group(1) +" from "+matcher.start(1)+ " to "+matcher.end(1));
+            System.out.println(" hostname: "+ matcher.group(2) +" from "+matcher.start(2)+ " to "+matcher.end(2));
+            if(matcher.group(4)!=null){
+                System.out.println(" port :" + matcher.group(4));
+            }else{
+                System.out.println(" default port:80");
+            }
+        }
+//        match all: http://regex.info:800
+//        protocol: http from 9 to 13
+//        hostname: regex.info from 16 to 26
+//        port :800
+    }
+
+```
+
+
+## 参考文章
+
+书籍：《精通正则表达式》
+
+[正则表达式的高级用法(分组和捕获)](http://www.cnblogs.com/kevin-yuan/archive/2012/11/11/2765340.html)
+
+[我眼里的正则表达式入门教程](http://www.zjmainstay.cn/my-regexp)
+
+[深入理解正则表达式高级教程](http://www.zjmainstay.cn/deep-regexp)
+
+[正则表达式30分钟入门教程](http://deerchao.net/tutorials/regex/regex.htm)
+
+[常用正则表达式](http://deerchao.net/tutorials/regex/common.htm)
+
+[正则在线测试工具](http://tool.chinaz.com/regex/)

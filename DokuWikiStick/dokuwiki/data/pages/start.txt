@@ -12,5 +12,7 @@
 
 4. [[http://www.dokuwiki.org/  | dokuwiki官网]]
 
+5. 如果200上面的页面挂了，请到200机器上重新运行software/dukuwiki/DokuwikiStick/run.cmd
+
 
 ---
