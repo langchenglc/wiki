@@ -1,0 +1,20 @@
+<span class="kw1">public</span> <span class="kw1">class</span> Test <span class="br0">&#123;</span>
+&nbsp;
+	<span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+		Class<span class="sy0">&lt;</span>SayHello<span class="sy0">&gt;</span> clazz<span class="sy0">=</span>SayHello.<span class="kw1">class</span><span class="sy0">;</span>
+<a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>clazz.<span class="me1">isAnnotationPresent</span><span class="br0">&#40;</span>Yts.<span class="kw1">class</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		<a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+method"><span class="kw3">Method</span></a><span class="br0">&#91;</span><span class="br0">&#93;</span> ms <span class="sy0">=</span> clazz.<span class="me1">getMethods</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>  
+        <span class="kw1">for</span> <span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+method"><span class="kw3">Method</span></a> method <span class="sy0">:</span> ms<span class="br0">&#41;</span> <span class="br0">&#123;</span>  
+            <span class="kw4">boolean</span> hasMyTest <span class="sy0">=</span> method.<span class="me1">isAnnotationPresent</span><span class="br0">&#40;</span>Yts.<span class="kw1">class</span><span class="br0">&#41;</span><span class="sy0">;</span>  
+            <span class="kw1">if</span> <span class="br0">&#40;</span>hasMyTest<span class="br0">&#41;</span> <span class="br0">&#123;</span>  
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+			method.<span class="me1">invoke</span><span class="br0">&#40;</span>clazz.<span class="me1">newInstance</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="st0">&quot;Joven Wong&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		     <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+illegalaccessexception"><span class="kw3">IllegalAccessException</span></a> <span class="sy0">|</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+illegalargumentexception"><span class="kw3">IllegalArgumentException</span></a> <span class="sy0">|</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+invocationtargetexception"><span class="kw3">InvocationTargetException</span></a>
+			    <span class="sy0">|</span> <a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+instantiationexception"><span class="kw3">InstantiationException</span></a> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>					
+					e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		     <span class="br0">&#125;</span>  
+            <span class="br0">&#125;</span>
+          <span class="br0">&#125;</span>
+	<span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>

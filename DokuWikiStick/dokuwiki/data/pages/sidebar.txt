@@ -1,6 +1,6 @@
 导航
 
-{{indexmenu> ..:#1|navbar context}}
+{{indexmenu>:#2}}
 
 ---
 

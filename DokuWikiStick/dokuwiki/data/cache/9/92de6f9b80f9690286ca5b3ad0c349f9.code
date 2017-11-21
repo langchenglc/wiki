@@ -1,0 +1,6 @@
+@Documented
+@Target<span class="br0">&#40;</span>ElementType.<span class="me1">METHOD</span><span class="br0">&#41;</span>
+@Retention<span class="br0">&#40;</span>RetentionPolicy.<span class="me1">RUNTIME</span><span class="br0">&#41;</span>
+<span class="kw1">public</span> @<span class="kw1">interface</span> myTest <span class="br0">&#123;</span>
+	<a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> name<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw1">default</span> <span class="st0">&quot;joven&quot;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>

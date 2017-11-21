@@ -1,0 +1,225 @@
+#java自定义注解
+
+ java注解是附加在代码中的一些元信息，用于一些工具在编译、运行时进行解析和使用，起到说明、配置的功能。
+注解不会也不能影响代码的实际逻辑，仅仅起到辅助性的作用。包含在 java.lang.annotation 包中。这些方法大都利用运行时注解，然后通过Java的反射机制实现功能，所以难免会在性能上带来损耗。
+
+自定义注解
+  *@interface关键字
+  *自定义注解参数
+  *元注解的使用
+
+
+###@interface关键字
+
+定义注解跟定义接口非常相似，只是关键字上多了个@，定义的注解最终会继承Annotation类（Java内部处理），默认情况下，注解可以修饰任何程序元素（类、接口、方法等）。
+   
+   
+
+不带任何参数的注解有一个特殊的名字－－－标记注解
+
+---
+
+###注解参数
+
+public @interface 注解名 {定义体}
+
+
+Annotation类型里面的参数该怎么设定：
+第一，只能用public或默认（default）这两个访问权限修饰；
+第二，参数成员只能用基本类型byte,short,char,int,long,float,double,boolean八种基本数据类型和 String,Enum,Class,annotations等数据类型,以及这一些类型的数组.
+
+---
+
+###元注解
+>元注解是指注解的注解。Java5.0定义了4个标准的meta-annotation类型，它们被用来提供对其它 annotation类型作说明：@Retention @Target @Document @Inherited
+
+1.@Retention 定义注解的保留策略，某些Annotation仅出现在源代码中，而被编译器丢弃；而另一些却被编译在class文件中；编译在class文件中的Annotation可能会被虚拟机忽略，而另一些在class被装载时将被读取（请注意并不影响class的执行，因为Annotation与class在使用上是被分离的）。
+
+
+|RetentionPoicy.SOURCE|只在源代码级别保留，编译时会被忽略|
+|RetentionPoicy.CLASS|编译时被保留，在Class文件中存在，但jvm将会忽略|    
+|RetentionPoicy.RUNTIME|在运行时被jvm或其他使用反射机制的代码读取和使用|
+
+
+
+2.@Target 定义注解所修饰的对象范围
+
+
+|ElementType.CONSTRUCTOR|用于描述构造器|
+|ElementType.FIELD|用于描述域|    
+|ElementType.LOCAL_VARIABLE|用于描述局部变量|
+|ElementType.METHOD|用于描述方法|
+|ElementType.PARAMETER|用于描述参数|
+|ElementType.TYPE|用于描述类、接口(包括注解类型) 或enum声明|
+|ElementType.PACKAGE|用于记录java文件上的package信息（固定文件package-info.java）|
+
+ElementType 可以有多个，一个注解可以为类的，方法的，字段的等等
+
+
+3.@Document 表明这个注解应该被javadoc工具记录，注解类型信息也会被包括在生成的文档中
+
+4.@Inherited 阐述了某个被标注的类型是被继承的
+
+**注意：@Inherited annotation类型是被标注过的class的子类所继承。类并不从它所实现的接口继承annotation，方法并不从它所重载的方法继承annotation。**
+
+当@Inherited annotation类型标注的annotation的Retention是RetentionPolicy.RUNTIME，则反射API增强了这种继承性。如果我们使用java.lang.reflect去查询一个@Inherited annotation类型的annotation时，反射代码检查将展开工作：检查class和其父类，直到发现指定的annotation类型被发现，或者到达类继承结构的顶层。
+
+[参考](http://zy19982004.iteye.com/blog/1979520)
+
+---
+
+###提取注解
+
+我们在使用注解的时候可能会给参数设置值，提取注解针对的对象是可注解元素，做的其实有两件事：
+
+1.确定该元素是否被注解（标记注解只要知道是否被注解就可以了）
+2.被注解的话获取到注解的参数值
+
+
+要做到上面的两件事情，可以使用java.lang.reflect包下AnnotatedElement接口。已知实现AnnotatedElement接口的类： Class、Constructor、 Field、Method、Package，因为上面这些类实现了AnnotatedElement接口，所以我们就可以通过反射结合AnnotatedElement接口中的一些方法来实现提取注解的操作。 
+
+
+|方法名|参数|返回值|作用|
+|isAnnotationPresent|注解对应的Class|boolean|检测该元素是否被参数对应注解修饰|
+|getAnnotation|注解对应的Class|Annotation|获取注解对象|
+|getAnnotations|无|Annotation[]|返回该程序元素上存在的所有注解（如果没有注解存在于此元素上，则返回长度为零的一个数组）|
+|getDeclaredAnnotations|无|Annotation[]|返回直接存在于此元素上的所有注解。与此接口中的其他方法不同，该方法将忽略继承的注解。（如果没有注解直接存在于此元素上，则返回长度为零的一个数组）|
+
+
+
+---
+
+
+###综合实例
+
+
+```java
+@Documented
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface myTest {
+	String name() default "joven";
+}
+```
+
+```java
+@Documented  
+@Target({ElementType.TYPE,ElementType.METHOD})  
+@Retention(RetentionPolicy.RUNTIME) 
+public @interface Yts {
+	public enum YtsType{util,entity,service,model};
+	
+	YtsType classType() default YtsType.util;
+}
+```
+
+
+
+```java
+@Yts(classType=YtsType.service)
+public class SayHello {
+	@myTest(name="杰jay")
+	@Yts
+	public void exclaim(String name){
+		if(name==null || name.trim().equals("")){
+			System.out.println("hello world!");
+		}else{
+			System.out.println(name+" say hello user-defined annotation!");
+		}
+	}
+
+}
+```
+
+
+
+
+```java
+public class ParseAnnotation {
+	public void parseMethod(Class clazz) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{
+		Object obj=clazz.getConstructor(new Class[]{}).newInstance(new Object[]{});
+		for(Method method:clazz.getDeclaredMethods()){
+			myTest mt=method.getAnnotation(myTest.class);
+			String name="";
+			if(mt!=null){
+				name=mt.name();
+				method.invoke(obj, name);
+			}
+			Yts y=(Yts)method.getAnnotation(Yts.class);
+			if(y!=null){
+				if(YtsType.util.equals(y.classType())){
+					System.out.println("parseMethod:this is a util method");
+				}else{
+					System.out.println("parseMethod:this is a other method");
+				}
+			}
+		}
+	}
+
+	public void parseType(Class clazz){
+		Yts y=(Yts)clazz.getAnnotation(Yts.class);
+		if(y!=null){
+			if(YtsType.util.equals(y.classType())){
+				System.out.println("parseType:this is a util class");
+			}else{
+				System.out.println("parseType:this is a other class");
+			}
+		}
+	}
+}
+```
+
+
+```java
+public class Test {
+
+	public static void main(String[] args) {
+		ParseAnnotation pa=new ParseAnnotation();
+		try {
+			pa.parseMethod(SayHello.class);
+			pa.parseType(SayHello.class);
+			
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}
+```
+
+结果：
+  杰jay say hello user-defined annotation!
+  parseMethod:this is a util method
+  parseType:this is a other class
+
+
+
+```java
+public class Test {
+
+	public static void main(String[] args) {
+		Class<SayHello> clazz=SayHello.class;
+System.out.println(clazz.isAnnotationPresent(Yts.class));
+		Method[] ms = clazz.getMethods();  
+        for (Method method : ms) {  
+            boolean hasMyTest = method.isAnnotationPresent(Yts.class);  
+            if (hasMyTest) {  
+                try {
+			method.invoke(clazz.newInstance(), "Joven Wong");
+		     } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+			    | InstantiationException e) {					
+					e.printStackTrace();
+		     }  
+            }
+          }
+	}
+
+}
+```
+
+
+结果：
+  true
+  Joven Wong say hello user-defined annotation!

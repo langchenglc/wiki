@@ -1,0 +1,13 @@
+@Yts<span class="br0">&#40;</span>classType<span class="sy0">=</span>YtsType.<span class="me1">service</span><span class="br0">&#41;</span>
+<span class="kw1">public</span> <span class="kw1">class</span> SayHello <span class="br0">&#123;</span>
+	@myTest<span class="br0">&#40;</span>name<span class="sy0">=</span><span class="st0">&quot;杰jay&quot;</span><span class="br0">&#41;</span>
+	@Yts
+	<span class="kw1">public</span> <span class="kw4">void</span> exclaim<span class="br0">&#40;</span><a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+string"><span class="kw3">String</span></a> name<span class="br0">&#41;</span><span class="br0">&#123;</span>
+		<span class="kw1">if</span><span class="br0">&#40;</span>name<span class="sy0">==</span><span class="kw2">null</span> <span class="sy0">||</span> name.<span class="me1">trim</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+			<a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;hello world!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		<span class="br0">&#125;</span><span class="kw1">else</span><span class="br0">&#123;</span>
+			<a href="http://www.google.com/search?hl=en&amp;q=allinurl%3Adocs.oracle.com+javase+docs+api+system"><span class="kw3">System</span></a>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>name<span class="sy0">+</span><span class="st0">&quot; say hello user-defined annotation!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+		<span class="br0">&#125;</span>
+	<span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>

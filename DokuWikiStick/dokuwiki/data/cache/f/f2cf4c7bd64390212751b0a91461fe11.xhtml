@@ -1,0 +1,247 @@
+<blockquote><div class="no">
+ 本篇介绍python中的logging模块；</div></blockquote>
+
+<p>
+logging是线程安全的
+</p>
+
+<h2 class="sectionedit1" id="使用">使用</h2>
+<div class="level2">
+
+</div>
+<!-- EDIT1 SECTION "使用" [73-83] -->
+<h3 class="sectionedit2" id="基本使用">1.基本使用</h3>
+<div class="level3">
+<pre class="code">
+import logging
+logging.info(&#039;info message&#039;)
+logging.warning(&#039;warn message&#039;)
+loggin.error(&#039;error message&#039;)</pre>
+
+<p>
+打印变量
+</p>
+<pre class="code">
+a = &#039;var&#039;
+logging.info(&#039;%s is variable data&#039;,a)</pre>
+
+</div>
+<!-- EDIT2 SECTION "1.基本使用" [84-285] -->
+<h3 class="sectionedit3" id="输出到文件">2.输出到文件</h3>
+<div class="level3">
+<pre class="code">
+import logging
+logging.basicConfig(filename=&#039;example.log&#039;,level=logging.DEBUG)
+logging.debug(&#039;This message should go to the log file&#039;)
+logging.info(&#039;So should this&#039;)
+logging.warning(&#039;And this, too&#039;)</pre>
+
+<p>
+更详细的打印到文件；
+</p>
+<pre class="code">
+fmt = &#039;%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s&#039;
+    &#039;&#039;&#039;
+    format: 指定输出的格式和内容，format可以输出很多有用信息，如上例所示:
+     %(levelno)s: 打印日志级别的数值
+     %(levelname)s: 打印日志级别名称
+     %(pathname)s: 打印当前执行程序的路径，其实就是sys.argv[0]
+     %(filename)s: 打印当前执行程序名
+     %(funcName)s: 打印日志的当前函数
+     %(lineno)d: 打印日志的当前行号
+     %(asctime)s: 打印日志的时间
+     %(thread)d: 打印线程ID
+     %(threadName)s: 打印线程名称
+     %(process)d: 打印进程ID
+     %(message)s: 打印日志信息
+     &#039;&#039;&#039;
+datefmt = &#039;%a,%d %b %Y %H:%M:%S&#039;
+    &#039;&#039;&#039;datefmt: 指定时间格式，同time.strftime()&#039;&#039;&#039;
+filename = &#039;myqpp.log&#039;
+filemod = &#039;w&#039;
+    &#039;&#039;&#039;filemod: a代表append，w代表write，直接覆盖&#039;&#039;&#039;
+
+logging.baseConfig(level=logging.Debug,format=fmt,datefmt=datefmt,filename=filename,filemod=&#039;a&#039;)
+logging.debug(&#039;debug message&#039;)
+logging.info(&#039;info message&#039;)
+logging.warning(&#039;warn messsage&#039;)
+logging.error(&#039;error message&#039;)</pre>
+
+<p>
+打印到控制台
+</p>
+<pre class="code">
+import logging
+
+# create logger
+logger = logging.getLogger(&#039;simple_example&#039;)
+logger.setLevel(logging.DEBUG)
+
+# create console handler and set level to debug
+ch = logging.StreamHandler()######################stdout
+ch.setLevel(logging.DEBUG)
+
+# create formatter
+formatter = logging.Formatter(&#039;%(asctime)s - %(name)s - %(levelname)s - %(message)s&#039;)
+
+# add formatter to ch
+ch.setFormatter(formatter)
+
+# add ch to logger
+logger.addHandler(ch)
+
+# &#039;application&#039; code
+logger.debug(&#039;debug message&#039;)
+logger.info(&#039;info message&#039;)
+logger.warn(&#039;warn message&#039;)
+logger.error(&#039;error message&#039;)
+logger.critical(&#039;critical message&#039;)</pre>
+
+</div>
+<!-- EDIT3 SECTION "2.输出到文件" [286-2293] -->
+<h3 class="sectionedit4" id="使用loggingconfig模块配置日志">3. 使用logging.config模块配置日志</h3>
+<div class="level3">
+<pre class="code">
+
+#logger.conf
+###############################################
+[loggers]
+keys=root,example01,example02
+[logger_root]
+level=DEBUG
+handlers=hand01,hand02
+[logger_example01]
+handlers=hand01,hand02
+qualname=example01
+propagate=0
+[logger_example02]
+handlers=hand01,hand03
+qualname=example02
+propagate=0
+###############################################
+[handlers]
+keys=hand01,hand02,hand03
+[handler_hand01]
+class=StreamHandler
+level=INFO
+formatter=form02
+args=(sys.stderr,)
+[handler_hand02]
+class=FileHandler
+level=DEBUG
+formatter=form01
+args=(&#039;myapp.log&#039;, &#039;a&#039;)
+[handler_hand03]
+class=handlers.RotatingFileHandler
+level=INFO
+formatter=form02
+args=(&#039;myapp.log&#039;, &#039;a&#039;, 10*1024*1024, 5)
+###############################################
+[formatters]
+keys=form01,form02
+[formatter_form01]
+format=%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s
+datefmt=%a, %d %b %Y %H:%M:%S
+[formatter_form02]
+format=%(name)-12s: %(levelname)-8s %(message)s
+datefmt=</pre>
+<pre class="code">
+import logging
+import logging.config
+
+logging.config.fileConfig(&quot;logger.conf&quot;)
+logger = logging.getLogger(&quot;example02&quot;)
+
+logger.debug(&#039;This is debug message&#039;)
+logger.info(&#039;This is info message&#039;)
+logger.warning(&#039;This is warning message&#039;)</pre>
+
+</div>
+<!-- EDIT4 SECTION "3. 使用logging.config模块配置日志" [2294-3549] -->
+<h2 class="sectionedit5" id="logger_handler_filter_formatter">Logger,Handler,Filter,Formatter</h2>
+<div class="level2">
+
+<p>
+Logger
+:     Loggers向程序直接暴露使用接口
+</p>
+
+<p>
+Handler
+:    负责发送日志到合适的目的地
+</p>
+
+<p>
+Filter
+:    提供过滤功能
+</p>
+
+<p>
+Formatter
+:    配置输出的格式
+</p>
+
+</div>
+<!-- EDIT5 SECTION "Logger,Handler,Filter,Formatter" [3550-3764] -->
+<h3 class="sectionedit6" id="loggers">1.Loggers</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"><code>Logger.setLevel()</code> 设置日志级别</div>
+</li>
+<li class="level1"><div class="li"><code>Logger.addHandler()   Logger.removeHandler() </code> 设置handlers</div>
+</li>
+<li class="level1"><div class="li"><code>Logger.addFilter()    Logger.removeFilter()</code>  设置filters</div>
+</li>
+<li class="level1"><div class="li"><code>Logger.debug()...</code></div>
+</li>
+<li class="level1"><div class="li"><code>Logger.exception()  =&gt; Logger.error() + 堆栈信息</code></div>
+</li>
+<li class="level1"><div class="li"><code>getLogger()</code>
+</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT6 SECTION "1.Loggers" [3765-4046] -->
+<h3 class="sectionedit7" id="handlers">2.Handlers</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"><code>setLever()</code>  logger的setlevel()决定了什么级别的日志被发送到handler，handl<em>的日志级别决定了什么日志发送到这个handler处理;
+</em> <code>setFormatter()</code></div>
+</li>
+<li class="level1"><div class="li"><code>addFilter()</code></div>
+</li>
+<li class="level1"><div class="li">程序中不要自己实例化Handler;</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT7 SECTION "2.Handlers" [4047-4298] -->
+<h3 class="sectionedit8" id="formatters">3.Formatters</h3>
+<div class="level3">
+<ul>
+<li class="level1"><div class="li"><code>logging.Formatter.__init__(fmt=None,datefmt=None)</code> 接收两个参数；</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT8 SECTION "3.Formatters" [4299-4394] -->
+<h3 class="sectionedit9" id="日志数据流">日志数据流</h3>
+<div class="level3">
+
+<p>
+<a href="/lib/exe/detail.php?id=aaa%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%3Apython%3Alogging&amp;media=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:python:logging.png" class="media" title="学习笔记:python:logging.png"><img src="/lib/exe/fetch.php?media=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:python:logging.png" class="media" title="数据流" alt="数据流" /></a>
+</p>
+
+</div>
+<!-- EDIT9 SECTION "日志数据流" [4395-4462] -->
+<h2 class="sectionedit10" id="参考链接">参考链接</h2>
+<div class="level2">
+
+<p>
+<a href="https://docs.python.org/2/howto/logging.html" class="urlextern" title="https://docs.python.org/2/howto/logging.html" rel="nofollow">官方doc</a>
+<a href="https://www.cnblogs.com/dkblog/archive/2011/08/26/2155018.html" class="urlextern" title="https://www.cnblogs.com/dkblog/archive/2011/08/26/2155018.html" rel="nofollow">cnblog-python的日志logging模块学习</a>
+</p>
+
+</div>
+<!-- EDIT10 SECTION "参考链接" [4463-] -->

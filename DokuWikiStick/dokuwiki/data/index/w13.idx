@@ -32,3 +32,6 @@ addvalidators
 rejectifempty
 dokuwikistick
 matcherresult
+getannotation
+streamhandler
+removehandler

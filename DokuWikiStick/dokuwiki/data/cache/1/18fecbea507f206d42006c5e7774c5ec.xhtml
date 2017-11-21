@@ -1,0 +1,155 @@
+<blockquote><div class="no">
+在使用form表单进行提交数据的时候，有时候我们会注意到我们使用了enctype属性，另外，我们了解一年http的童靴也肯定知道content-type，那他们又有什么关系呢，这里做一个介绍。</div></blockquote>
+
+<h2 class="sectionedit1" id="enctype属性">enctype属性</h2>
+<div class="level2">
+<ol>
+<li class="level1"><div class="li">application/x-www-form-urlencoded发送前对所有字符进行编码（默认）</div>
+</li>
+<li class="level0"><div class="li">multipart/form-data 不对字符进行编码，<strong>表单中存在文件上传控件的时候必须使用这个</strong></div>
+</li>
+<li class="level0"><div class="li">text/plain 空格转换为+，但不对特殊字符进行编码</div>
+</li>
+</ol>
+
+</div>
+<!-- EDIT1 SECTION "enctype属性" [240-525] -->
+<h3 class="sectionedit2" id="form-data">form-data</h3>
+<div class="level3">
+
+<p>
+它会将请求的数据处理为一条，中间用一个分隔符分开。既可以上传键值对，也可以上传文件。当上传的时间的时候就有content-type来标记文件的类型;由于字段和字段有boundary来进行分割，可以上传多个文件.
+</p>
+<pre class="code">
+对应的请求头的信息
+Host: 200a:8800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Referer: http://200a:8800/x-www-form-urlencoded.html?name=%E9%BE%9A+gong&amp;age=22&amp;file=qrcode_for_gh_31aacf03edcd_258.jpg
+Content-Type: multipart/form-data; boundary=---------------------------265983038314827
+Content-Length: 28148
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1</pre>
+<pre class="code">
+参数实体信息
+-----------------------------265983038314827
+Content-Disposition: form-data; name=&quot;name&quot;
+
+gong
+-----------------------------265983038314827
+Content-Disposition: form-data; name=&quot;age&quot;
+
+12
+-----------------------------265983038314827
+Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;qrcode_for_gh_31aacf03edcd_258.jpg&quot;
+Content-Type: image/jpeg</pre>
+
+</div>
+<!-- EDIT2 SECTION "form-data" [526-1765] -->
+<h3 class="sectionedit3" id="x-www-form-urlencoded">x-www-form-urlencoded</h3>
+<div class="level3">
+
+<p>
+就是会将表单内的数据转换为键值对，这个表单进行数据转换的默认方式。
+<code>name=java&amp;age=23</code>
+</p>
+<hr />
+
+</div>
+<!-- EDIT3 SECTION "x-www-form-urlencoded" [1766-1920] -->
+<h2 class="sectionedit4" id="content-type">Content-Type</h2>
+<div class="level2">
+
+<p>
+是用来表示请求具体内容的媒体类型信息，也叫做MIME类型
+</p>
+<dl class="file">
+<dt><a href="/doku.php?do=export_code&amp;id=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:html:form&amp;codeblock=2" title="下载片段" class="mediafile mf_html">snippet.html</a></dt>
+<dd><pre class="code file html">类型格式：type/subtype(;parameter)? type  
+主类型，任意的字符串，如text，如果是*号代表所有；   
+subtype 子类型，任意的字符串，如html，如果是*号代表所有；   
+parameter 可选，一些参数，如Accept请求头的q参数， Content-Type的 charset参数。   </pre>
+</dd></dl>
+
+<p>
+常见的媒体格式类型如下：
+</p>
+<ul>
+<li class="level1"><div class="li">text/html ： HTML格式</div>
+</li>
+<li class="level1"><div class="li">text/plain ：纯文本格式</div>
+</li>
+<li class="level1"><div class="li">text/xml ：  XML格式</div>
+</li>
+<li class="level1"><div class="li">image/gif ：gif图片格式</div>
+</li>
+<li class="level1"><div class="li">image/jpeg ：jpg图片格式</div>
+</li>
+<li class="level1"><div class="li">image/png：png图片格式</div>
+</li>
+</ul>
+
+<p>
+以application开头的媒体格式类型：
+</p>
+<ul>
+<li class="level1"><div class="li">application/xhtml+xml ：XHTML格式</div>
+</li>
+<li class="level1"><div class="li">application/xml     ： XML数据格式</div>
+</li>
+<li class="level1"><div class="li">application/atom+xml  ：Atom XML聚合格式</div>
+</li>
+<li class="level1"><div class="li">application/json    ： JSON数据格式</div>
+</li>
+<li class="level1"><div class="li">application/pdf       ：pdf格式</div>
+</li>
+<li class="level1"><div class="li">application/msword  ： Word文档格式</div>
+</li>
+<li class="level1"><div class="li">application/octet-stream ： 二进制流数据（如常见的文件下载)</div>
+</li>
+<li class="level1"><div class="li">application/x-www-form-urlencoded ： form表单提交中默认的encType，form表单数据被编码为key/value格式发送到服务器（表单默认的提交数据的格式）</div>
+</li>
+</ul>
+
+<p>
+另外一种常见的媒体格式是上传文件之时使用的：
+</p>
+<ul>
+<li class="level1"><div class="li">multipart/form-data ： 需要在表单中进行文件上传时，就需要使用该格式</div>
+</li>
+</ul>
+
+</div>
+<!-- EDIT4 SECTION "Content-Type" [1921-3273] -->
+<h2 class="sectionedit5" id="总结">总结</h2>
+<div class="level2">
+
+<p>
+所以在form表单的enctype的几个属性就是对我们常用的contentType的提取。他们本质上描述的东西是一致的。
+</p>
+
+</div>
+<!-- EDIT5 SECTION "总结" [3274-3421] -->
+<h2 class="sectionedit6" id="参考文章">参考文章</h2>
+<div class="level2">
+
+<p>
+<a href="http://blog.csdn.net/blueheart20/article/details/45174399" class="urlextern" title="http://blog.csdn.net/blueheart20/article/details/45174399" rel="nofollow">Http请求中Content-Type讲解以及在Spring MVC中的应用</a>
+</p>
+
+<p>
+<a href="http://www.w3school.com.cn/tags/att_form_enctype.asp" class="urlextern" title="http://www.w3school.com.cn/tags/att_form_enctype.asp" rel="nofollow">w3c form</a>
+</p>
+
+<p>
+<a href="http://tool.oschina.net/commons" class="urlextern" title="http://tool.oschina.net/commons" rel="nofollow">Content-Type</a>
+</p>
+
+<p>
+<a href="http://www.iteye.com/topic/1127120" class="urlextern" title="http://www.iteye.com/topic/1127120" rel="nofollow">springMvc 中使用Content——type</a>
+</p>
+
+</div>
+<!-- EDIT6 SECTION "参考文章" [3422-] -->

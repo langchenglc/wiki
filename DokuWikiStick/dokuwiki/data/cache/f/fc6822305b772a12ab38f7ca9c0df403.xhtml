@@ -1,0 +1,260 @@
+<blockquote><div class="no">
+本篇介绍python中的装饰器</div></blockquote>
+
+<p>
+python中有两类装饰器：
+</p>
+<ul>
+<li class="level1"><div class="li">方法装饰器</div>
+</li>
+<li class="level1"><div class="li">类装饰器</div>
+</li>
+</ul>
+
+<p>
+python中的装饰器是任何可以调用的python object，他们能改变方法和类；将一个方法或者一个类的引用传给装饰器，然后返回一个改变过的方法或类；当然，这个改变的方法或者类中常常包含了对原来方法或类的调用；
+</p>
+
+<h2 class="sectionedit1" id="理解装饰器需要恶补的几个关于python方法的知识">理解装饰器需要恶补的几个关于python方法的知识</h2>
+<div class="level2">
+
+</div>
+<!-- EDIT1 SECTION "理解装饰器需要恶补的几个关于python方法的知识" [389-456] -->
+<h3 class="sectionedit2" id="多名字的方法">1.多名字的方法</h3>
+<div class="level3">
+
+<p>
+python中的方法可以有多个不同名字来对应同一个方法，我们删掉一个名字以后，另外一个名字仍然可以正常调用这个方法；
+</p>
+<pre class="code">
+&gt;&gt;&gt; def succ(x):
+       return x+1
+&gt;&gt;&gt; successor = succ
+&gt;&gt;&gt; successor(10)
+11
+&gt;&gt;&gt; succ(10)
+11
+&gt;&gt;&gt; del succ
+&gt;&gt;&gt; successor(10)
+11</pre>
+
+</div>
+<!-- EDIT2 SECTION "1.多名字的方法" [457-781] -->
+<h3 class="sectionedit3" id="方法中定义方法">2. 方法中定义方法</h3>
+<div class="level3">
+
+<p>
+python中的方法可以在方法中定义方法;并且可以在方法中调用定义的方法；
+</p>
+<pre class="code">
+def f():
+    def g():
+        print &quot;function g;&quot;
+    print &quot;funciton f;&quot;
+    g()
+f()</pre>
+
+</div>
+<!-- EDIT3 SECTION "2. 方法中定义方法" [782-1005] -->
+<h3 class="sectionedit4" id="方法作为参数">3.方法作为参数</h3>
+<div class="level3">
+
+<p>
+由于python中的方法其实也是object（或者叫object的指代），我们可以将方法作为参数传入另一个方法中。
+</p>
+<pre class="code">
+def g():
+    print &quot;function g&quot;
+def f(func):
+    print &quot;function f&quot;
+    print &quot;call func&quot;
+    func()   # 获取真实的方法名func.__name__  ===&gt;  g
+f(g)</pre>
+
+</div>
+<!-- EDIT4 SECTION "3.方法作为参数" [1006-1334] -->
+<h3 class="sectionedit5" id="将方法作为返回值返回">4.将方法作为返回值返回</h3>
+<div class="level3">
+
+<p>
+方法中能返回以个方法
+</p>
+<pre class="code">
+def f(x):
+    def g(y):
+        return x+y+3
+    return g
+nf1 = f(1) # x  nf1指代的是一个方法g,方法g=lamabda y:1+y+3
+print nf1(1) #y</pre>
+
+</div>
+<!-- EDIT5 SECTION "4.将方法作为返回值返回" [1335-1556] -->
+<h2 class="sectionedit6" id="一个简单的装饰器">一个简单的装饰器</h2>
+<div class="level2">
+<pre class="code">
+def our_decorator(func):
+    def function_wrapper(x):
+        print(&quot;Before calling &quot; + func.__name__)
+        func(x)
+        print(&quot;After calling &quot; + func.__name__)
+    return function_wrapper
+def foo(x):
+    print(&quot;Hi, foo has been called with &quot; + str(x))
+print(&quot;We call foo before decoration:&quot;)
+foo(&quot;Hi&quot;)
+print(&quot;We now decorate foo with f:&quot;)
+foo = our_decorator(foo)# 对方法进行改造，然后返回新的方法；
+print(&quot;We call foo after decoration:&quot;)
+foo(42)</pre>
+
+</div>
+<!-- EDIT6 SECTION "一个简单的装饰器" [1557-2065] -->
+<h2 class="sectionedit7" id="用_改造上面的装饰器">用@改造上面的装饰器</h2>
+<div class="level2">
+<pre class="code">
+def our_decorator(func):
+    def function_wrapper(x):
+        print(&quot;Before calling &quot; + func.__name__)
+        func(x)
+        print(&quot;After calling &quot; + func.__name__)
+    return function_wrapper
+@our_decorator
+def foo(x):
+    print(&quot;Hi, foo has been called with &quot; + str(x))
+foo(&quot;Hi&quot;)</pre>
+
+</div>
+<!-- EDIT7 SECTION "用@改造上面的装饰器" [2066-2391] -->
+<h2 class="sectionedit8" id="多参数的处理">多参数的处理</h2>
+<div class="level2">
+<pre class="code">
+from random import random, randint, choice
+
+def our_decorator(func): ## func方法名
+    def function_wrapper(*args, **kwargs):   ## 这里对应原来的函数参数列表就好了
+        print(&quot;Before calling &quot; + func.__name__)
+        res = func(*args, **kwargs)
+        print(res)
+        print(&quot;After calling &quot; + func.__name__)
+    return function_wrapper
+random = our_decorator(random)
+randint = our_decorator(randint)
+choice = our_decorator(choice)
+random()
+randint(3, 8)
+choice([4, 5, 6])</pre>
+
+</div>
+<!-- EDIT8 SECTION "多参数的处理" [2392-2923] -->
+<h2 class="sectionedit9" id="带参数的装饰器">带参数的装饰器</h2>
+<div class="level2">
+<pre class="code">
+def greeting(expr):
+    def greeting_decorator(func):
+        def function_wrapper(x):
+            print(expr + &quot;, &quot; + func.__name__ + &quot; returns:&quot;)
+            func(x)
+        return function_wrapper
+    return greeting_decorator
+@greeting(&quot;καλημερα&quot;)
+def foo(x):
+    print(42)
+foo(&quot;Hi&quot;)
+foo = greeting(&quot;καλημερα&quot;)(foo) # 或者可以这样使用</pre>
+
+</div>
+<!-- EDIT9 SECTION "带参数的装饰器" [2924-3321] -->
+<h2 class="sectionedit10" id="functools_中的_wraps的使用">functools 中的@wraps的使用</h2>
+<div class="level2">
+
+<p>
+使用之前的装饰器的定义方式，返回的修改后的方法的元信息如（<em class="u">name</em>,<em class="u">doc</em>,<em class="u">module</em>等）都将被装饰器方法覆盖；在之后调用此方法的这些元信息将返回不是我们需要的信息；这是因为实际上装饰器返回的是一个闭包对象；
+functools包中的@wraps能自动帮我们处理这个覆盖；
+</p>
+<pre class="code">
+from functools import wraps
+
+def greeting(func):
+    @wraps(func)
+    def function_wrapper(x):
+        &quot;&quot;&quot; function_wrapper of greeting &quot;&quot;&quot;
+        print(&quot;Hi, &quot; + func.__name__ + &quot; returns:&quot;)
+        return func(x)
+    return function_wrapper</pre>
+
+<p>
+<a href="https://www.cnblogs.com/myd7349/p/how_to_use_wraps_of_functools.html" class="urlextern" title="https://www.cnblogs.com/myd7349/p/how_to_use_wraps_of_functools.html" rel="nofollow">functools中的@wraps详解</a>
+</p>
+
+</div>
+<!-- EDIT10 SECTION "functools 中的@wraps的使用" [3322-4074] -->
+<h2 class="sectionedit11" id="类的装饰器">类的装饰器</h2>
+<div class="level2">
+
+</div>
+<!-- EDIT11 SECTION "类的装饰器" [4075-4094] -->
+<h3 class="sectionedit12" id="call_方法">1.`__call__`方法</h3>
+<div class="level3">
+
+<p>
+装饰器就是将一个可调用对象作为参数传入一个方法；python中方法是一个可调用对象，但是实际上类也是一个可调用对象；当我们在类中定义了<code>__call__</code>方法，我们再像调用方法那样调用对象的时候，也会调用这个方法；
+</p>
+<pre class="code">
+class A:
+    def __init__(self):
+        print(&quot;An instance of A was initialized&quot;)
+    def __call__(self, *args, **kwargs):
+        print(&quot;Arguments are:&quot;, args, kwargs)
+x = A()
+print(&quot;now calling the instance:&quot;)
+x(3, 4, x=11, y=10)
+print(&quot;Let&#039;s call it again:&quot;)
+x(3, 4, x=11, y=10)</pre>
+
+<p>
+我们得到的输出是这样的：
+</p>
+<pre class="code">
+An instance of A was initialized
+now calling the instance:
+Arguments are: (3, 4) {&#039;x&#039;: 11, &#039;y&#039;: 10}
+Let&#039;s call it again:
+Arguments are: (3, 4) {&#039;x&#039;: 11, &#039;y&#039;: 10}</pre>
+
+</div>
+<!-- EDIT12 SECTION "1.`__call__`方法" [4095-4906] -->
+<h3 class="sectionedit13" id="用类装饰器来重写一次装饰器">2.用类装饰器来重写一次装饰器</h3>
+<div class="level3">
+<pre class="code">
+def decorator1(f):
+    def helper():
+        print(&quot;Decorating&quot;, f.__name__)
+        f()
+    return helper
+@decorator1
+def foo():
+    print(&quot;inside foo()&quot;)
+foo()</pre>
+<pre class="code">
+class decorator2:
+    def __init__(self, f):
+        self.f = f
+    def __call__(self):
+        print(&quot;Decorating&quot;, self.f.__name__)
+        self.f()
+@decorator2
+def foo():
+    print(&quot;inside foo()&quot;)
+foo()</pre>
+
+</div>
+<!-- EDIT13 SECTION "2.用类装饰器来重写一次装饰器" [4907-5338] -->
+<h2 class="sectionedit14" id="参考link">参考link</h2>
+<div class="level2">
+
+<p>
+<a href="https://www.python-course.eu/python3_decorators.php" class="urlextern" title="https://www.python-course.eu/python3_decorators.php" rel="nofollow">python3 tutor</a>
+</p>
+
+</div>
+<!-- EDIT14 SECTION "参考link" [5339-] -->

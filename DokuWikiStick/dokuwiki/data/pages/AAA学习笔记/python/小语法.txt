@@ -1,0 +1,187 @@
+> 本篇介绍一些python中的不是这么常见的语法知识，作为学习python的基础巩固还是重要的
+
+
+## is 和 ==的区别
+
+Python中的对象包含三要素：id、type、value。
+其中id用来唯一标识一个对象，type标识对象的类型，value是对象的值。
+同一个id标示他们在内存中指代的是同一块区域；
+
+is判断的是a对象是否就是b对象，是通过id来判断的。
+==判断的是a对象的值是否和b对象的值相等，是通过value来判断的。
+is 判断为True的，那么==判断肯定也为True
+
+## copy() 和 deepcopy() 拷贝和深拷贝
+
+https://www.python-course.eu/deep_copy.php
+用copy模块进行copy操作
+```
+import copy
+copy.copy(origin)
+copy.deepcopy(origin)
+```
+list的slice操作进行shallow copy浅层拷贝
+```
+>>> list1 = ['a','b','c','d']
+>>> list2 = list1[:]
+>>> list2[1] = 'x'
+>>> print list2
+['a', 'x', 'c', 'd']
+>>> print list1
+['a', 'b', 'c', 'd']
+>>> 
+```
+## raw string
+`r"c:\users\belter\destop\temp"`以`r`开头的字符串
+抑制转义
+
+## 三目运算
+`a if b else c` => `b?a:c` 
+python中没有后面这种三目运算操作，用前面这种代替
+
+常规的只有一个if的判断，可以用and or这种逻辑运算符连接；
+
+## while循环
+看图就够了
+![while循环](学习笔记:python:while.png)
+
+## 格式化字符串
+
+### 1.str.format()
+
+`print("my name is {}".format('gong'))` 使用{}{0}{name}{!r}{0:.3f} 这种形式的占位符
+以后越来越推荐str.format()形式了；x
+[str.format()形式介绍](https://www.cnblogs.com/hongten/p/hongten_python_format.html)
+[str.format()介绍2](https://www.cnblogs.com/ToDoToTry/p/5635863.html)
+![format](学习笔记:python:format.png)
+
+|Option 放在:之后的符号|	Meaning|
+|'<'|	The field will be left-aligned within the available space. This is usually the default for strings. 左对齐|
+|'>'|	The field will be right-aligned within the available space. This is the default for numbers. 右对齐|
+|'0'|	If the width field is preceded by a zero ('0') character, sign-aware zero-padding for numeric types will be enabled.前导零填充|
+|','|	This option signals the use of a comma for a thousands separator.|
+|'='|	Forces the padding to be placed after the sign (if any) but before the digits. This is used for printing fields in the| form"+000000120". This alignment option is only valid for numeric types.
+|'^'|	Forces the field to be centered within the available space.|
+
+
+|Option	|Meaning|
+|'+'|	indicates that a sign should be used for both positive as well as negative numbers.|
+|'-'|	indicates that a sign should be used only for negative numbers, which is the default behavior.|
+|space|	indicates that a leading space should be used on positive numbers, and a minus sign on negative numbers.|
+
+例子：
+```
+>>> "{0:<20s} {1:6.2f}".format('Spam & Eggs:', 6.99)
+'Spam & Eggs:           6.99'
+>>> "{0:>20s} {1:6.2f}".format('Spam & Eggs:', 6.99)
+'        Spam & Eggs:   6.99'
+---------------------------------
+>>> data = dict(province="Ontario",capital="Toronto")
+>>> data
+{'province': 'Ontario', 'capital': 'Toronto'}
+>>> print("The capital of {province} is {capital}".format(**data))
+The capital of Ontario is Toronto
+```
+
+### 2.用%的形式
+
+`print("my name is %s" %"gong")`  格式： `%[flags][width][.precision]type `
+
+![%str.format](学习笔记:python:format2.png)
+
+|type Conversion|	Meaning|
+|d|	Signed integer decimal.|
+|i|	Signed integer decimal.|
+|o|	Unsigned octal.|
+|u|	Obsolete and equivalent to 'd', i.e. signed integer decimal.|
+|x|	Unsigned hexadecimal (lowercase).|
+|X|	Unsigned hexadecimal (uppercase).|
+|e|	Floating point exponential format (lowercase).|
+|E|	Floating point exponential format (uppercase).|
+|f|	Floating point decimal format.|
+|F|	Floating point decimal format.|
+|g|	Same as "e" if exponent is greater than -4 or less than precision, "f" otherwise.|
+|G|	Same as "E" if exponent is greater than -4 or less than precision, "F" otherwise.|
+|c|	Single character (accepts integer or single character string).|
+|r|	String (converts any python object using repr()).|
+|s|	String (converts any python object using str()).|
+|%|	No argument is converted, results in a "%" character in the result.|
+
+
+|Flag|	Meaning|
+|#|	Used with o, x or X specifiers the value is preceded with 0, 0o, 0O, 0x or 0X respectively.|
+|0|	The conversion result will be zero padded for numeric values.|
+|-|	The converted value is left adjusted|
+| |	If no sign (minus sign e.g.) is going to be written, a blank space is inserted before the value.|
+|+|	A sign character ("+" or "-") will precede the conversion (overrides a "space" flag).|
+
+### 3.format 字面量`f`
+
+python3.6以后才有的
+```
+>>> name='gong'
+>>> print f'my name is {name}'
+```
+
+## eval repr str的用法
+
+* str() 转字符串，对内容会进行转义
+* repr() 将对象转换为一个可打印的字符串。包含转义字符的字符串也可以完整打印出来；`raw string`有点像
+* eval() 通过repr()出来的对象可以通过eval()再获得对象
+
+
+> 尽管str(),repr()和``运算在特性和功能方面都非常相似，事实上repr()和``做的是完全一样的事情，它们返回的是一个对象的“官方”字符串表示，也就是说绝大多数情况下可以通过求值运算（使用内建函数eval()）重新得到该对象。
+但str()则有所不同，str()致力于生成一个对象的可读性好的字符串表示，它的返回结果通常无法用于eval()求值，但很适合用于print语句输出。需要再次提醒的是，并不是所有repr()返回的字符串都能够用 eval()内建函数得到原来的对象。 也就是说 repr() 输出对 Python比较友好，而str()的输出对用户比较友好.
+
+## nolocal
+python3引入了nolocal的作用域，只能作用于嵌套的方法内，同global类似，但是作用域比global小；
+
+```
+def f():
+    x = 42
+    def g():
+        nonlocal x
+        x = 43
+    print("Before calling g: " + str(x))
+    print("Calling g now:")
+    g()
+    print("After calling g: " + str(x))
+x = 3
+f()
+print("x in main: " + str(x))
+```
+```
+Before calling g: 42
+Calling g now:
+After calling g: 43
+x in main: 3
+```
+
+## super用法
+
+todo
+
+
+## 参考链接
+
+###资料
+[书单](http://python.jobbole.com/85620/)
+
+### 入门
+[很好的一个python英文教程](https://www.python-course.eu)
+《head first python》
+
+### 进阶
+《python cookbook》
+《python 科学计算》
+
+
+
+
+
+
+
+
+
+
+

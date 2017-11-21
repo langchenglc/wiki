@@ -3,3 +3,5 @@ datavalidcontroller
 getcurrentloginname
 allexceptionhandler
 querydatafromremote
+isannotationpresent
+rotatingfilehandler
