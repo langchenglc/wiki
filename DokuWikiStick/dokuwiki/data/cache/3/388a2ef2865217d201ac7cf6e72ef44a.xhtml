@@ -1,0 +1,161 @@
+<blockquote><div class="no">
+本篇介绍python中的getter和setter</div></blockquote>
+
+<p>
+面向对象的语言中我们强调对数据的封装，我们希望属性是private的，这样我们只能通过getter和setter对数据进行存取,既保证了数据的封装，又能后期方便的对存取逻辑进行修改；
+</p>
+
+<h2 class="sectionedit1" id="问题">问题</h2>
+<div class="level2">
+<pre class="code">
+class P:
+    def __init__(self,x):
+        self.set_x(x)
+    def get_x(self):
+        return self.__x
+    def set_x(self, x):
+        if x &lt; 0:
+            self.__x = 0
+        elif x &gt; 1000:
+            self.__x = 1000
+        else:
+            self.__x = x</pre>
+
+<p>
+使用getter和setter
+</p>
+<pre class="code">
+&gt;&gt;&gt; from mutators import P
+&gt;&gt;&gt; p1 = P(1001)
+&gt;&gt;&gt; p1.get_x()
+1000
+&gt;&gt;&gt; p2 = P(15)
+&gt;&gt;&gt; p2.get_x()
+15
+&gt;&gt;&gt; p3 = P(-1)
+&gt;&gt;&gt; p3.get_x()
+0</pre>
+
+<p>
+使用常规的方法来实现getter和setter，实在是太丑了！而且人们已经习惯了直接用实体点出来他的属性
+</p>
+
+</div>
+<!-- EDIT1 SECTION "问题" [280-850] -->
+<h2 class="sectionedit2" id="python中的property">python中的property</h2>
+<div class="level2">
+
+<p>
+有两种定义getter和setter的方法：
+</p>
+<ol>
+<li class="level1"><div class="li">使用装饰器
+<p>
+    * <code>@property</code>
+</p>
+
+<p>
+    * <code>@x.setter</code>
+</p>
+
+<p>
+    * <code>@x.deleter</code>
+</p>
+</div>
+</li>
+</ol>
+<pre class="code">
+class C(object):
+    def __init__(self): 
+        self._x = None
+    @property
+    def x(self):
+        &quot;&quot;&quot;I&#039;m the &#039;x&#039; property.&quot;&quot;&quot;
+        return self._x
+    @x.setter
+    def x(self, value):
+        self._x = value
+    @x.deleter
+    def x(self):
+        del self._x</pre>
+<ol>
+<li class="level1"><div class="li">使用property函数</div>
+</li>
+</ol>
+<pre class="code">
+class P:
+    def __init__(self,x):
+        self.__set_x(x)
+    def __get_x(self):
+        return self.__x
+    def __set_x(self, x):#方法定义为private的，这样只有一个入口可以使用，避免同时可以使用p.x和p.get_x两种同时获取到对应的数据
+        if x &lt; 0:
+            self.__x = 0
+        elif x &gt; 1000:
+            self.__x = 1000
+        else:
+            self.__x = x
+    x = property(__get_x, __set_x)</pre>
+
+</div>
+<!-- EDIT2 SECTION "python中的property" [851-1755] -->
+<h2 class="sectionedit3" id="完整的例子">完整的例子</h2>
+<div class="level2">
+<pre class="code">
+class Robot:
+    def __init__(self, name, build_year, lk = 0.5, lp = 0.5 ):
+        self.name = name
+        self.build_year = build_year
+        self.__potential_physical = lk
+        self.__potential_psychic = lp
+    @property
+    def condition(self):
+        s = self.__potential_physical + self.__potential_psychic
+        if s &lt;= -1:
+           return &quot;I feel miserable!&quot;
+        elif s &lt;= 0:
+           return &quot;I feel bad!&quot;
+        elif s &lt;= 0.5:
+           return &quot;Could be worse!&quot;
+        elif s &lt;= 1:
+           return &quot;Seems to be okay!&quot;
+        else:
+           return &quot;Great!&quot; 
+  
+if __name__ == &quot;__main__&quot;:
+    x = Robot(&quot;Marvin&quot;, 1979, 0.2, 0.4 )
+    y = Robot(&quot;Caliban&quot;, 1993, -0.4, 0.3)
+    print(x.condition)
+    print(y.condition)</pre>
+<pre class="code">
+class OurClass:
+    def __init__(self, a):
+        self.OurAtt = a
+        
+    @property
+    def OurAtt(self):
+        return self.__OurAtt
+        
+    @OurAtt.setter
+    def OurAtt(self, val):
+        if val &lt; 0:
+            self.__OurAtt = 0
+        elif val &gt; 1000:
+            self.__OurAtt = 1000
+        else:
+            self.__OurAtt = val
+
+x = OurClass(10)
+print(x.OurAtt)</pre>
+
+</div>
+<!-- EDIT3 SECTION "完整的例子" [1756-2928] -->
+<h2 class="sectionedit4" id="参考链接">参考链接</h2>
+<div class="level2">
+
+<p>
+<a href="https://www.python-course.eu/python3_properties.php" class="urlextern" title="https://www.python-course.eu/python3_properties.php" rel="nofollow">python-course.eu</a>
+</p>
+
+</div>
+<!-- EDIT4 SECTION "参考链接" [2929-] -->

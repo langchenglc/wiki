@@ -1,0 +1,338 @@
+<blockquote><div class="no">
+本篇介绍一些python中的不是这么常见的语法知识，作为学习python的基础巩固还是重要的</div></blockquote>
+
+<h2 class="sectionedit1" id="is_和_的区别">is 和 ==的区别</h2>
+<div class="level2">
+
+<p>
+Python中的对象包含三要素：id、type、value。
+其中id用来唯一标识一个对象，type标识对象的类型，value是对象的值。
+同一个id标示他们在内存中指代的是同一块区域；
+</p>
+
+<p>
+is判断的是a对象是否就是b对象，是通过id来判断的。
+==判断的是a对象的值是否和b对象的值相等，是通过value来判断的。
+is 判断为True的，那么==判断肯定也为True
+</p>
+
+</div>
+<!-- EDIT1 SECTION "is 和 ==的区别" [119-570] -->
+<h2 class="sectionedit2" id="copy_和_deepcopy_拷贝和深拷贝">copy() 和 deepcopy() 拷贝和深拷贝</h2>
+<div class="level2">
+
+<p>
+<a href="https://www.python-course.eu/deep_copy.php" class="urlextern" title="https://www.python-course.eu/deep_copy.php" rel="nofollow">https://www.python-course.eu/deep_copy.php</a>
+用copy模块进行copy操作
+</p>
+<pre class="code">
+import copy
+copy.copy(origin)
+copy.deepcopy(origin)</pre>
+
+<p>
+list的slice操作进行shallow copy浅层拷贝
+</p>
+<pre class="code">
+&gt;&gt;&gt; list1 = [&#039;a&#039;,&#039;b&#039;,&#039;c&#039;,&#039;d&#039;]
+&gt;&gt;&gt; list2 = list1[:]
+&gt;&gt;&gt; list2[1] = &#039;x&#039;
+&gt;&gt;&gt; print list2
+[&#039;a&#039;, &#039;x&#039;, &#039;c&#039;, &#039;d&#039;]
+&gt;&gt;&gt; print list1
+[&#039;a&#039;, &#039;b&#039;, &#039;c&#039;, &#039;d&#039;]
+&gt;&gt;&gt; </pre>
+
+</div>
+<!-- EDIT2 SECTION "copy() 和 deepcopy() 拷贝和深拷贝" [571-954] -->
+<h2 class="sectionedit3" id="raw_string">raw string</h2>
+<div class="level2">
+
+<p>
+<code>r&quot;c:\users\belter\destop\temp&quot;</code>以<code>r</code>开头的字符串
+抑制转义
+</p>
+
+</div>
+<!-- EDIT3 SECTION "raw string" [955-1039] -->
+<h2 class="sectionedit4" id="三目运算">三目运算</h2>
+<div class="level2">
+
+<p>
+<code>a if b else c</code> ⇒ <code>b?a:c</code>
+python中没有后面这种三目运算操作，用前面这种代替
+</p>
+
+<p>
+常规的只有一个if的判断，可以用and or这种逻辑运算符连接；
+</p>
+
+</div>
+<!-- EDIT4 SECTION "三目运算" [1040-1236] -->
+<h2 class="sectionedit5" id="while循环">while循环</h2>
+<div class="level2">
+
+<p>
+看图就够了
+<a href="/lib/exe/detail.php?id=a%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%3Apython%3A%E5%B0%8F%E8%AF%AD%E6%B3%95&amp;media=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:python:while.png" class="media" title="学习笔记:python:while.png"><img src="/lib/exe/fetch.php?media=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:python:while.png" class="media" title="while循环" alt="while循环" /></a>
+</p>
+
+</div>
+<!-- EDIT5 SECTION "while循环" [1237-1314] -->
+<h2 class="sectionedit6" id="格式化字符串">格式化字符串</h2>
+<div class="level2">
+
+</div>
+<!-- EDIT6 SECTION "格式化字符串" [1315-1337] -->
+<h3 class="sectionedit7" id="strformat">1.str.format()</h3>
+<div class="level3">
+
+<p>
+<code>print(&quot;my name is {}&quot;.format(&#039;gong&#039;))</code> 使用{}{0}{name}{!r}{0:.3f} 这种形式的占位符
+以后越来越推荐str.format()形式了；x
+<a href="https://www.cnblogs.com/hongten/p/hongten_python_format.html" class="urlextern" title="https://www.cnblogs.com/hongten/p/hongten_python_format.html" rel="nofollow">str.format()形式介绍</a>
+<a href="https://www.cnblogs.com/ToDoToTry/p/5635863.html" class="urlextern" title="https://www.cnblogs.com/ToDoToTry/p/5635863.html" rel="nofollow">str.format()介绍2</a>
+<a href="/lib/exe/detail.php?id=a%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%3Apython%3A%E5%B0%8F%E8%AF%AD%E6%B3%95&amp;media=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:python:format.png" class="media" title="学习笔记:python:format.png"><img src="/lib/exe/fetch.php?media=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:python:format.png" class="media" title="format" alt="format" /></a>
+</p>
+<div class="table sectionedit8"><table class="inline">
+	<tr class="row0">
+		<td class="col0">Option 放在:之后的符号</td><td class="col1 rightalign">	Meaning</td><td class="col2"></td>
+	</tr>
+	<tr class="row1">
+		<td class="col0">&#039;&lt;&#039;</td><td class="col1 rightalign">	The field will be left-aligned within the available space. This is usually the default for strings. 左对齐</td><td class="col2"></td>
+	</tr>
+	<tr class="row2">
+		<td class="col0">&#039;&gt;&#039;</td><td class="col1 rightalign">	The field will be right-aligned within the available space. This is the default for numbers. 右对齐</td><td class="col2"></td>
+	</tr>
+	<tr class="row3">
+		<td class="col0">&#039;0&#039;</td><td class="col1 rightalign">	If the width field is preceded by a zero (&#039;0&#039;) character, sign-aware zero-padding for numeric types will be enabled.前导零填充</td><td class="col2"></td>
+	</tr>
+	<tr class="row4">
+		<td class="col0">&#039;,&#039;</td><td class="col1 rightalign">	This option signals the use of a comma for a thousands separator.</td><td class="col2"></td>
+	</tr>
+	<tr class="row5">
+		<td class="col0">&#039;=&#039;</td><td class="col1 rightalign">	Forces the padding to be placed after the sign (if any) but before the digits. This is used for printing fields in the</td><td class="col2"></td>
+	</tr>
+	<tr class="row6">
+		<td class="col0">&#039;</td><th class="col1">&#039;</th><td class="col2 rightalign">	Forces the field to be centered within the available space.</td>
+	</tr>
+</table></div>
+<!-- EDIT8 TABLE [1704-2449] --><div class="table sectionedit9"><table class="inline">
+	<tr class="row0">
+		<td class="col0 leftalign">Option	</td><td class="col1">Meaning</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0">&#039;+&#039;</td><td class="col1 rightalign">	indicates that a sign should be used for both positive as well as negative numbers.</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0">&#039;-&#039;</td><td class="col1 rightalign">	indicates that a sign should be used only for negative numbers, which is the default behavior.</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0">space</td><td class="col1 rightalign">	indicates that a leading space should be used on positive numbers, and a minus sign on negative numbers.</td>
+	</tr>
+</table></div>
+<!-- EDIT9 TABLE [2452-2776] -->
+<p>
+例子：
+</p>
+<pre class="code">
+&gt;&gt;&gt; &quot;{0:&lt;20s} {1:6.2f}&quot;.format(&#039;Spam &amp; Eggs:&#039;, 6.99)
+&#039;Spam &amp; Eggs:           6.99&#039;
+&gt;&gt;&gt; &quot;{0:&gt;20s} {1:6.2f}&quot;.format(&#039;Spam &amp; Eggs:&#039;, 6.99)
+&#039;        Spam &amp; Eggs:   6.99&#039;
+---------------------------------
+&gt;&gt;&gt; data = dict(province=&quot;Ontario&quot;,capital=&quot;Toronto&quot;)
+&gt;&gt;&gt; data
+{&#039;province&#039;: &#039;Ontario&#039;, &#039;capital&#039;: &#039;Toronto&#039;}
+&gt;&gt;&gt; print(&quot;The capital of {province} is {capital}&quot;.format(**data))
+The capital of Ontario is Toronto</pre>
+
+</div>
+<!-- EDIT7 SECTION "1.str.format()" [1338-3205] -->
+<h3 class="sectionedit10" id="用_的形式">2.用%的形式</h3>
+<div class="level3">
+
+<p>
+<code>print(&quot;my name is %s&quot; %&quot;gong&quot;)</code>  格式： <code>%[flags][width][.precision]type </code>
+</p>
+
+<p>
+<a href="/lib/exe/detail.php?id=a%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%3Apython%3A%E5%B0%8F%E8%AF%AD%E6%B3%95&amp;media=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:python:format2.png" class="media" title="学习笔记:python:format2.png"><img src="/lib/exe/fetch.php?media=%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0:python:format2.png" class="media" title="%str.format" alt="%str.format" /></a>
+</p>
+<div class="table sectionedit11"><table class="inline">
+	<tr class="row0">
+		<td class="col0">type Conversion</td><td class="col1 rightalign">	Meaning</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0">d</td><td class="col1 rightalign">	Signed integer decimal.</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0">i</td><td class="col1 rightalign">	Signed integer decimal.</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0">o</td><td class="col1 rightalign">	Unsigned octal.</td>
+	</tr>
+	<tr class="row4">
+		<td class="col0">u</td><td class="col1 rightalign">	Obsolete and equivalent to &#039;d&#039;, i.e. signed integer decimal.</td>
+	</tr>
+	<tr class="row5">
+		<td class="col0">x</td><td class="col1 rightalign">	Unsigned hexadecimal (lowercase).</td>
+	</tr>
+	<tr class="row6">
+		<td class="col0">X</td><td class="col1 rightalign">	Unsigned hexadecimal (uppercase).</td>
+	</tr>
+	<tr class="row7">
+		<td class="col0">e</td><td class="col1 rightalign">	Floating point exponential format (lowercase).</td>
+	</tr>
+	<tr class="row8">
+		<td class="col0">E</td><td class="col1 rightalign">	Floating point exponential format (uppercase).</td>
+	</tr>
+	<tr class="row9">
+		<td class="col0">f</td><td class="col1 rightalign">	Floating point decimal format.</td>
+	</tr>
+	<tr class="row10">
+		<td class="col0">F</td><td class="col1 rightalign">	Floating point decimal format.</td>
+	</tr>
+	<tr class="row11">
+		<td class="col0">g</td><td class="col1 rightalign">	Same as “e” if exponent is greater than -4 or less than precision, “f” otherwise.</td>
+	</tr>
+	<tr class="row12">
+		<td class="col0">G</td><td class="col1 rightalign">	Same as “E” if exponent is greater than -4 or less than precision, “F” otherwise.</td>
+	</tr>
+	<tr class="row13">
+		<td class="col0">c</td><td class="col1 rightalign">	Single character (accepts integer or single character string).</td>
+	</tr>
+	<tr class="row14">
+		<td class="col0">r</td><td class="col1 rightalign">	String (converts any python object using repr()).</td>
+	</tr>
+	<tr class="row15">
+		<td class="col0">s</td><td class="col1 rightalign">	String (converts any python object using str()).</td>
+	</tr>
+	<tr class="row16">
+		<td class="col0">%</td><td class="col1 rightalign">	No argument is converted, results in a “%” character in the result.</td>
+	</tr>
+</table></div>
+<!-- EDIT11 TABLE [3357-4206] --><div class="table sectionedit12"><table class="inline">
+	<tr class="row0">
+		<td class="col0">Flag</td><td class="col1 rightalign">	Meaning</td>
+	</tr>
+	<tr class="row1">
+		<td class="col0">#</td><td class="col1 rightalign">	Used with o, x or X specifiers the value is preceded with 0, 0o, 0O, 0x or 0X respectively.</td>
+	</tr>
+	<tr class="row2">
+		<td class="col0">0</td><td class="col1 rightalign">	The conversion result will be zero padded for numeric values.</td>
+	</tr>
+	<tr class="row3">
+		<td class="col0">-</td><td class="col1 rightalign">	The converted value is left adjusted</td>
+	</tr>
+	<tr class="row4">
+		<td class="col0"> </td><td class="col1 rightalign">	If no sign (minus sign e.g.) is going to be written, a blank space is inserted before the value.</td>
+	</tr>
+	<tr class="row5">
+		<td class="col0">+</td><td class="col1 rightalign">	A sign character (“+” or “-”) will precede the conversion (overrides a “space” flag).</td>
+	</tr>
+</table></div>
+<!-- EDIT12 TABLE [4209-4623] -->
+</div>
+<!-- EDIT10 SECTION "2.用%的形式" [3206-4623] -->
+<h3 class="sectionedit13" id="format_字面量_f">3.format 字面量`f`</h3>
+<div class="level3">
+
+<p>
+python3.6以后才有的
+</p>
+<pre class="code">
+&gt;&gt;&gt; name=&#039;gong&#039;
+&gt;&gt;&gt; print f&#039;my name is {name}&#039;</pre>
+
+</div>
+<!-- EDIT13 SECTION "3.format 字面量`f`" [4624-4731] -->
+<h2 class="sectionedit14" id="eval_repr_str的用法">eval repr str的用法</h2>
+<div class="level2">
+<ul>
+<li class="level1"><div class="li">str() 转字符串，对内容会进行转义</div>
+</li>
+<li class="level1"><div class="li">repr() 将对象转换为一个可打印的字符串。包含转义字符的字符串也可以完整打印出来；<code>raw string</code>有点像</div>
+</li>
+<li class="level1"><div class="li">eval() 通过repr()出来的对象可以通过eval()再获得对象</div>
+</li>
+</ul>
+<blockquote><div class="no">
+尽管str(),repr()和``运算在特性和功能方面都非常相似，事实上repr()和``做的是完全一样的事情，它们返回的是一个对象的“官方”字符串表示，也就是说绝大多数情况下可以通过求值运算（使用内建函数eval()）重新得到该对象。</div></blockquote>
+
+
+
+
+
+</div>
+<!-- EDIT14 SECTION "eval repr str的用法" [4732-5715] -->
+<h2 class="sectionedit15" id="nolocal">nolocal</h2>
+<div class="level2">
+
+<p>
+python3引入了nolocal的作用域，只能作用于嵌套的方法内，同global类似，但是作用域比global小；
+</p>
+<pre class="code">
+def f():
+    x = 42
+    def g():
+        nonlocal x
+        x = 43
+    print(&quot;Before calling g: &quot; + str(x))
+    print(&quot;Calling g now:&quot;)
+    g()
+    print(&quot;After calling g: &quot; + str(x))
+x = 3
+f()
+print(&quot;x in main: &quot; + str(x))</pre>
+<pre class="code">
+Before calling g: 42
+Calling g now:
+After calling g: 43
+x in main: 3</pre>
+
+</div>
+<!-- EDIT15 SECTION "nolocal" [5716-6160] -->
+<h2 class="sectionedit16" id="super用法">super用法</h2>
+<div class="level2">
+
+<p>
+todo
+</p>
+
+</div>
+<!-- EDIT16 SECTION "super用法" [6161-6183] -->
+<h2 class="sectionedit17" id="参考链接">参考链接</h2>
+<div class="level2">
+
+</div>
+<!-- EDIT17 SECTION "参考链接" [6184-6200] -->
+<h3 class="sectionedit18" id="资料">资料</h3>
+<div class="level3">
+
+<p>
+<a href="http://python.jobbole.com/85620/" class="urlextern" title="http://python.jobbole.com/85620/" rel="nofollow">书单</a>
+</p>
+
+</div>
+<!-- EDIT18 SECTION "资料" [6201-6254] -->
+<h3 class="sectionedit19" id="入门">入门</h3>
+<div class="level3">
+
+<p>
+<a href="https://www.python-course.eu" class="urlextern" title="https://www.python-course.eu" rel="nofollow">很好的一个python英文教程</a>
+《head first python》
+</p>
+
+</div>
+<!-- EDIT19 SECTION "入门" [6255-6356] -->
+<h3 class="sectionedit20" id="进阶">进阶</h3>
+<div class="level3">
+
+<p>
+《python cookbook》
+《python 科学计算》
+</p>
+
+</div>
+<!-- EDIT20 SECTION "进阶" [6357-] -->

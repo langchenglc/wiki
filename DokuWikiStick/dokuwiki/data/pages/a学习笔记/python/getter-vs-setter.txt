@@ -1,0 +1,155 @@
+> 本篇介绍python中的getter和setter
+
+
+面向对象的语言中我们强调对数据的封装，我们希望属性是private的，这样我们只能通过getter和setter对数据进行存取,既保证了数据的封装，又能后期方便的对存取逻辑进行修改；
+
+
+## 问题
+
+```
+class P:
+    def __init__(self,x):
+        self.set_x(x)
+    def get_x(self):
+        return self.__x
+    def set_x(self, x):
+        if x < 0:
+            self.__x = 0
+        elif x > 1000:
+            self.__x = 1000
+        else:
+            self.__x = x
+```
+使用getter和setter
+```
+>>> from mutators import P
+>>> p1 = P(1001)
+>>> p1.get_x()
+1000
+>>> p2 = P(15)
+>>> p2.get_x()
+15
+>>> p3 = P(-1)
+>>> p3.get_x()
+0
+```
+使用常规的方法来实现getter和setter，实在是太丑了！而且人们已经习惯了直接用实体点出来他的属性
+
+## python中的property
+
+有两种定义getter和setter的方法：
+
+1. 使用装饰器
+
+
+    * `@property`
+
+    * `@x.setter`
+
+    * `@x.deleter`
+
+
+
+```
+class C(object):
+    def __init__(self): 
+        self._x = None
+    @property
+    def x(self):
+        """I'm the 'x' property."""
+        return self._x
+    @x.setter
+    def x(self, value):
+        self._x = value
+    @x.deleter
+    def x(self):
+        del self._x
+```
+
+
+2. 使用property函数
+
+```
+class P:
+    def __init__(self,x):
+        self.__set_x(x)
+    def __get_x(self):
+        return self.__x
+    def __set_x(self, x):#方法定义为private的，这样只有一个入口可以使用，避免同时可以使用p.x和p.get_x两种同时获取到对应的数据
+        if x < 0:
+            self.__x = 0
+        elif x > 1000:
+            self.__x = 1000
+        else:
+            self.__x = x
+    x = property(__get_x, __set_x)
+```
+
+
+## 完整的例子
+
+```
+class Robot:
+    def __init__(self, name, build_year, lk = 0.5, lp = 0.5 ):
+        self.name = name
+        self.build_year = build_year
+        self.__potential_physical = lk
+        self.__potential_psychic = lp
+    @property
+    def condition(self):
+        s = self.__potential_physical + self.__potential_psychic
+        if s <= -1:
+           return "I feel miserable!"
+        elif s <= 0:
+           return "I feel bad!"
+        elif s <= 0.5:
+           return "Could be worse!"
+        elif s <= 1:
+           return "Seems to be okay!"
+        else:
+           return "Great!" 
+  
+if __name__ == "__main__":
+    x = Robot("Marvin", 1979, 0.2, 0.4 )
+    y = Robot("Caliban", 1993, -0.4, 0.3)
+    print(x.condition)
+    print(y.condition)
+```
+
+```
+class OurClass:
+    def __init__(self, a):
+        self.OurAtt = a
+        
+    @property
+    def OurAtt(self):
+        return self.__OurAtt
+        
+    @OurAtt.setter
+    def OurAtt(self, val):
+        if val < 0:
+            self.__OurAtt = 0
+        elif val > 1000:
+            self.__OurAtt = 1000
+        else:
+            self.__OurAtt = val
+
+x = OurClass(10)
+print(x.OurAtt)
+```
+
+
+
+## 参考链接
+
+[python-course.eu](https://www.python-course.eu/python3_properties.php)
+
+
+
+
+
+
+
+
+
+
